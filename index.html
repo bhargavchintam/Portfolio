@@ -1,0 +1,1555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bhargav Chintam | AI/ML Professional Portfolio</title>
+    <meta name="description" content="Professional portfolio of Bindu Bhargava Reddy Chintam — Principal ML/AI Architect specializing in Agentic AI, RAG, LLMOps, and multi-domain AI solutions.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* ===== RESET & VARIABLES ===== */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-card: #1a1a2e;
+            --bg-card-hover: #1f1f35;
+            --accent-primary: #7c74ff;
+            --accent-secondary: #00d4aa;
+            --accent-tertiary: #ff6b9d;
+            --accent-gold: #ffd700;
+            --accent-blue: #38bdf8;
+            --text-primary: #eaeaf2;
+            --text-secondary: #b0b0c8;
+            --text-muted: #757590;
+            --border-color: rgba(124, 116, 255, 0.13);
+            --border-glow: rgba(124, 116, 255, 0.35);
+            --gradient-1: linear-gradient(135deg, #7c74ff, #00d4aa);
+            --gradient-2: linear-gradient(135deg, #ff6b9d, #7c74ff);
+            --gradient-3: linear-gradient(135deg, #00d4aa, #7c74ff, #ff6b9d);
+            --shadow-glow: 0 0 40px rgba(124, 116, 255, 0.12);
+            --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.35);
+            --radius: 16px;
+            --radius-sm: 10px;
+            --transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* ===== BACKGROUND ===== */
+        .bg-mesh {
+            position: fixed; top: 0; left: 0;
+            width: 100%; height: 100%; z-index: 0; pointer-events: none;
+            background:
+                radial-gradient(ellipse 600px 400px at 20% 20%, rgba(124, 116, 255, 0.07), transparent),
+                radial-gradient(ellipse 500px 500px at 80% 80%, rgba(0, 212, 170, 0.05), transparent),
+                radial-gradient(ellipse 400px 300px at 50% 50%, rgba(255, 107, 157, 0.03), transparent);
+        }
+
+        .floating-orbs {
+            position: fixed; top: 0; left: 0;
+            width: 100%; height: 100%; z-index: 0; pointer-events: none; overflow: hidden;
+        }
+
+        .orb {
+            position: absolute; border-radius: 50%;
+            filter: blur(80px); opacity: 0.25;
+            animation: floatOrb 20s ease-in-out infinite;
+        }
+
+        .orb-1 { width: 400px; height: 400px; background: var(--accent-primary); top: 10%; left: -5%; }
+        .orb-2 { width: 300px; height: 300px; background: var(--accent-secondary); top: 60%; right: -5%; animation-delay: -7s; }
+        .orb-3 { width: 250px; height: 250px; background: var(--accent-tertiary); bottom: 10%; left: 30%; animation-delay: -14s; }
+
+        @keyframes floatOrb {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(30px, -40px) scale(1.05); }
+            50% { transform: translate(-20px, 20px) scale(0.95); }
+            75% { transform: translate(40px, 30px) scale(1.02); }
+        }
+
+        /* ===== NAVIGATION ===== */
+        .navbar {
+            position: fixed; top: 0; left: 0; right: 0;
+            z-index: 1000; padding: 16px 0; transition: var(--transition);
+        }
+
+        .navbar.scrolled {
+            background: rgba(10, 10, 15, 0.88);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 10px 0;
+        }
+
+        .nav-inner {
+            max-width: 1200px; margin: 0 auto; padding: 0 24px;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+
+        .nav-logo {
+            font-size: 1.3rem; font-weight: 800;
+            background: var(--gradient-1);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text; letter-spacing: -0.5px;
+            text-decoration: none;
+        }
+
+        .nav-links { display: flex; gap: 4px; align-items: center; }
+
+        .nav-links a {
+            color: var(--text-secondary); text-decoration: none;
+            font-size: 0.85rem; font-weight: 500;
+            padding: 8px 14px; border-radius: 8px; transition: var(--transition);
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--text-primary);
+            background: rgba(124, 116, 255, 0.1);
+        }
+
+        .nav-cta {
+            background: var(--gradient-1) !important;
+            color: #fff !important;
+            -webkit-text-fill-color: #fff !important;
+            font-weight: 600 !important;
+        }
+
+        .nav-toggle {
+            display: none; background: none; border: none; cursor: pointer; padding: 8px;
+        }
+
+        .nav-toggle span {
+            display: block; width: 24px; height: 2px;
+            background: var(--text-primary); margin: 5px 0; transition: var(--transition);
+            border-radius: 2px;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            position: relative; z-index: 1; min-height: 100vh;
+            display: flex; align-items: center; padding: 120px 24px 80px;
+        }
+
+        .hero-inner {
+            max-width: 1200px; margin: 0 auto; width: 100%;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+        }
+
+        .hero-content { animation: fadeUp 1s ease-out; }
+
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 6px 16px;
+            background: rgba(124, 116, 255, 0.1);
+            border: 1px solid rgba(124, 116, 255, 0.25);
+            border-radius: 100px; font-size: 0.8rem; font-weight: 600;
+            color: var(--accent-primary); margin-bottom: 24px; letter-spacing: 0.5px;
+        }
+
+        .hero-badge .dot {
+            width: 8px; height: 8px; background: var(--accent-secondary);
+            border-radius: 50%; animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.8); }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900; line-height: 1.1; margin-bottom: 12px; letter-spacing: -2px;
+        }
+
+        .hero h1 .gradient-text {
+            background: var(--gradient-3);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem; color: var(--text-secondary);
+            margin-bottom: 32px; max-width: 520px; line-height: 1.8;
+        }
+
+        .hero-stats { display: flex; gap: 32px; margin-bottom: 40px; }
+
+        .stat-number {
+            font-size: 2rem; font-weight: 800;
+            background: var(--gradient-1);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text; line-height: 1.2;
+        }
+
+        .stat-label {
+            font-size: 0.75rem; color: var(--text-muted);
+            font-weight: 500; text-transform: uppercase; letter-spacing: 1px;
+        }
+
+        .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+
+        .btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 14px 28px; border-radius: 12px;
+            font-size: 0.95rem; font-weight: 600;
+            text-decoration: none; transition: var(--transition);
+            cursor: pointer; border: none;
+        }
+
+        .btn-primary {
+            background: var(--gradient-1); color: #fff;
+            box-shadow: 0 4px 20px rgba(124, 116, 255, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(124, 116, 255, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent; color: var(--text-primary);
+            border: 1.5px solid var(--border-color);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--accent-primary);
+            background: rgba(124, 116, 255, 0.05);
+        }
+
+        /* Hero Visual Card */
+        .hero-visual {
+            position: relative; display: flex; justify-content: center;
+            align-items: center; animation: fadeUp 1s ease-out 0.3s backwards;
+        }
+
+        .hero-card {
+            width: 100%; max-width: 440px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px; padding: 36px;
+            position: relative; overflow: hidden;
+        }
+
+        .hero-card::before {
+            content: ''; position: absolute;
+            top: 0; left: 0; right: 0; height: 4px; background: var(--gradient-3);
+        }
+
+        .profile-section {
+            display: flex; align-items: center; gap: 16px; margin-bottom: 24px;
+        }
+
+        .avatar {
+            width: 64px; height: 64px; border-radius: 16px;
+            background: var(--gradient-1);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem; font-weight: 800; color: #fff; flex-shrink: 0;
+        }
+
+        .profile-info h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 2px; }
+        .profile-info p { font-size: 0.82rem; color: var(--text-muted); }
+
+        .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+
+        .skill-tag {
+            padding: 5px 12px;
+            background: rgba(124, 116, 255, 0.08);
+            border: 1px solid rgba(124, 116, 255, 0.15);
+            border-radius: 8px; font-size: 0.73rem; font-weight: 600;
+            color: var(--accent-primary); white-space: nowrap;
+        }
+
+        .skill-tag.g {
+            background: rgba(0, 212, 170, 0.08); border-color: rgba(0, 212, 170, 0.15); color: var(--accent-secondary);
+        }
+
+        .skill-tag.p {
+            background: rgba(255, 107, 157, 0.08); border-color: rgba(255, 107, 157, 0.15); color: var(--accent-tertiary);
+        }
+
+        .code-block {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px; padding: 16px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.73rem; line-height: 1.8; color: var(--text-secondary);
+        }
+
+        .code-block .kw { color: var(--accent-tertiary); }
+        .code-block .str { color: var(--accent-secondary); }
+        .code-block .fn { color: var(--accent-primary); }
+        .code-block .cm { color: var(--text-muted); }
+
+        /* ===== SECTIONS ===== */
+        .section {
+            position: relative; z-index: 1; padding: 100px 24px;
+        }
+
+        .section-inner { max-width: 1200px; margin: 0 auto; }
+
+        .section-header { text-align: center; margin-bottom: 56px; }
+
+        .section-label {
+            display: inline-block; padding: 6px 16px;
+            background: rgba(124, 116, 255, 0.1);
+            border: 1px solid rgba(124, 116, 255, 0.2);
+            border-radius: 100px; font-size: 0.75rem; font-weight: 600;
+            color: var(--accent-primary); letter-spacing: 1px;
+            text-transform: uppercase; margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: clamp(1.8rem, 4vw, 2.6rem);
+            font-weight: 800; letter-spacing: -1px; margin-bottom: 14px;
+        }
+
+        .section-desc {
+            font-size: 1.02rem; color: var(--text-secondary);
+            max-width: 600px; margin: 0 auto;
+        }
+
+        .section-divider {
+            width: 100%; height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border-color), transparent);
+        }
+
+        /* ===== ABOUT / BIO ===== */
+        .about-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start;
+        }
+
+        .about-text p {
+            color: var(--text-secondary); margin-bottom: 18px; font-size: 1rem;
+        }
+
+        .about-text p strong { color: var(--text-primary); }
+
+        .info-cards { display: grid; gap: 14px; }
+
+        .info-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius); padding: 22px; transition: var(--transition);
+        }
+
+        .info-card:hover {
+            border-color: var(--border-glow); box-shadow: var(--shadow-glow);
+            transform: translateY(-2px);
+        }
+
+        .info-card-icon {
+            width: 38px; height: 38px; border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.05rem; margin-bottom: 10px;
+        }
+
+        .info-card h4 { font-size: 0.92rem; font-weight: 700; margin-bottom: 4px; }
+        .info-card p { font-size: 0.83rem; color: var(--text-muted); }
+
+        /* ===== VALUE PROPOSITION ===== */
+        .value-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+
+        .value-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius); padding: 32px 24px; text-align: center;
+            transition: var(--transition); position: relative; overflow: hidden;
+        }
+
+        .value-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0;
+            height: 3px; background: var(--gradient-1);
+            transform: scaleX(0); transition: var(--transition);
+        }
+
+        .value-card:hover::before { transform: scaleX(1); }
+
+        .value-card:hover {
+            border-color: var(--border-glow); transform: translateY(-4px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .value-icon {
+            width: 56px; height: 56px; border-radius: 14px;
+            background: rgba(124, 116, 255, 0.1);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.4rem; margin: 0 auto 18px;
+        }
+
+        .value-card:nth-child(2) .value-icon { background: rgba(0, 212, 170, 0.1); }
+        .value-card:nth-child(3) .value-icon { background: rgba(255, 107, 157, 0.1); }
+
+        .value-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 10px; }
+        .value-card p { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.7; }
+
+        /* ===== EXPERIENCE TIMELINE ===== */
+        .timeline-container { position: relative; max-width: 900px; margin: 0 auto; }
+
+        .timeline-line {
+            position: absolute; left: 50%; top: 0; bottom: 0; width: 2px;
+            background: linear-gradient(180deg, var(--accent-primary), var(--accent-secondary), var(--accent-tertiary));
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            display: flex; align-items: flex-start;
+            margin-bottom: 40px; position: relative;
+        }
+
+        .timeline-item:nth-child(odd) { flex-direction: row; }
+        .timeline-item:nth-child(even) { flex-direction: row-reverse; }
+
+        .timeline-content {
+            width: calc(50% - 36px);
+            background: var(--bg-card); border: 1px solid var(--border-color);
+            border-radius: var(--radius); padding: 24px; transition: var(--transition);
+        }
+
+        .timeline-content:hover { border-color: var(--border-glow); box-shadow: var(--shadow-glow); }
+
+        .timeline-dot {
+            position: absolute; left: 50%; transform: translateX(-50%);
+            width: 14px; height: 14px; border-radius: 50%;
+            background: var(--accent-primary); border: 3px solid var(--bg-primary);
+            z-index: 2; box-shadow: 0 0 0 4px rgba(124, 116, 255, 0.2);
+        }
+
+        .timeline-year {
+            display: inline-block; padding: 3px 10px;
+            background: rgba(124, 116, 255, 0.1); border-radius: 6px;
+            font-size: 0.73rem; font-weight: 700; color: var(--accent-primary);
+            margin-bottom: 8px; font-family: 'JetBrains Mono', monospace;
+        }
+
+        .timeline-content h3 { font-size: 1rem; font-weight: 700; margin-bottom: 3px; }
+
+        .timeline-content .org {
+            font-size: 0.83rem; color: var(--accent-secondary);
+            margin-bottom: 8px; font-weight: 500;
+        }
+
+        .timeline-content p { font-size: 0.85rem; color: var(--text-secondary); }
+
+        /* ===== ARTIFACT SECTION ===== */
+        .artifact-showcase {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 24px; overflow: hidden;
+            box-shadow: var(--shadow-card);
+        }
+
+        .artifact-hero-banner {
+            background: linear-gradient(135deg, rgba(124, 116, 255, 0.15), rgba(0, 212, 170, 0.08));
+            padding: 44px 48px; position: relative;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .artifact-hero-banner::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0;
+            height: 4px; background: var(--gradient-3);
+        }
+
+        .artifact-number {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 6px 16px;
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.25);
+            border-radius: 100px; font-size: 0.78rem; font-weight: 700;
+            color: var(--accent-gold); margin-bottom: 14px;
+        }
+
+        .artifact-hero-banner h2 {
+            font-size: 1.8rem; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 6px;
+        }
+
+        .artifact-hero-banner .subtitle {
+            font-size: 1rem; color: var(--text-secondary);
+        }
+
+        /* Audience callout */
+        .audience-callout {
+            display: flex; align-items: flex-start; gap: 14px;
+            background: rgba(0, 212, 170, 0.06);
+            border: 1px solid rgba(0, 212, 170, 0.15);
+            border-radius: 14px; padding: 20px 24px;
+            margin: 32px 48px 0;
+        }
+
+        .audience-callout-icon {
+            width: 40px; height: 40px; border-radius: 10px;
+            background: rgba(0, 212, 170, 0.12);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.1rem; flex-shrink: 0;
+        }
+
+        .audience-callout h4 {
+            font-size: 0.9rem; font-weight: 700; color: var(--accent-secondary); margin-bottom: 4px;
+        }
+
+        .audience-callout p { font-size: 0.85rem; color: var(--text-secondary); }
+
+        .artifact-body { padding: 48px; }
+
+        .artifact-section { margin-bottom: 36px; }
+        .artifact-section:last-child { margin-bottom: 0; }
+
+        .artifact-section-title {
+            display: flex; align-items: center; gap: 10px;
+            font-size: 1.05rem; font-weight: 700; margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+
+        .artifact-section-title .icon {
+            width: 30px; height: 30px; border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.85rem; flex-shrink: 0;
+        }
+
+        .artifact-section p, .artifact-section li {
+            color: var(--text-secondary); font-size: 0.93rem; line-height: 1.8;
+        }
+
+        .artifact-section ul { list-style: none; padding-left: 0; }
+
+        .artifact-section ul li {
+            padding: 5px 0 5px 22px; position: relative;
+        }
+
+        .artifact-section ul li::before {
+            content: ''; position: absolute; left: 0; top: 14px;
+            width: 7px; height: 7px; border-radius: 50%; background: var(--accent-primary);
+        }
+
+        /* AI Timeline visual */
+        .ai-timeline {
+            display: grid; gap: 2px; margin-top: 18px;
+            border-radius: var(--radius); overflow: hidden;
+        }
+
+        .ai-era {
+            display: grid; grid-template-columns: 140px 1fr;
+            background: rgba(0, 0, 0, 0.2); transition: var(--transition);
+        }
+
+        .ai-era:hover { background: rgba(124, 116, 255, 0.04); }
+
+        .ai-era-year {
+            padding: 14px 18px;
+            background: rgba(124, 116, 255, 0.05);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem; font-weight: 600; color: var(--accent-primary);
+            display: flex; align-items: center;
+            border-right: 2px solid var(--accent-primary);
+        }
+
+        .ai-era-content { padding: 14px 18px; }
+        .ai-era-content h4 { font-size: 0.88rem; font-weight: 700; margin-bottom: 2px; }
+        .ai-era-content p { font-size: 0.8rem; color: var(--text-muted); }
+
+        /* Tool tags */
+        .tool-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+
+        .tool-tag {
+            padding: 7px 14px;
+            background: rgba(124, 116, 255, 0.06);
+            border: 1px solid rgba(124, 116, 255, 0.12);
+            border-radius: 10px; font-size: 0.82rem; font-weight: 600;
+            color: var(--text-secondary); display: flex; align-items: center; gap: 6px;
+        }
+
+        .tool-tag span { font-size: 1rem; }
+
+        /* Reference list */
+        .ref-list { list-style: decimal !important; padding-left: 20px !important; }
+
+        .ref-list li { padding-left: 6px !important; }
+
+        .ref-list li::before { display: none !important; }
+
+        .ref-list li a {
+            color: var(--accent-blue); text-decoration: none;
+            border-bottom: 1px solid rgba(56, 189, 248, 0.2);
+            transition: var(--transition);
+        }
+
+        .ref-list li a:hover { border-bottom-color: var(--accent-blue); }
+
+        /* ===== SKILLS GRID ===== */
+        .skills-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 22px;
+        }
+
+        .skill-category {
+            background: var(--bg-card); border: 1px solid var(--border-color);
+            border-radius: var(--radius); padding: 24px; transition: var(--transition);
+        }
+
+        .skill-category:hover { border-color: var(--border-glow); box-shadow: var(--shadow-glow); }
+
+        .skill-cat-header { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+
+        .skill-cat-icon {
+            width: 34px; height: 34px; border-radius: 10px;
+            display: flex; align-items: center; justify-content: center; font-size: 1rem;
+        }
+
+        .skill-cat-header h3 { font-size: 0.92rem; font-weight: 700; }
+
+        .skill-list { display: flex; flex-wrap: wrap; gap: 6px; }
+
+        .skill-pill {
+            padding: 4px 11px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 6px; font-size: 0.73rem; font-weight: 500; color: var(--text-muted);
+        }
+
+        /* ===== EDUCATION ===== */
+        .edu-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+
+        .edu-card {
+            background: var(--bg-card); border: 1px solid var(--border-color);
+            border-radius: var(--radius); padding: 28px; transition: var(--transition);
+            position: relative; overflow: hidden;
+        }
+
+        .edu-card::after {
+            content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+        }
+
+        .edu-card:nth-child(1)::after { background: var(--accent-primary); }
+        .edu-card:nth-child(2)::after { background: var(--accent-secondary); }
+        .edu-card:nth-child(3)::after { background: var(--accent-tertiary); }
+
+        .edu-card:hover {
+            border-color: var(--border-glow); transform: translateY(-4px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .edu-degree {
+            font-size: 0.75rem; font-weight: 700; color: var(--accent-primary);
+            text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;
+        }
+
+        .edu-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+
+        .edu-card .school {
+            font-size: 0.85rem; color: var(--accent-secondary);
+            margin-bottom: 6px; font-weight: 500;
+        }
+
+        .edu-card .details { font-size: 0.8rem; color: var(--text-muted); }
+
+        .edu-gpa {
+            display: inline-block; padding: 4px 10px;
+            background: rgba(0, 212, 170, 0.1); border-radius: 6px;
+            font-size: 0.76rem; font-weight: 700; color: var(--accent-secondary);
+            margin-top: 10px; font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* ===== PUBLICATIONS ===== */
+        .pub-list { display: grid; gap: 14px; max-width: 900px; margin: 0 auto; }
+
+        .pub-item {
+            background: var(--bg-card); border: 1px solid var(--border-color);
+            border-radius: var(--radius); padding: 22px 24px;
+            display: flex; align-items: flex-start; gap: 14px;
+            transition: var(--transition);
+        }
+
+        .pub-item:hover { border-color: var(--border-glow); }
+
+        .pub-type {
+            padding: 4px 9px; border-radius: 6px;
+            font-size: 0.68rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 0.5px;
+            white-space: nowrap; margin-top: 2px;
+        }
+
+        .pub-type.paper { background: rgba(124, 116, 255, 0.1); color: var(--accent-primary); }
+        .pub-type.patent { background: rgba(255, 215, 0, 0.1); color: var(--accent-gold); }
+
+        .pub-info h4 { font-size: 0.9rem; font-weight: 600; margin-bottom: 3px; line-height: 1.5; }
+        .pub-info p { font-size: 0.78rem; color: var(--text-muted); }
+
+        /* ===== CONTACT ===== */
+        .contact-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr);
+            gap: 20px; max-width: 800px; margin: 0 auto;
+        }
+
+        .contact-card {
+            background: var(--bg-card); border: 1px solid var(--border-color);
+            border-radius: var(--radius); padding: 24px 16px; text-align: center;
+            text-decoration: none; color: var(--text-primary); transition: var(--transition);
+        }
+
+        .contact-card:hover {
+            border-color: var(--border-glow); transform: translateY(-4px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .contact-icon { font-size: 1.6rem; margin-bottom: 10px; }
+        .contact-card h4 { font-size: 0.88rem; font-weight: 700; margin-bottom: 4px; }
+        .contact-card p { font-size: 0.75rem; color: var(--text-muted); word-break: break-all; }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            position: relative; z-index: 1; text-align: center;
+            padding: 36px 24px; border-top: 1px solid var(--border-color);
+        }
+
+        .footer p { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 4px; }
+        .footer .hl { color: var(--accent-tertiary); }
+        .footer .sub { font-size: 0.75rem; }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            opacity: 0; transform: translateY(24px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .hero-inner { grid-template-columns: 1fr; text-align: center; }
+            .hero-subtitle { margin: 0 auto 32px; }
+            .hero-stats { justify-content: center; }
+            .hero-actions { justify-content: center; }
+            .hero-visual { margin-top: 24px; }
+            .about-grid { grid-template-columns: 1fr; }
+            .value-grid { grid-template-columns: 1fr 1fr; }
+            .edu-cards { grid-template-columns: 1fr; }
+            .contact-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .nav-toggle { display: block; }
+            .nav-links.active {
+                display: flex; flex-direction: column;
+                position: absolute; top: 100%; left: 0; right: 0;
+                background: rgba(10, 10, 15, 0.95);
+                backdrop-filter: blur(20px);
+                padding: 16px 24px;
+                border-bottom: 1px solid var(--border-color);
+            }
+            .hero { padding: 100px 16px 50px; }
+            .section { padding: 60px 16px; }
+            .hero-stats { flex-wrap: wrap; gap: 20px; }
+            .timeline-line { display: none; }
+            .timeline-item, .timeline-item:nth-child(even) {
+                flex-direction: column; align-items: stretch;
+            }
+            .timeline-content { width: 100%; }
+            .timeline-dot { display: none; }
+            .artifact-hero-banner, .artifact-body { padding: 24px; }
+            .audience-callout { margin: 24px 24px 0; }
+            .ai-era { grid-template-columns: 1fr; }
+            .ai-era-year { border-right: none; border-bottom: 2px solid var(--accent-primary); }
+            .contact-grid { grid-template-columns: 1fr 1fr; }
+            .value-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 480px) {
+            .contact-grid { grid-template-columns: 1fr; }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-primary); }
+        ::-webkit-scrollbar-thumb { background: var(--bg-card); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent-primary); }
+
+        /* Print-friendly */
+        @media print {
+            .bg-mesh, .floating-orbs, .navbar { display: none; }
+            body { background: #fff; color: #111; }
+            .section { padding: 24px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Animated Background -->
+<div class="bg-mesh"></div>
+<div class="floating-orbs">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+</div>
+
+<!-- ===== NAVIGATION ===== -->
+<nav class="navbar" id="navbar" role="navigation" aria-label="Main Navigation">
+    <div class="nav-inner">
+        <a href="#home" class="nav-logo" aria-label="Home">B.CHINTAM</a>
+        <button class="nav-toggle" aria-label="Toggle navigation" onclick="document.querySelector('.nav-links').classList.toggle('active')">
+            <span></span><span></span><span></span>
+        </button>
+        <div class="nav-links" role="menubar">
+            <a href="#about" role="menuitem">Bio</a>
+            <a href="#value" role="menuitem">Value</a>
+            <a href="#experience" role="menuitem">Experience</a>
+            <a href="#artifacts" role="menuitem">Artifacts</a>
+            <a href="#skills" role="menuitem">Skills</a>
+            <a href="#education" role="menuitem">Education</a>
+            <a href="#publications" role="menuitem">Research</a>
+            <a href="#contact" role="menuitem">Contact</a>
+            <a href="https://github.com/bhargavchintam" target="_blank" rel="noopener noreferrer" class="nav-cta" role="menuitem">GitHub</a>
+        </div>
+    </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="home">
+    <div class="hero-inner">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span class="dot"></span>
+                M.S. in AI &mdash; Indiana Wesleyan University
+            </div>
+            <h1>
+                Hi, I'm <span class="gradient-text">Bhargav</span><br>
+                Chintam
+            </h1>
+            <p class="hero-subtitle">
+                Principal ML/AI Architect building intelligent systems across genomics, healthcare, telecom, and enterprise AI. I turn research prototypes into production-grade, secure, and cost-aware services.
+            </p>
+            <div class="hero-stats">
+                <div class="stat">
+                    <div class="stat-number">5+</div>
+                    <div class="stat-label">Years Exp.</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">7</div>
+                    <div class="stat-label">Publications</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">Patents</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">4</div>
+                    <div class="stat-label">Industries</div>
+                </div>
+            </div>
+            <div class="hero-actions">
+                <a href="#artifacts" class="btn btn-primary">View Artifacts</a>
+                <a href="https://linkedin.com/in/bindu-bhargava-reddy-chintam/" target="_blank" rel="noopener noreferrer" class="btn btn-outline">LinkedIn</a>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="hero-card">
+                <div class="profile-section">
+                    <div class="avatar">BC</div>
+                    <div class="profile-info">
+                        <h3>Bhargav Chintam</h3>
+                        <p>Stony Brook, NY &bull; IWU M.S. AI '27</p>
+                    </div>
+                </div>
+                <div class="skill-tags">
+                    <span class="skill-tag">LangGraph</span>
+                    <span class="skill-tag g">RAG Systems</span>
+                    <span class="skill-tag p">MLOps</span>
+                    <span class="skill-tag">Agentic AI</span>
+                    <span class="skill-tag g">AWS / Azure / GCP</span>
+                    <span class="skill-tag p">Genomics AI</span>
+                </div>
+                <div class="code-block">
+                    <span class="cm"># what I build</span><br>
+                    <span class="kw">class</span> <span class="fn">AIArchitect</span>:<br>
+                    &nbsp;&nbsp;domains = [<span class="str">"genomics"</span>, <span class="str">"healthcare"</span>,<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"telecom/5G"</span>, <span class="str">"enterprise"</span>]<br>
+                    &nbsp;&nbsp;stack&nbsp;&nbsp;= <span class="str">"Agentic + RAG + LLMOps"</span><br>
+                    &nbsp;&nbsp;degree&nbsp;= <span class="str">"IWU M.S. AI (2026-27)"</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ===== PROFESSIONAL BIO ===== -->
+<section class="section" id="about">
+    <div class="section-inner">
+        <div class="section-header fade-in">
+            <div class="section-label">About Me</div>
+            <h2 class="section-title">Professional Bio</h2>
+            <p class="section-desc">A hands-on AI/ML leader passionate about turning cutting-edge research into real-world impact</p>
+        </div>
+        <div class="about-grid fade-in">
+            <div class="about-text">
+                <p>
+                    I am <strong>Bindu Bhargava Reddy Chintam</strong>, a Principal ML/AI Architect with over five years of hands-on experience designing, building, and deploying data, ML, and LLM platforms. My work spans some of the most impactful domains in technology: <strong>genomics, healthcare/ICU, telecom/5G, and enterprise AI</strong>.
+                </p>
+                <p>
+                    I am currently pursuing my <strong>M.S. in Artificial Intelligence at Indiana Wesleyan University</strong> (Jan 2026 &ndash; May 2027). I previously earned a Master's in Computer Science (Thesis track) from <strong>Stony Brook University</strong> with a 3.88 GPA and a B.Tech in Computer Science &amp; Engineering from REVA University (9.78/10 GPA).
+                </p>
+                <p>
+                    I specialize in the 2025 AI stack: <strong>agentic systems</strong> (LangGraph, CrewAI, AutoGen), <strong>RAG with production evaluations</strong> (RAGAS, TruLens, Guardrails), and <strong>LLMOps on AWS/Azure/GCP</strong>. My track record includes turning research prototypes into monitored, secure, cost-aware services across regulated environments.
+                </p>
+                <p>
+                    Beyond technical expertise, I am a recognized <strong>university leader</strong>: President of the Graduate Student Organization at Stony Brook, Chief Steward with CWA Local 1101 GSEU, and Board of Directors of ASA &ndash; SBU. I am deeply committed to mentoring, cross-functional collaboration, and driving inclusive initiatives.
+                </p>
+            </div>
+            <div class="info-cards">
+                <div class="info-card">
+                    <div class="info-card-icon" style="background:rgba(124,116,255,0.1); color:var(--accent-primary);">&#127891;</div>
+                    <h4>Current Program</h4>
+                    <p>M.S. Artificial Intelligence, Indiana Wesleyan University (Jan 2026 &ndash; May 2027)</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-card-icon" style="background:rgba(0,212,170,0.1); color:var(--accent-secondary);">&#128300;</div>
+                    <h4>Research Focus</h4>
+                    <p>AI for Genomics, Agentic AI Systems, RAG Orchestration, LLMOps at Scale</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-card-icon" style="background:rgba(255,107,157,0.1); color:var(--accent-tertiary);">&#127942;</div>
+                    <h4>Leadership</h4>
+                    <p>President, GSO &ndash; SBU | Chief Steward, CWA 1101 | Board of Directors, ASA &ndash; SBU</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-card-icon" style="background:rgba(255,215,0,0.1); color:var(--accent-gold);">&#128205;</div>
+                    <h4>Location</h4>
+                    <p>Stony Brook, NY &bull; Open to Remote / Relocation</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ===== PERSONAL VALUE PROPOSITION ===== -->
+<section class="section" id="value">
+    <div class="section-inner">
+        <div class="section-header fade-in">
+            <div class="section-label">My Unique Value</div>
+            <h2 class="section-title">Personal Value Proposition</h2>
+            <p class="section-desc">I bring a rare combination of deep technical expertise, multi-industry delivery, and leadership that bridges academia and production engineering.</p>
+        </div>
+        <div class="value-grid fade-in">
+            <div class="value-card">
+                <div class="value-icon">&#129302;</div>
+                <h3>Full-Stack AI Engineering</h3>
+                <p>From data pipelines to production LLMOps, I architect end-to-end AI systems that are monitored, secure, and cost-aware. I specialize in agentic AI, RAG with production-grade evaluations, and multi-cloud deployments across AWS, Azure, and GCP.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">&#127973;</div>
+                <h3>Domain-Driven Impact</h3>
+                <p>Having shipped AI in genomics, ICU/healthcare, telecom/5G, and enterprise settings, I understand the regulatory, compliance, and domain-specific constraints that determine whether a solution reaches production. I turn research into real products.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">&#128101;</div>
+                <h3>Leadership &amp; Mentorship</h3>
+                <p>As a university president, published researcher (7 papers, 3 patents), and teaching assistant, I bridge academic and industry worlds. I define data contracts, MLOps standards, and delivery timelines while mentoring the next generation of AI practitioners.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ===== EXPERIENCE TIMELINE ===== -->
+<section class="section" id="experience">
+    <div class="section-inner">
+        <div class="section-header fade-in">
+            <div class="section-label">Career Journey</div>
+            <h2 class="section-title">Professional Experience</h2>
+            <p class="section-desc">A journey across genomics, healthcare, telecom, and enterprise AI</p>
+        </div>
+        <div class="timeline-container fade-in">
+            <div class="timeline-line"></div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">Feb 2024 &ndash; Present</div>
+                    <h3>Research Scientist &ndash; AI for Genomics</h3>
+                    <div class="org">The Research Foundation for SUNY / Stony Brook University</div>
+                    <p>Building AI/ML experiments to decode genomic sequences for model organisms and humans. Prototyping RAG over lab literature and genomic annotations using LangChain/LangGraph + vector DB to accelerate hypothesis generation for novel therapeutics.</p>
+                </div>
+                <div class="timeline-dot"></div>
+                <div style="width:calc(50% - 36px)"></div>
+            </div>
+
+            <div class="timeline-item">
+                <div style="width:calc(50% - 36px)"></div>
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-year">Feb 2023 &ndash; Jan 2025</div>
+                    <h3>Data Engineer &amp; ML Engineer (5G / Telecom AI)</h3>
+                    <div class="org">A5G Networks, Inc.</div>
+                    <p>Designed end-to-end Azure Event Hub &rarr; Databricks &rarr; Delta &rarr; Azure ML pipeline for high-volume 5G events. Implemented MLOps with MLflow + Azure DevOps + Kubernetes for monitored REST endpoints.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">May 2022 &ndash; Feb 2023</div>
+                    <h3>Data Engineer &amp; ML Engineer &ndash; ICU / CV / GenAI</h3>
+                    <div class="org">Cloudphysician, Bengaluru, India</div>
+                    <p>Architected real-time ICU analytics: video/vitals &rarr; Kafka/PySpark &rarr; AWS to detect deterioration and heart-failure risks. Containerized CV and multimodal models for clinician dashboards with Docker + EKS.</p>
+                </div>
+                <div class="timeline-dot"></div>
+                <div style="width:calc(50% - 36px)"></div>
+            </div>
+
+            <div class="timeline-item">
+                <div style="width:calc(50% - 36px)"></div>
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-year">Sep 2021 &ndash; Sep 2023</div>
+                    <h3>Data Engineer</h3>
+                    <div class="org">Inxite Out (Alumnus Software Ltd.)</div>
+                    <p>Built microservice-based data platforms on cloud for healthcare, retail, and BFSI. Created accelerators (Airflow/Prefect DAGs, dbt-style transforms, monitoring) so PoCs became production jobs quickly.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">Aug 2023 &ndash; Jan 2025</div>
+                    <h3>Graduate Teaching Assistant &ndash; CSE381 / ISE320</h3>
+                    <div class="org">Stony Brook University, NY</div>
+                    <p>Ran labs, grading, and student mentoring for 3D networked game programming and information management courses. Introduced students to responsible LLM/RAG usage for projects.</p>
+                </div>
+                <div class="timeline-dot"></div>
+                <div style="width:calc(50% - 36px)"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ===== PORTFOLIO ARTIFACTS ===== -->
+<section class="section" id="artifacts">
+    <div class="section-inner">
+        <div class="section-header fade-in">
+            <div class="section-label">Portfolio Artifacts</div>
+            <h2 class="section-title">Evidence of Learning &amp; Growth</h2>
+            <p class="section-desc">Each artifact provides tangible evidence of skills, knowledge, and professional competence developed during coursework at IWU.</p>
+        </div>
+
+        <!-- ===== ARTIFACT 1 ===== -->
+        <div class="artifact-showcase fade-in" id="artifact-1">
+            <div class="artifact-hero-banner">
+                <div class="artifact-number">&#11088; Artifact 1 &mdash; Workshop 1</div>
+                <h2>The Evolution of AI &amp; Machine Learning: An Interactive Timeline</h2>
+                <p class="subtitle">Tracing the milestones that shaped modern AI &mdash; from rule-based systems to agentic intelligence</p>
+            </div>
+
+            <!-- TARGET AUDIENCE CALLOUT -->
+            <div class="audience-callout">
+                <div class="audience-callout-icon">&#127919;</div>
+                <div>
+                    <h4>Target Audience</h4>
+                    <p>This artifact is tailored for <strong>AI/ML hiring managers, technical recruiters, and fellow graduate students</strong> who want a structured overview of the AI field's evolution. It is designed to demonstrate my breadth of knowledge and my ability to synthesize complex historical and technical information into an accessible, professional resource. Hiring managers can use it to assess my understanding of the field; peers can use it as a reference guide.</p>
+                </div>
+            </div>
+
+            <div class="artifact-body">
+
+                <!-- Title (explicitly labeled) -->
+                <div class="artifact-section">
+                    <div class="artifact-section-title">
+                        <div class="icon" style="background:rgba(124,116,255,0.1);">&#128221;</div>
+                        Title
+                    </div>
+                    <p><strong>The Evolution of AI &amp; Machine Learning: An Interactive Timeline</strong></p>
+                </div>
+
+                <!-- Introduction -->
+                <div class="artifact-section">
+                    <div class="artifact-section-title">
+                        <div class="icon" style="background:rgba(0,212,170,0.1);">&#128218;</div>
+                        Introduction
+                    </div>
+                    <p>Artificial Intelligence and Machine Learning have undergone a remarkable evolution over the past seven decades. This timeline artifact traces the key breakthroughs, paradigm shifts, and technological milestones that have defined the AI/ML landscape from its theoretical foundations in the 1950s to the agentic AI systems of 2025. As a practitioner who has built AI solutions across genomics, healthcare, telecom, and enterprise environments, I created this resource to provide a clear, structured overview of where AI has been and where it is heading &mdash; and to show how each era directly informs the production-grade systems I build today.</p>
+                </div>
+
+                <!-- Description -->
+                <div class="artifact-section">
+                    <div class="artifact-section-title">
+                        <div class="icon" style="background:rgba(255,107,157,0.1);">&#128196;</div>
+                        Description
+                    </div>
+                    <p>This artifact is a curated, interactive visual timeline that captures the most significant events in the history of AI and ML. It is organized by era &mdash; from the Dawn of AI (1950s) through the Transformer Revolution and into today's Agentic AI &mdash; and highlights the transition between paradigms rather than listing isolated events. Each milestone includes contextual information about its impact on the field. The timeline below serves as a tangible, evidence-based deliverable: a professionally designed visual that can be referenced, shared, and used as a resource by its target audience.</p>
+                </div>
+
+                <!-- Objective -->
+                <div class="artifact-section">
+                    <div class="artifact-section-title">
+                        <div class="icon" style="background:rgba(124,116,255,0.1);">&#127919;</div>
+                        Objective
+                    </div>
+                    <p>The primary objective was to synthesize the full arc of AI/ML development into a cohesive visual narrative that both educates and demonstrates deep understanding of the field. This timeline was created to: (1) serve as a quick-reference resource for fellow students and early-career professionals, (2) showcase my ability to contextualize current tools and techniques within historical trends for potential employers, and (3) reinforce my own understanding of how foundational breakthroughs connect to the agentic AI, RAG, and LLMOps solutions I build in production environments today.</p>
+                </div>
+
+                <!-- THE TIMELINE VISUAL (tangible deliverable) -->
+                <div class="artifact-section">
+                    <div class="artifact-section-title">
+                        <div class="icon" style="background:rgba(255,215,0,0.1);">&#128197;</div>
+                        AI &amp; ML Evolution Timeline (Visual Artifact)
+                    </div>
+                    <div class="ai-timeline">
+                        <div class="ai-era">
+                            <div class="ai-era-year">1950 &ndash; 1969</div>
+                            <div class="ai-era-content">
+                                <h4>The Dawn of AI</h4>
+                                <p>Turing Test proposed (1950) &bull; Dartmouth Conference coins "Artificial Intelligence" (1956) &bull; Perceptron invented by Rosenblatt (1958) &bull; ELIZA chatbot at MIT (1966)</p>
+                            </div>
+                        </div>
+                        <div class="ai-era">
+                            <div class="ai-era-year">1970 &ndash; 1979</div>
+                            <div class="ai-era-content">
+                                <h4>First AI Winter &amp; Expert Systems</h4>
+                                <p>Lighthill Report triggers funding cuts (1973) &bull; MYCIN expert system for medical diagnosis (1976) &bull; Knowledge-based systems emerge as practical AI</p>
+                            </div>
+                        </div>
+                        <div class="ai-era">
+                            <div class="ai-era-year">1980 &ndash; 1989</div>
+                            <div class="ai-era-content">
+                                <h4>Expert Systems Boom &amp; Backpropagation</h4>
+                                <p>Commercial expert systems surge &bull; Backpropagation algorithm revived by Rumelhart, Hinton &amp; Williams (1986) &bull; Connectionism rises &bull; Second AI winter begins (late 1980s)</p>
+                            </div>
+                        </div>
+                        <div class="ai-era">
+                            <div class="ai-era-year">1990 &ndash; 1999</div>
+                            <div class="ai-era-content">
+                                <h4>Statistical ML &amp; Key Milestones</h4>
+                                <p>SVMs &amp; ensemble methods gain traction &bull; Deep Blue defeats Kasparov (1997) &bull; LSTM networks by Hochreiter &amp; Schmidhuber (1997) &bull; Data-driven approaches replace hand-coded rules</p>
+                            </div>
+                        </div>
+                        <div class="ai-era">
+                            <div class="ai-era-year">2000 &ndash; 2009</div>
+                            <div class="ai-era-content">
+                                <h4>Big Data &amp; Deep Learning Foundations</h4>
+                                <p>MapReduce &amp; Hadoop enable massive data processing &bull; Netflix Prize accelerates recommendation research (2006) &bull; ImageNet dataset launched (2009) &bull; GPU computing begins to accelerate model training</p>
+                            </div>
+                        </div>
+                        <div class="ai-era">
+                            <div class="ai-era-year">2010 &ndash; 2016</div>
+                            <div class="ai-era-content">
+                                <h4>Deep Learning Revolution</h4>
+                                <p>AlexNet wins ImageNet competition (2012) &bull; Generative Adversarial Networks / GANs (2014) &bull; Attention mechanism introduced (2015) &bull; AlphaGo defeats Lee Sedol (2016) &bull; TensorFlow open-sourced</p>
+                            </div>
+                        </div>
+                        <div class="ai-era">
+                            <div class="ai-era-year">2017 &ndash; 2019</div>
+                            <div class="ai-era-content">
+                                <h4>The Transformer Era Begins</h4>
+                                <p>"Attention Is All You Need" paper (2017) &bull; BERT pre-trained language model (2018) &bull; GPT-2 demonstrates large-scale text generation (2019) &bull; Transfer learning becomes the standard paradigm across NLP</p>
+                            </div>
+                        </div>
+                        <div class="ai-era">
+                            <div class="ai-era-year">2020 &ndash; 2022</div>
+                            <div class="ai-era-content">
+                                <h4>Generative AI Explosion</h4>
+                                <p>GPT-3 shows few-shot learning (2020) &bull; DALL-E &amp; Codex (2021) &bull; Stable Diffusion democratizes image generation &bull; ChatGPT launches (Nov 2022) &bull; AI applied to drug discovery &amp; genomics at scale</p>
+                            </div>
+                        </div>
+                        <div class="ai-era">
+                            <div class="ai-era-year">2023 &ndash; 2024</div>
+                            <div class="ai-era-content">
+                                <h4>Foundation Models &amp; Early Agents</h4>
+                                <p>GPT-4, Gemini, Claude released &bull; Open-weight models (LLaMA, Mistral) &bull; RAG architectures become production standard &bull; LangChain / LangGraph frameworks &bull; Early agentic systems and tool-use patterns</p>
+                            </div>
+                        </div>
+                        <div class="ai-era">
+                            <div class="ai-era-year">2025</div>
+                            <div class="ai-era-content">
+                                <h4>Agentic AI &amp; Reasoning at Scale</h4>
+                                <p>Multi-agent orchestration (CrewAI, AutoGen, Magentic-One) &bull; o1-class reasoning models &bull; Production RAG with evals (RAGAS, TruLens) &bull; LLMOps and AI governance at enterprise scale &bull; AI regulation advances globally</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Process -->
+                <div class="artifact-section">
+                    <div class="artifact-section-title">
+                        <div class="icon" style="background:rgba(0,212,170,0.1);">&#9881;&#65039;</div>
+                        Process
+                    </div>
+                    <ul>
+                        <li>Conducted research through academic papers, AI history archives, and credible industry sources (MIT Technology Review, Stanford AI Index) to identify the most impactful milestones across each decade.</li>
+                        <li>Organized milestones into thematic eras (foundational, statistical ML, deep learning, generative, agentic) to show paradigm progression rather than isolated events.</li>
+                        <li>Mapped my personal professional experience to each modern era, connecting my work in genomics RAG, ICU real-time analytics, and telecom MLOps to the broader AI timeline.</li>
+                        <li>Designed the interactive visual layout using HTML5/CSS3/JavaScript with a focus on clarity, professional presentation, and responsive design suitable for portfolio sharing.</li>
+                        <li>Iteratively refined content based on IWU Workshop 1 course materials and self-assessment insights from the professional development activities.</li>
+                        <li>Tailored language and depth for the target audience (hiring managers, technical recruiters, and fellow graduate students) to ensure the artifact is both informative and impressive as a portfolio piece.</li>
+                    </ul>
+                </div>
+
+                <!-- Tools & Technologies Used -->
+                <div class="artifact-section">
+                    <div class="artifact-section-title">
+                        <div class="icon" style="background:rgba(255,107,157,0.1);">&#128736;&#65039;</div>
+                        Tools and Technologies Used
+                    </div>
+                    <div class="tool-tags">
+                        <div class="tool-tag"><span>&#128187;</span> HTML5 / CSS3</div>
+                        <div class="tool-tag"><span>&#9889;</span> JavaScript (ES6+)</div>
+                        <div class="tool-tag"><span>&#128038;</span> GitHub Pages</div>
+                        <div class="tool-tag"><span>&#129302;</span> GenAI Chatbots (research aid)</div>
+                        <div class="tool-tag"><span>&#128218;</span> Academic &amp; Industry Literature</div>
+                        <div class="tool-tag"><span>&#127912;</span> Responsive Web Design</div>
+                        <div class="tool-tag"><span>&#128240;</span> Google Fonts (Inter, JetBrains Mono)</div>
+                    </div>
+                </div>
+
+                <!-- Value Proposition -->
+                <div class="artifact-section">
+                    <div class="artifact-section-title">
+                        <div class="icon" style="background:rgba(255,215,0,0.1);">&#128161;</div>
+                        Value Proposition
+                    </div>
+                    <p>This artifact demonstrates my ability to distill complex, multi-decade technological evolution into a clear, engaging narrative. For fellow students and early-career professionals, it serves as a quick-reference guide to understand the lineage of tools and concepts they encounter daily. For potential employers and collaborators, it showcases broad historical awareness, the ability to communicate technical depth in an accessible format, and a commitment to creating resources that help others learn. The timeline connects past to present, showing how foundational breakthroughs directly inform the agentic AI, RAG, and LLMOps solutions I build in production environments today.</p>
+                </div>
+
+                <!-- Unique Value -->
+                <div class="artifact-section">
+                    <div class="artifact-section-title">
+                        <div class="icon" style="background:rgba(124,116,255,0.1);">&#10024;</div>
+                        Unique Value
+                    </div>
+                    <p>Unlike generic AI timelines available online, this artifact is authored by a practitioner who has shipped production AI systems across four distinct industries. Each era is annotated not just with historical facts, but through the lens of someone who has applied these concepts in real-world, high-stakes settings: deploying deep learning models in ICU environments, building RAG systems for genomics research, and engineering 5G telecom ML pipelines. This practitioner's perspective makes the timeline more actionable and relevant for an audience seeking to understand how AI history connects directly to today's engineering practices and job market demands.</p>
+                </div>
+
+                <!-- Relevance -->
+                <div class="artifact-section">
+                    <div class="artifact-section-title">
+                        <div class="icon" style="background:rgba(0,212,170,0.1);">&#127793;</div>
+                        Relevance
+                    </div>
+                    <p>As the AI/ML field continues rapid evolution, professionals and students benefit from structured resources that contextualize new developments within historical patterns. This timeline is directly relevant to my coursework in the M.S. in Artificial Intelligence program at Indiana Wesleyan University, to the professionals I collaborate with who need to understand AI trends, and to hiring managers evaluating my breadth of knowledge and communication skills. It also serves as a living document that I plan to update as the field continues to evolve, making it a lasting resource in my professional portfolio.</p>
+                </div>
+
+                <!-- REFERENCES (required by template) -->
+                <div class="artifact-section">
+                    <div class="artifact-section-title">
+                        <div class="icon" style="background:rgba(56,189,248,0.1);">&#128214;</div>
+                        References
+                    </div>
+                    <ol class="ref-list">
+                        <li>Russell, S. &amp; Norvig, P. (2021). <em>Artificial Intelligence: A Modern Approach</em> (4th ed.). Pearson.</li>
+                        <li>Vaswani, A., et al. (2017). "Attention Is All You Need." <em>Advances in Neural Information Processing Systems (NeurIPS)</em>.</li>
+                        <li>Stanford University. (2024). <em>AI Index Report 2024</em>. Stanford Institute for Human-Centered Artificial Intelligence. <a href="https://aiindex.stanford.edu/report/" target="_blank" rel="noopener noreferrer">aiindex.stanford.edu/report</a></li>
+                        <li>Goodfellow, I., et al. (2014). "Generative Adversarial Nets." <em>NeurIPS 2014</em>.</li>
+                        <li>Devlin, J., et al. (2019). "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding." <em>NAACL-HLT 2019</em>.</li>
+                        <li>Brown, T. B., et al. (2020). "Language Models are Few-Shot Learners." <em>NeurIPS 2020</em>.</li>
+                        <li>LangChain Documentation. (2024). <a href="https://docs.langchain.com/" target="_blank" rel="noopener noreferrer">docs.langchain.com</a></li>
+                        <li>MIT Technology Review. (2024). "The AI Timeline: Key Milestones in Artificial Intelligence." <a href="https://www.technologyreview.com/" target="_blank" rel="noopener noreferrer">technologyreview.com</a></li>
+                    </ol>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Placeholder for future artifacts -->
+        <div style="text-align:center; margin-top:48px; color:var(--text-muted); font-size:0.9rem;" class="fade-in">
+            <p style="color:var(--text-muted);">Artifacts 2&ndash;5 will be added as the course progresses through Workshops 2&ndash;5.</p>
+        </div>
+
+    </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ===== CORE SKILLS ===== -->
+<section class="section" id="skills">
+    <div class="section-inner">
+        <div class="section-header fade-in">
+            <div class="section-label">Expertise</div>
+            <h2 class="section-title">Core Skills &amp; Technologies</h2>
+            <p class="section-desc">A comprehensive toolkit spanning the modern AI/ML engineering stack</p>
+        </div>
+        <div class="skills-grid fade-in">
+            <div class="skill-category">
+                <div class="skill-cat-header">
+                    <div class="skill-cat-icon" style="background:rgba(124,116,255,0.1); color:var(--accent-primary);">&#129302;</div>
+                    <h3>AI / LLM / Agentic</h3>
+                </div>
+                <div class="skill-list">
+                    <span class="skill-pill">LangGraph</span><span class="skill-pill">CrewAI</span>
+                    <span class="skill-pill">AutoGen</span><span class="skill-pill">LlamaIndex</span>
+                    <span class="skill-pill">Semantic Kernel</span><span class="skill-pill">n8n</span>
+                    <span class="skill-pill">Multi-Agent Systems</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <div class="skill-cat-header">
+                    <div class="skill-cat-icon" style="background:rgba(0,212,170,0.1); color:var(--accent-secondary);">&#128269;</div>
+                    <h3>RAG &amp; Retrieval</h3>
+                </div>
+                <div class="skill-list">
+                    <span class="skill-pill">RAGAS</span><span class="skill-pill">TruLens</span>
+                    <span class="skill-pill">Guardrails</span><span class="skill-pill">Pinecone</span>
+                    <span class="skill-pill">Weaviate</span><span class="skill-pill">Qdrant</span>
+                    <span class="skill-pill">Chroma</span><span class="skill-pill">ColBERT</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <div class="skill-cat-header">
+                    <div class="skill-cat-icon" style="background:rgba(255,107,157,0.1); color:var(--accent-tertiary);">&#9881;&#65039;</div>
+                    <h3>LLMOps / MLOps</h3>
+                </div>
+                <div class="skill-list">
+                    <span class="skill-pill">MLflow</span><span class="skill-pill">KServe</span>
+                    <span class="skill-pill">Ray Serve</span><span class="skill-pill">BentoML</span>
+                    <span class="skill-pill">Seldon Core</span><span class="skill-pill">Prometheus</span>
+                    <span class="skill-pill">Grafana</span><span class="skill-pill">Feast</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <div class="skill-cat-header">
+                    <div class="skill-cat-icon" style="background:rgba(255,215,0,0.1); color:var(--accent-gold);">&#9729;&#65039;</div>
+                    <h3>Cloud Platforms</h3>
+                </div>
+                <div class="skill-list">
+                    <span class="skill-pill">AWS Bedrock</span><span class="skill-pill">SageMaker</span>
+                    <span class="skill-pill">Azure AI Studio</span><span class="skill-pill">Azure OpenAI</span>
+                    <span class="skill-pill">GCP Vertex AI</span><span class="skill-pill">Gemini</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <div class="skill-cat-header">
+                    <div class="skill-cat-icon" style="background:rgba(124,116,255,0.1); color:var(--accent-primary);">&#128202;</div>
+                    <h3>Data &amp; Streaming</h3>
+                </div>
+                <div class="skill-list">
+                    <span class="skill-pill">Databricks</span><span class="skill-pill">Delta Lake</span>
+                    <span class="skill-pill">Kafka</span><span class="skill-pill">PySpark</span>
+                    <span class="skill-pill">dbt</span><span class="skill-pill">Apache Iceberg</span>
+                    <span class="skill-pill">Redshift</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <div class="skill-cat-header">
+                    <div class="skill-cat-icon" style="background:rgba(0,212,170,0.1); color:var(--accent-secondary);">&#128187;</div>
+                    <h3>Languages &amp; Infra</h3>
+                </div>
+                <div class="skill-list">
+                    <span class="skill-pill">Python</span><span class="skill-pill">SQL</span>
+                    <span class="skill-pill">TypeScript</span><span class="skill-pill">React</span>
+                    <span class="skill-pill">FastAPI</span><span class="skill-pill">Kubernetes</span>
+                    <span class="skill-pill">Terraform</span><span class="skill-pill">Docker</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ===== EDUCATION ===== -->
+<section class="section" id="education">
+    <div class="section-inner">
+        <div class="section-header fade-in">
+            <div class="section-label">Education</div>
+            <h2 class="section-title">Academic Background</h2>
+        </div>
+        <div class="edu-cards fade-in">
+            <div class="edu-card">
+                <div class="edu-degree">In Progress</div>
+                <h3>M.S. Artificial Intelligence</h3>
+                <div class="school">Indiana Wesleyan University, IN</div>
+                <div class="details">Jan 2026 &ndash; May 2027</div>
+            </div>
+            <div class="edu-card">
+                <div class="edu-degree" style="color:var(--accent-secondary);">Completed</div>
+                <h3>M.S. Computer Science (Thesis)</h3>
+                <div class="school">Stony Brook University, NY</div>
+                <div class="details">Sep 2023 &ndash; Dec 2024</div>
+                <div class="edu-gpa">GPA: 3.88 / 4.0</div>
+            </div>
+            <div class="edu-card">
+                <div class="edu-degree" style="color:var(--accent-tertiary);">Completed</div>
+                <h3>B.Tech, CS &amp; Engineering (Thesis)</h3>
+                <div class="school">REVA University, India</div>
+                <div class="details">2017 &ndash; Jul 2021</div>
+                <div class="edu-gpa">GPA: 9.78 / 10</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ===== PUBLICATIONS & PATENTS ===== -->
+<section class="section" id="publications">
+    <div class="section-inner">
+        <div class="section-header fade-in">
+            <div class="section-label">Research Output</div>
+            <h2 class="section-title">Publications &amp; Patents</h2>
+            <p class="section-desc">7 publications and 3 patents contributing to the academic frontier of AI/ML</p>
+        </div>
+        <div class="pub-list fade-in">
+            <div class="pub-item">
+                <div class="pub-type paper">Paper</div>
+                <div class="pub-info">
+                    <h4>Adaptive RAG Orchestration and Tool-Graph Optimization for Enterprise LLMs</h4>
+                    <p>2025</p>
+                </div>
+            </div>
+            <div class="pub-item">
+                <div class="pub-type paper">Paper</div>
+                <div class="pub-info">
+                    <h4>Using Machine Learning Approach to Identify Dinucleotide Motif Periodicity in Genomes</h4>
+                    <p>November 2025</p>
+                </div>
+            </div>
+            <div class="pub-item">
+                <div class="pub-type paper">Paper</div>
+                <div class="pub-info">
+                    <h4>Adaptive Importance Sampling for Rare Congestion in a Two-Stage Queue</h4>
+                    <p>Google Scholar, June 2025</p>
+                </div>
+            </div>
+            <div class="pub-item">
+                <div class="pub-type paper">Paper</div>
+                <div class="pub-info">
+                    <h4>Dinuc2mer: Deep Learning Approach for Coding Region Prediction</h4>
+                    <p>BioCHEM Paper, September 2024</p>
+                </div>
+            </div>
+            <div class="pub-item">
+                <div class="pub-type paper">Paper</div>
+                <div class="pub-info">
+                    <h4>Facial Emotions and Behaviour Detection using DNN</h4>
+                    <p>Scopus, May 2021</p>
+                </div>
+            </div>
+            <div class="pub-item">
+                <div class="pub-type paper">Paper</div>
+                <div class="pub-info">
+                    <h4>Text Recognition from Images using Image Processing (Tesseract + gTTS)</h4>
+                    <p>IJARCS, May 2020</p>
+                </div>
+            </div>
+            <div class="pub-item">
+                <div class="pub-type patent">Patent</div>
+                <div class="pub-info">
+                    <h4>A System and Method for Monitoring Facial Emotions and Behavior Using Deep Neural Networks</h4>
+                    <p>AU 2021102414 &mdash; Granted, June 2021</p>
+                </div>
+            </div>
+            <div class="pub-item">
+                <div class="pub-type patent">Patent</div>
+                <div class="pub-info">
+                    <h4>Adaptive RAG Orchestration and Tool-Graph Optimization for Enterprise LLMs</h4>
+                    <p>Provisional, 2025</p>
+                </div>
+            </div>
+            <div class="pub-item">
+                <div class="pub-type patent">Patent</div>
+                <div class="pub-info">
+                    <h4>Multimodal ICU Deterioration Prediction via Streaming Pipelines</h4>
+                    <p>Provisional, 2023</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ===== CONTACT ===== -->
+<section class="section" id="contact">
+    <div class="section-inner">
+        <div class="section-header fade-in">
+            <div class="section-label">Connect</div>
+            <h2 class="section-title">Get In Touch</h2>
+            <p class="section-desc">Open to collaborations, research partnerships, and opportunities in AI/ML</p>
+        </div>
+        <div class="contact-grid fade-in">
+            <a href="mailto:bindubhargavareddy@gmail.com" class="contact-card">
+                <div class="contact-icon">&#9993;&#65039;</div>
+                <h4>Email</h4>
+                <p>bindubhargavareddy@gmail.com</p>
+            </a>
+            <a href="https://linkedin.com/in/bindu-bhargava-reddy-chintam/" target="_blank" rel="noopener noreferrer" class="contact-card">
+                <div class="contact-icon">&#128101;</div>
+                <h4>LinkedIn</h4>
+                <p>bindu-bhargava-reddy-chintam</p>
+            </a>
+            <a href="https://github.com/bhargavchintam" target="_blank" rel="noopener noreferrer" class="contact-card">
+                <div class="contact-icon">&#128187;</div>
+                <h4>GitHub</h4>
+                <p>@bhargavchintam</p>
+            </a>
+            <a href="tel:+19342217847" class="contact-card">
+                <div class="contact-icon">&#128222;</div>
+                <h4>Phone</h4>
+                <p>+1 (934) 221-7847</p>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+    <p>&copy; 2026 Bindu Bhargava Reddy Chintam &mdash; Built with <span class="hl">&#10084;&#65039;</span> for the IWU M.S. in Artificial Intelligence Program</p>
+    <p class="sub">Professional Portfolio &bull; Indiana Wesleyan University &bull; Workshop 1 Submission</p>
+</footer>
+
+<!-- ===== SCRIPTS ===== -->
+<script>
+    // Sticky navbar
+    window.addEventListener('scroll', () => {
+        document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // Intersection Observer for fade-in
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) entry.target.classList.add('visible');
+        });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                document.querySelector('.nav-links')?.classList.remove('active');
+            }
+        });
+    });
+
+    // Active nav highlight on scroll
+    const sections = document.querySelectorAll('section[id]');
+    window.addEventListener('scroll', () => {
+        const scrollY = window.scrollY + 120;
+        sections.forEach(section => {
+            const top = section.offsetTop;
+            const height = section.offsetHeight;
+            const id = section.getAttribute('id');
+            const link = document.querySelector(`.nav-links a[href="#${id}"]`);
+            if (link) {
+                link.classList.toggle('active', scrollY >= top && scrollY < top + height);
+            }
+        });
+    });
+</script>
+</body>
+</html>
