@@ -962,7 +962,7 @@
             font-family: 'JetBrains Mono', monospace; line-height: 1.7;
         }
 
-        /* ===== ARTIFACT 2.5 — Chatbot Styles ===== */
+        /* ===== ARTIFACT 2.2 — Chatbot Styles ===== */
         .chatbot-arch-diagram {
             background: rgba(0, 0, 0, 0.25);
             border: 1px solid var(--border-color);
@@ -1116,6 +1116,94 @@
         .chatbot-eval-grid {
             display: grid; grid-template-columns: 1fr 1fr;
             gap: 18px; margin-top: 18px;
+        }
+
+        /* ===== ARTIFACT 3 — ML Training Methods Styles ===== */
+        .scenario-table {
+            width: 100%; border-collapse: separate; border-spacing: 0;
+            margin-top: 18px; font-size: 0.78rem;
+            border: 1px solid var(--border-color); border-radius: var(--radius);
+            overflow: hidden;
+        }
+
+        .scenario-table thead th {
+            background: rgba(124,116,255,0.08);
+            color: var(--text-primary); font-weight: 700;
+            padding: 14px 16px; text-align: left; font-size: 0.72rem;
+            text-transform: uppercase; letter-spacing: 0.5px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .scenario-table tbody td {
+            padding: 14px 16px; color: var(--text-secondary);
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+            vertical-align: top; line-height: 1.7;
+        }
+
+        .scenario-table tbody tr:last-child td { border-bottom: none; }
+
+        .scenario-table tbody tr:hover {
+            background: rgba(124,116,255,0.03);
+        }
+
+        .scenario-table .concept-badge {
+            display: inline-block; padding: 3px 10px;
+            border-radius: 20px; font-size: 0.66rem; font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+
+        .concept-badge.supervised { background: rgba(124,116,255,0.12); color: var(--accent-primary); }
+        .concept-badge.reinforcement { background: rgba(0,212,170,0.12); color: var(--accent-secondary); }
+        .concept-badge.unsupervised { background: rgba(255,107,157,0.12); color: var(--accent-tertiary); }
+
+        .ml-method-cards {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 14px; margin-top: 16px;
+        }
+
+        .ml-method-card {
+            background: rgba(0,0,0,0.2);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            padding: 20px; text-align: center;
+            transition: var(--transition);
+        }
+
+        .ml-method-card:hover {
+            border-color: var(--border-glow);
+            transform: translateY(-2px);
+        }
+
+        .ml-method-card .method-emoji { font-size: 2rem; margin-bottom: 10px; }
+        .ml-method-card h4 { font-size: 0.82rem; font-weight: 700; margin-bottom: 6px; color: var(--text-primary); }
+        .ml-method-card p { font-size: 0.75rem; color: var(--text-muted); line-height: 1.6; }
+
+        .learning-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 14px; margin-top: 16px;
+        }
+
+        .learning-item {
+            background: rgba(0,0,0,0.15);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            padding: 16px;
+        }
+
+        .learning-item h4 {
+            font-size: 0.78rem; font-weight: 700; margin-bottom: 6px;
+            color: var(--text-primary);
+        }
+
+        .learning-item p {
+            font-size: 0.75rem; color: var(--text-muted); line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .ml-method-cards { grid-template-columns: 1fr; }
+            .learning-grid { grid-template-columns: 1fr; }
+            .scenario-table { font-size: 0.7rem; }
+            .scenario-table thead th, .scenario-table tbody td { padding: 10px 12px; }
         }
 
         @media (max-width: 768px) {
@@ -2011,10 +2099,10 @@
             </div>
         </div>
 
-        <!-- ===== ARTIFACT 2.5 ===== -->
-        <div class="artifact-showcase fade-in" id="artifact-2-5" style="margin-top:56px;">
+        <!-- ===== ARTIFACT 2.2 ===== -->
+        <div class="artifact-showcase fade-in" id="artifact-2-2" style="margin-top:56px;">
             <div class="artifact-hero-banner" style="background:linear-gradient(135deg, rgba(124,116,255,0.12), rgba(255,107,157,0.08));">
-                <div class="artifact-number" style="background:rgba(124,116,255,0.1); border-color:rgba(124,116,255,0.25); color:var(--accent-primary);">&#129302; Artifact 2.5 &mdash; Workshop 1 (AI Lab &bull; Activity 1.4)</div>
+                <div class="artifact-number" style="background:rgba(124,116,255,0.1); border-color:rgba(124,116,255,0.25); color:var(--accent-primary);">&#129302; Artifact 2.2 &mdash; Workshop 1 (AI Lab &bull; Activity 1.4)</div>
                 <h2>Building an AI Chatbot: From User Empathy to Responsible Deployment</h2>
                 <p class="subtitle">Designing a domain-specific AI assistant using the Design Thinking framework &mdash; grounded in real-world chatbot and RAG system experience</p>
             </div>
@@ -2471,9 +2559,367 @@ Speak as a caring nurse would.</pre>
             </div>
         </div>
 
+        <!-- ===== ARTIFACT 3 ===== -->
+        <div class="artifact-showcase fade-in" id="artifact-3" style="margin-top:56px;">
+            <div class="artifact-hero-banner" style="background:linear-gradient(135deg, rgba(255,215,0,0.10), rgba(0,212,170,0.08));">
+                <div class="artifact-number" style="background:rgba(255,215,0,0.1); border-color:rgba(255,215,0,0.25); color:var(--accent-gold);">&#129504; Artifact 3 &mdash; Workshop 2 (AI Chatbot Interaction)</div>
+                <h2>AI Chatbot Interaction on Machine Learning Training Methods</h2>
+                <p class="subtitle">Engaging an AI coach to solidify supervised, unsupervised, and reinforcement learning concepts &mdash; then applying them to real-world scenarios through independent critical thinking</p>
+            </div>
+
+            <!-- TARGET AUDIENCE -->
+            <div class="audience-callout">
+                <div class="audience-callout-icon">&#127919;</div>
+                <div>
+                    <h4>Target Audience</h4>
+                    <p>This artifact is crafted for <strong>AI/ML hiring managers and technical recruiters</strong> who want to see that a candidate does not just know textbook definitions of ML training methods but can apply them to real-world engineering problems. It is also for <strong>professors and academic reviewers</strong> evaluating whether I truly engaged with the SchoolAI ML Coach or just copied surface-level answers. My background building production ML systems &mdash; supervised learning pipelines for 5G network anomaly detection at A5G Networks, reinforcement-style feedback loops in ICU patient monitoring at Cloudphysician, and unsupervised clustering for genomics feature extraction at Stony Brook &mdash; gave me a practical lens to push the AI conversation well beyond the basics. Fellow students can use this as a model for turning a chatbot interaction into evidence of critical thinking.</p>
+                </div>
+            </div>
+
+            <div class="artifact-body">
+
+                <!-- Title -->
+                <div class="artifact-section">
+                    <div class="artifact-section-title">
+                        <div class="icon" style="background:rgba(255,215,0,0.1);">&#128221;</div>
+                        Title
+                    </div>
+                    <p><strong>AI Chatbot Interaction on Machine Learning Training Methods</strong></p>
+                </div>
+
+                <!-- Introduction -->
+                <div class="artifact-section">
+                    <div class="artifact-section-title">
+                        <div class="icon" style="background:rgba(124,116,255,0.1);">&#128218;</div>
+                        Introduction
+                    </div>
+                    <p>This artifact documents my interactive session with the SchoolAI Machine Learning Training Methods Coach, where I explored the three core ML training paradigms: supervised learning, unsupervised learning, and reinforcement learning. What makes this artifact more than just a chatbot transcript is the way I approached the conversation. After completing the assigned reading (<em>A Beginner's Guide to Artificial Intelligence and Machine Learning</em>), I did not simply ask the AI coach to repeat the textbook definitions. Instead, I first confirmed my understanding of the foundational concepts, and then I challenged the chatbot with custom real-world scenarios &mdash; a cricket score predictor with data bias, an F1 racing agent with a flawed reward system, and a movie clustering problem with no ground truth. These scenarios come directly from how I think about ML problems professionally. At A5G Networks, I built supervised learning pipelines for 5G telecom anomaly detection. At Cloudphysician, I worked with feedback-driven monitoring systems that share the explore-vs-exploit logic of reinforcement learning. At Stony Brook, I applied unsupervised clustering techniques to genomic datasets. This artifact shows how I used the AI coach as a thinking partner &mdash; not a answer machine &mdash; to deepen my understanding through dialogue.</p>
+                </div>
+
+                <!-- Description -->
+                <div class="artifact-section">
+                    <div class="artifact-section-title">
+                        <div class="icon" style="background:rgba(255,107,157,0.1);">&#128196;</div>
+                        Description
+                    </div>
+                    <p>The assignment required us to access the SchoolAI Machine Learning Training Methods Coach and have a meaningful conversation about supervised, unsupervised, and reinforcement learning. I structured my interaction in two parts. <strong>Part A</strong> covered the foundational concepts &mdash; how supervised models learn from labelled data, how unsupervised models find hidden patterns without labels, how reinforcement agents learn through trial-and-error rewards, why algorithms matter, the importance of training steps and iterations, and the role of high-quality data. <strong>Part B</strong> was where I pushed the conversation further with three custom scenarios that demonstrate independent critical thinking. I deliberately chose scenarios from domains I know well (cricket analytics, F1 racing strategy, movie recommendation) so that I could provide my own reasoning rather than just accepting the AI's answers. The result is a documented back-and-forth that shows genuine engagement, domain knowledge, and the ability to apply theoretical ML concepts to messy real-world problems. The tangible evidence below includes the concept interaction panels, the scenario analysis table, and a bridge diagram connecting each concept to my professional experience.</p>
+                </div>
+
+                <!-- Objective -->
+                <div class="artifact-section">
+                    <div class="artifact-section-title">
+                        <div class="icon" style="background:rgba(124,116,255,0.1);">&#127919;</div>
+                        Objective
+                    </div>
+                    <p>The primary objectives were to: (1) solidify my understanding of the three core ML training paradigms by discussing them interactively with an AI coach, drawing on the same foundational knowledge I apply when choosing between supervised classification vs. unsupervised clustering vs. RL-based optimisation in production ML pipelines, (2) demonstrate independent critical thinking by creating custom scenarios that go beyond the assignment's standard questions &mdash; the kind of problem-solving I do daily when scoping ML experiments at the Research Foundation for SUNY, (3) show the ability to identify real-world pitfalls like overfitting, data bias, and reward misalignment &mdash; issues I have encountered first-hand in 5G anomaly detection (A5G Networks) and clinical analytics (Cloudphysician), and (4) document the entire interaction as professional portfolio evidence that proves I can engage with AI tools thoughtfully, not passively.</p>
+                </div>
+
+                <!-- Process -->
+                <div class="artifact-section">
+                    <div class="artifact-section-title">
+                        <div class="icon" style="background:rgba(0,212,170,0.1);">&#9881;&#65039;</div>
+                        Process
+                    </div>
+                    <p>I followed a structured two-part approach to get the most out of the AI coaching session:</p>
+
+                    <!-- ML METHOD CARDS -->
+                    <div style="text-align:center; margin-top:18px; margin-bottom:8px; font-size:0.73rem; font-weight:600; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px;">Part A &mdash; Foundational Concepts Explored</div>
+                    <div class="ml-method-cards">
+                        <div class="ml-method-card" style="border-top: 3px solid var(--accent-primary);">
+                            <div class="method-emoji">&#128200;</div>
+                            <h4>Supervised Learning</h4>
+                            <p>The model learns from labelled data (input + correct output). It makes a guess, checks the answer, and adjusts its internal maths to reduce error each time. Like a student learning with an answer key.</p>
+                        </div>
+                        <div class="ml-method-card" style="border-top: 3px solid var(--accent-tertiary);">
+                            <div class="method-emoji">&#128270;</div>
+                            <h4>Unsupervised Learning</h4>
+                            <p>No labels are given. The model must find hidden patterns, structures, or groupings on its own. Like sorting a pile of unlabelled photographs into albums by visual similarity.</p>
+                        </div>
+                        <div class="ml-method-card" style="border-top: 3px solid var(--accent-secondary);">
+                            <div class="method-emoji">&#127918;</div>
+                            <h4>Reinforcement Learning</h4>
+                            <p>The agent learns by trial and error, receiving rewards for good actions and penalties for bad ones. It figures out the best strategy (policy) to maximise total reward over time.</p>
+                        </div>
+                    </div>
+
+                    <!-- KEY CONCEPTS DISCUSSED - INTERACTIVE PANELS -->
+                    <div style="text-align:center; margin-top:28px; margin-bottom:8px; font-size:0.73rem; font-weight:600; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px;">AI Coach Interaction &mdash; Key Concept Discussions</div>
+
+                    <div class="chatbot-eval-grid">
+                        <div class="chat-convo-panel">
+                            <div class="chat-panel-header">
+                                <span class="lab-panel-dot r"></span>
+                                <span class="lab-panel-dot y"></span>
+                                <span class="lab-panel-dot g"></span>
+                                <span class="chat-title">supervised-learning.chat</span>
+                            </div>
+                            <div class="chat-panel-body">
+                                <div class="chat-msg">
+                                    <div class="chat-avatar user-av">&#128100;</div>
+                                    <div class="chat-bubble user-bubble">
+                                        <div class="sender">Bhargav</div>
+                                        How does a supervised learning model actually learn from training data? Walk me through the mechanics.
+                                    </div>
+                                </div>
+                                <div class="chat-msg">
+                                    <div class="chat-avatar bot-av">&#129302;</div>
+                                    <div class="chat-bubble bot-bubble">
+                                        <div class="sender">ML Coach</div>
+                                        A supervised model learns by looking at labelled data &mdash; inputs paired with the correct output. It makes a prediction, compares it to the actual answer, calculates the error, and adjusts its internal weights to minimise that error. With each pass (epoch), the model gets better at mapping inputs to outputs.
+                                    </div>
+                                </div>
+                                <div style="margin-top:8px; padding:6px 10px; background:rgba(124,116,255,0.06); border-radius:6px; font-size:0.7rem; color:var(--accent-primary); border:1px solid rgba(124,116,255,0.12);">&#128161; <strong>My connection:</strong> At A5G Networks, I built supervised pipelines for 5G anomaly detection &mdash; same principle: labelled network events &#8594; train &#8594; detect anomalies in production.</div>
+                            </div>
+                        </div>
+
+                        <div class="chat-convo-panel">
+                            <div class="chat-panel-header">
+                                <span class="lab-panel-dot r"></span>
+                                <span class="lab-panel-dot y"></span>
+                                <span class="lab-panel-dot g"></span>
+                                <span class="chat-title">unsupervised-learning.chat</span>
+                            </div>
+                            <div class="chat-panel-body">
+                                <div class="chat-msg">
+                                    <div class="chat-avatar user-av">&#128100;</div>
+                                    <div class="chat-bubble user-bubble">
+                                        <div class="sender">Bhargav</div>
+                                        In unsupervised learning, there are no labels. So what is the main approach the model uses to learn?
+                                    </div>
+                                </div>
+                                <div class="chat-msg">
+                                    <div class="chat-avatar bot-av">&#129302;</div>
+                                    <div class="chat-bubble bot-bubble">
+                                        <div class="sender">ML Coach</div>
+                                        Since there are no correct answers provided, the main approach is to find hidden structures, patterns, or similarities in the data. The model groups similar data points together (clustering) or reduces dimensions to reveal underlying relationships.
+                                    </div>
+                                </div>
+                                <div style="margin-top:8px; padding:6px 10px; background:rgba(255,107,157,0.06); border-radius:6px; font-size:0.7rem; color:var(--accent-tertiary); border:1px solid rgba(255,107,157,0.12);">&#128161; <strong>My connection:</strong> At Stony Brook, I applied unsupervised clustering on genomic datasets to extract feature groupings from unlabelled biological sequences.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chatbot-eval-grid" style="margin-top:18px;">
+                        <div class="chat-convo-panel">
+                            <div class="chat-panel-header">
+                                <span class="lab-panel-dot r"></span>
+                                <span class="lab-panel-dot y"></span>
+                                <span class="lab-panel-dot g"></span>
+                                <span class="chat-title">reinforcement-learning.chat</span>
+                            </div>
+                            <div class="chat-panel-body">
+                                <div class="chat-msg">
+                                    <div class="chat-avatar user-av">&#128100;</div>
+                                    <div class="chat-bubble user-bubble">
+                                        <div class="sender">Bhargav</div>
+                                        How does a reinforcement learning agent decide which actions are best if nobody tells it the right answer?
+                                    </div>
+                                </div>
+                                <div class="chat-msg">
+                                    <div class="chat-avatar bot-av">&#129302;</div>
+                                    <div class="chat-bubble bot-bubble">
+                                        <div class="sender">ML Coach</div>
+                                        The agent learns purely through trial and error. It takes an action in an environment, receives either a positive reward or a negative penalty, and over many episodes it learns which policy (sequence of actions) gives the maximum cumulative reward. The key challenge is balancing exploration (trying new things) versus exploitation (doing what already works).
+                                    </div>
+                                </div>
+                                <div style="margin-top:8px; padding:6px 10px; background:rgba(0,212,170,0.06); border-radius:6px; font-size:0.7rem; color:var(--accent-secondary); border:1px solid rgba(0,212,170,0.12);">&#128161; <strong>My connection:</strong> At Cloudphysician, our ICU monitoring system used feedback-driven thresholds &mdash; similar explore/exploit logic &mdash; to alert doctors when patient vitals crossed critical boundaries.</div>
+                            </div>
+                        </div>
+
+                        <div class="chat-convo-panel">
+                            <div class="chat-panel-header">
+                                <span class="lab-panel-dot r"></span>
+                                <span class="lab-panel-dot y"></span>
+                                <span class="lab-panel-dot g"></span>
+                                <span class="chat-title">training-fundamentals.chat</span>
+                            </div>
+                            <div class="chat-panel-body">
+                                <div class="chat-msg">
+                                    <div class="chat-avatar user-av">&#128100;</div>
+                                    <div class="chat-bubble user-bubble">
+                                        <div class="sender">Bhargav</div>
+                                        Why do we need to pass the same data multiple times through the model? Why not just learn it in one go?
+                                    </div>
+                                </div>
+                                <div class="chat-msg">
+                                    <div class="chat-avatar bot-av">&#129302;</div>
+                                    <div class="chat-bubble bot-bubble">
+                                        <div class="sender">ML Coach</div>
+                                        Iterating (running multiple epochs) helps the model slowly update its weights and fine-tune its understanding. A single pass would be like reading a textbook once before an exam &mdash; repetition helps the model generalise rather than memorise. Too few epochs lead to underfitting; too many lead to overfitting.
+                                    </div>
+                                </div>
+                                <div style="margin-top:8px; padding:6px 10px; background:rgba(255,215,0,0.06); border-radius:6px; font-size:0.7rem; color:var(--accent-gold); border:1px solid rgba(255,215,0,0.12);">&#128161; <strong>My connection:</strong> I track training epochs, learning rate schedules, and early stopping with MLflow at A5G &mdash; knowing when to stop iterating is as important as starting.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PART B: CRITICAL THINKING SCENARIOS -->
+                    <div style="text-align:center; margin-top:28px; margin-bottom:8px; font-size:0.73rem; font-weight:600; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px;">Part B &mdash; Independent Critical Thinking Scenarios</div>
+                    <p style="margin-bottom:14px;">After confirming the fundamentals, I challenged the AI coach with three custom scenarios from domains I know well. For each scenario, I provided my own reasoning rather than just accepting the chatbot's response:</p>
+
+                    <table class="scenario-table">
+                        <thead>
+                            <tr>
+                                <th style="width:18%;">Scenario</th>
+                                <th style="width:22%;">The Challenge</th>
+                                <th style="width:32%;">My Decision &amp; Reasoning</th>
+                                <th style="width:28%;">ML Concept</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>&#127951; Cricket Score Predictor</strong></td>
+                                <td>The supervised model perfectly predicts match outcomes in India but completely fails for matches in Australia.</td>
+                                <td>I decided we must strictly balance the training examples. The model had memorised spin-friendly Indian pitches. We need to feed it equal data from fast-paced Australian pitches so it can generalise properly across conditions.</td>
+                                <td><span class="concept-badge supervised">Overfitting &amp; Data Bias in Supervised Learning</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>&#127946; F1 Racing Strategy</strong></td>
+                                <td>The RL agent learns to drive extremely slowly just to avoid the massive penalty of crashing.</td>
+                                <td>I reasoned that the reward system was set up incorrectly. I advised changing the algorithm to give a much higher positive reward for crossing checkpoints quickly, forcing the agent to balance speed with safety.</td>
+                                <td><span class="concept-badge reinforcement">Exploration vs. Exploitation in Reinforcement Learning</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>&#127916; Movie Clustering</strong></td>
+                                <td>Grouping thousands of unlabelled movies. How do humans verify if the unsupervised algorithm did a good job?</td>
+                                <td>Since there is no correct answer key, I explained that we must manually inspect the clusters to see if the movies inside them share sensible hidden patterns (like matching genres or directors).</td>
+                                <td><span class="concept-badge unsupervised">Evaluating Unsupervised Learning Outputs</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Classroom-to-Production Bridge -->
+                <div class="artifact-section">
+                    <div class="artifact-section-title">
+                        <div class="icon" style="background:rgba(56,189,248,0.1);">&#128736;&#65039;</div>
+                        Classroom to Production &mdash; Skills Bridge
+                    </div>
+                    <p>Each concept discussed with the AI coach maps directly to skills I use in professional ML engineering:</p>
+                    <div class="bridge-diagram">
+                        <div class="bridge-col left">
+                            <h4>&#127891; Chatbot Interaction (Classroom)</h4>
+                            <div class="bridge-item"><span class="bridge-item-icon">&#128200;</span> <span>Discussed supervised learning from labelled data</span></div>
+                            <div class="bridge-item"><span class="bridge-item-icon">&#128270;</span> <span>Explored unsupervised clustering without labels</span></div>
+                            <div class="bridge-item"><span class="bridge-item-icon">&#127918;</span> <span>Understood RL rewards, penalties &amp; policies</span></div>
+                            <div class="bridge-item"><span class="bridge-item-icon">&#128260;</span> <span>Discussed training iterations &amp; overfitting</span></div>
+                            <div class="bridge-item"><span class="bridge-item-icon">&#128161;</span> <span>Applied concepts to cricket, F1 &amp; movie scenarios</span></div>
+                            <div class="bridge-item"><span class="bridge-item-icon">&#128203;</span> <span>Documented the full interaction as evidence</span></div>
+                        </div>
+                        <div class="bridge-arrow-col">
+                            <div class="bridge-arrow-line"></div>
+                            <div class="bridge-arrow-icon">&#8652;</div>
+                            <div class="bridge-arrow-line"></div>
+                        </div>
+                        <div class="bridge-col right">
+                            <h4>&#128640; Production (Professional)</h4>
+                            <div class="bridge-item"><span class="bridge-item-icon">&#128225;</span> <span>Supervised anomaly detection for 5G networks at A5G Networks</span></div>
+                            <div class="bridge-item"><span class="bridge-item-icon">&#129516;</span> <span>Unsupervised genomic clustering at Stony Brook Research</span></div>
+                            <div class="bridge-item"><span class="bridge-item-icon">&#127973;</span> <span>Feedback-driven ICU alert thresholds at Cloudphysician</span></div>
+                            <div class="bridge-item"><span class="bridge-item-icon">&#9881;&#65039;</span> <span>MLflow epoch tracking &amp; early stopping at A5G</span></div>
+                            <div class="bridge-item"><span class="bridge-item-icon">&#128202;</span> <span>Cross-domain ML problem scoping at Research Foundation SUNY</span></div>
+                            <div class="bridge-item"><span class="bridge-item-icon">&#128203;</span> <span>Azure DevOps experiment documentation &amp; reproducibility</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Key Takeaways -->
+                <div class="artifact-section">
+                    <div class="artifact-section-title">
+                        <div class="icon" style="background:rgba(255,215,0,0.1);">&#128161;</div>
+                        Key Takeaways
+                    </div>
+                    <div class="takeaway-grid">
+                        <div class="takeaway-item">
+                            <div class="takeaway-icon">&#128202;</div>
+                            <h4>Data Quality Decides Everything</h4>
+                            <p>The cricket predictor scenario proved that biased training data produces biased models. In production at A5G, I learned the same lesson &mdash; garbage in, garbage out, no matter how good the algorithm.</p>
+                        </div>
+                        <div class="takeaway-item">
+                            <div class="takeaway-icon">&#127918;</div>
+                            <h4>Reward Design Is the Real Challenge</h4>
+                            <p>The F1 scenario showed that a badly designed reward function can make an RL agent behave in completely unexpected ways. Getting the incentive structure right is harder than writing the code.</p>
+                        </div>
+                        <div class="takeaway-item">
+                            <div class="takeaway-icon">&#128270;</div>
+                            <h4>AI Coaches Are Thinking Partners</h4>
+                            <p>The real value of the AI coach was not in its answers but in forcing me to articulate my own reasoning. Explaining why a model fails is where the deepest learning happens.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tools & Technologies Used -->
+                <div class="artifact-section">
+                    <div class="artifact-section-title">
+                        <div class="icon" style="background:rgba(255,107,157,0.1);">&#128736;&#65039;</div>
+                        Tools and Technologies Used
+                    </div>
+                    <div class="tool-tags">
+                        <div class="tool-tag"><span>&#129302;</span> SchoolAI ML Training Methods Coach</div>
+                        <div class="tool-tag"><span>&#128218;</span> A Beginner's Guide to AI &amp; ML (Course Reading)</div>
+                        <div class="tool-tag"><span>&#128200;</span> Supervised Learning Concepts</div>
+                        <div class="tool-tag"><span>&#128270;</span> Unsupervised Learning / Clustering</div>
+                        <div class="tool-tag"><span>&#127918;</span> Reinforcement Learning / Reward Design</div>
+                        <div class="tool-tag"><span>&#128202;</span> Overfitting &amp; Bias Analysis</div>
+                        <div class="tool-tag"><span>&#128187;</span> HTML5 / CSS3 / JavaScript</div>
+                        <div class="tool-tag"><span>&#128038;</span> GitHub Pages</div>
+                        <div class="tool-tag"><span>&#9881;&#65039;</span> MLflow / Experiment Tracking</div>
+                        <div class="tool-tag"><span>&#128218;</span> IWU AIML-500 Workshop 2 Materials</div>
+                    </div>
+                    <p style="margin-top:14px;">My professional toolset gave depth to this interaction: supervised anomaly detection pipelines with Scikit-learn + XGBoost at A5G Networks, unsupervised clustering with PySpark + custom feature engineering at Stony Brook, feedback-driven monitoring with Kafka + real-time streaming at Cloudphysician, and experiment tracking with MLflow + Azure DevOps for reproducibility across all projects.</p>
+                </div>
+
+                <!-- Value Proposition -->
+                <div class="artifact-section">
+                    <div class="artifact-section-title">
+                        <div class="icon" style="background:rgba(255,215,0,0.1);">&#128161;</div>
+                        Value Proposition
+                    </div>
+                    <p>This artifact demonstrates a skill that hiring managers value highly &mdash; the ability to take abstract ML concepts and apply them to concrete, messy real-world problems. It is easy to define supervised learning from a textbook. It is much harder to diagnose why a cricket prediction model fails in Australia, or why an RL agent drives too slowly, or how to evaluate clusters when there is no answer key. The three custom scenarios show that I do not just memorise definitions &mdash; I think like an engineer who has shipped ML systems in production. For academic reviewers, this artifact shows genuine engagement with the AI coach that goes well beyond the standard assignment questions. For fellow students, it offers a practical model for how to turn a chatbot interaction into a portfolio-ready artifact by adding your own critical thinking and professional context.</p>
+                </div>
+
+                <!-- Unique Value -->
+                <div class="artifact-section">
+                    <div class="artifact-section-title">
+                        <div class="icon" style="background:rgba(124,116,255,0.1);">&#10024;</div>
+                        Unique Value
+                    </div>
+                    <p>What sets this artifact apart is the combination of theoretical understanding with battle-tested production experience. Most students can explain what supervised learning is. But diagnosing a data bias problem in a cricket predictor &mdash; and connecting it to the same data quality issues I faced when building 5G anomaly detection at A5G Networks &mdash; shows a different level of understanding. The F1 reward design scenario is not just an interesting thought experiment; it mirrors the real challenge of tuning alert thresholds in ICU monitoring at Cloudphysician, where a wrong threshold can mean missed critical events or alarm fatigue. The movie clustering scenario connects to the unsupervised techniques I applied to genomic datasets at Stony Brook, where there truly is no ground truth and human inspection of clusters is the only validation available. Each scenario is grounded in something I have actually done professionally, which makes this artifact authentic rather than performative. The annotated chat panels, scenario analysis table, and bridge diagram together provide tangible, visual evidence &mdash; not just a text summary of a conversation.</p>
+                </div>
+
+                <!-- Relevance -->
+                <div class="artifact-section">
+                    <div class="artifact-section-title">
+                        <div class="icon" style="background:rgba(0,212,170,0.1);">&#127793;</div>
+                        Relevance
+                    </div>
+                    <p>This artifact aligns directly with the IWU M.S. in Artificial Intelligence curriculum, which requires students to demonstrate applied understanding of core ML concepts. Workshop 2's focus on ML training methods is foundational &mdash; every advanced topic in the programme (deep learning, NLP, computer vision, reinforcement learning) builds on understanding when and why to use supervised, unsupervised, or reinforcement approaches. For recruiters and hiring managers, this artifact shows that I can explain ML concepts clearly (important for cross-functional communication with product managers and stakeholders), apply them to real scenarios (important for system design interviews), and think critically about failure modes (important for building reliable production systems). The ability to interact with AI tools thoughtfully &mdash; using them as thinking partners rather than answer machines &mdash; is itself a valuable professional skill as AI-assisted workflows become standard in industry.</p>
+                </div>
+
+                <!-- References -->
+                <div class="artifact-section">
+                    <div class="artifact-section-title">
+                        <div class="icon" style="background:rgba(56,189,248,0.1);">&#128214;</div>
+                        References
+                    </div>
+                    <ol class="ref-list">
+                        <li>Indiana Wesleyan University. (2026). <em>Workshop 2: AI Chatbot Interaction &mdash; Machine Learning Training Methods</em>. IWU M.S. in Artificial Intelligence Program, Course Materials.</li>
+                        <li>SchoolAI. (2026). "Machine Learning Training Methods Coach." <a href="https://student.schoolai.com/dot/spaces/join" target="_blank" rel="noopener noreferrer">student.schoolai.com</a></li>
+                        <li>Bishop, C. M. (2006). <em>Pattern Recognition and Machine Learning</em>. Springer.</li>
+                        <li>Sutton, R. S. &amp; Barto, A. G. (2018). <em>Reinforcement Learning: An Introduction</em> (2nd ed.). MIT Press.</li>
+                        <li>Hastie, T., Tibshirani, R., &amp; Friedman, J. (2009). <em>The Elements of Statistical Learning</em> (2nd ed.). Springer.</li>
+                        <li>Goodfellow, I., Bengio, Y., &amp; Courville, A. (2016). <em>Deep Learning</em>. MIT Press. <a href="https://www.deeplearningbook.org/" target="_blank" rel="noopener noreferrer">deeplearningbook.org</a></li>
+                        <li>Scikit-learn Documentation. (2024). "Supervised, Unsupervised, and Reinforcement Learning." <a href="https://scikit-learn.org/stable/" target="_blank" rel="noopener noreferrer">scikit-learn.org</a></li>
+                        <li>MLflow Documentation. (2024). "Experiment Tracking and Model Registry." <a href="https://mlflow.org/docs/latest/index.html" target="_blank" rel="noopener noreferrer">mlflow.org</a></li>
+                    </ol>
+                </div>
+
+            </div>
+        </div>
+
         <!-- Placeholder for future artifacts -->
         <div style="text-align:center; margin-top:48px; color:var(--text-muted); font-size:0.9rem;" class="fade-in">
-            <p style="color:var(--text-muted);">Artifacts 3&ndash;5 will be added as the course progresses through Workshops 3&ndash;5.</p>
+            <p style="color:var(--text-muted);">Artifacts 4&ndash;5 will be added as the course progresses through Workshops 4&ndash;5.</p>
         </div>
 
     </div>
