@@ -1206,6 +1206,138 @@
             .scenario-table thead th, .scenario-table tbody td { padding: 10px 12px; }
         }
 
+        /* ===== ARTIFACT 4 — Trust Audit Styles ===== */
+        .trust-scorecard {
+            width: 100%; border-collapse: separate; border-spacing: 0;
+            margin-top: 18px; font-size: 0.78rem;
+            border: 1px solid var(--border-color); border-radius: var(--radius);
+            overflow: hidden;
+        }
+
+        .trust-scorecard thead th {
+            background: rgba(255,215,0,0.06);
+            color: var(--text-primary); font-weight: 700;
+            padding: 14px 16px; text-align: left; font-size: 0.72rem;
+            text-transform: uppercase; letter-spacing: 0.5px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .trust-scorecard tbody td {
+            padding: 12px 16px; color: var(--text-secondary);
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+            vertical-align: middle; line-height: 1.6;
+        }
+
+        .trust-scorecard tbody tr:last-child td { border-bottom: none; }
+        .trust-scorecard tbody tr:hover { background: rgba(255,215,0,0.02); }
+
+        .score-pill {
+            display: inline-block; padding: 2px 10px;
+            border-radius: 12px; font-size: 0.7rem; font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .score-pill.low { background: rgba(255,95,87,0.12); color: #ff5f57; }
+        .score-pill.mid { background: rgba(255,215,0,0.12); color: var(--accent-gold); }
+        .score-pill.high { background: rgba(40,200,64,0.12); color: #28c840; }
+
+        .response-card {
+            background: rgba(0,0,0,0.25);
+            border: 2px solid; border-radius: var(--radius);
+            padding: 24px; margin-top: 14px;
+        }
+
+        .response-card.risky { border-color: rgba(255,95,87,0.3); }
+        .response-card.trusted { border-color: rgba(40,200,64,0.3); }
+
+        .response-card .resp-label {
+            font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.8px; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;
+        }
+
+        .response-card.risky .resp-label { color: #ff5f57; }
+        .response-card.trusted .resp-label { color: #28c840; }
+
+        .response-card .resp-text {
+            font-size: 0.82rem; line-height: 1.8; color: var(--text-secondary);
+            font-style: italic; padding: 16px; border-radius: var(--radius-sm);
+            background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04);
+        }
+
+        .response-card .resp-annotations {
+            margin-top: 14px; display: flex; flex-wrap: wrap; gap: 8px;
+        }
+
+        .resp-tag {
+            display: inline-flex; align-items: center; gap: 5px;
+            padding: 4px 12px; border-radius: 20px; font-size: 0.66rem; font-weight: 600;
+        }
+
+        .resp-tag.bad { background: rgba(255,95,87,0.1); color: #ff5f57; border: 1px solid rgba(255,95,87,0.15); }
+        .resp-tag.good { background: rgba(40,200,64,0.1); color: #28c840; border: 1px solid rgba(40,200,64,0.15); }
+
+        .red-flag-box {
+            background: rgba(255,95,87,0.04);
+            border: 1px solid rgba(255,95,87,0.2);
+            border-radius: var(--radius); padding: 20px 24px;
+            margin-top: 18px;
+        }
+
+        .red-flag-box h4 {
+            font-size: 0.78rem; font-weight: 700; color: #ff5f57;
+            margin-bottom: 12px; display: flex; align-items: center; gap: 8px;
+        }
+
+        .red-flag-list {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .red-flag-list span {
+            display: flex; align-items: center; gap: 8px;
+            font-size: 0.78rem; color: var(--text-secondary);
+        }
+
+        .redesign-rules {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 10px; margin-top: 14px;
+        }
+
+        .redesign-rule {
+            display: flex; align-items: flex-start; gap: 10px;
+            padding: 10px 14px;
+            background: rgba(0,212,170,0.03);
+            border: 1px solid rgba(0,212,170,0.1);
+            border-radius: var(--radius-sm);
+            font-size: 0.78rem; color: var(--text-secondary); line-height: 1.6;
+        }
+
+        .redesign-rule .rule-icon { flex-shrink: 0; font-size: 0.9rem; margin-top: 2px; }
+
+        .failure-grid {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 10px; margin-top: 14px;
+        }
+
+        .failure-item {
+            display: flex; align-items: flex-start; gap: 10px;
+            padding: 10px 14px;
+            background: rgba(255,95,87,0.03);
+            border: 1px solid rgba(255,95,87,0.1);
+            border-radius: var(--radius-sm);
+            font-size: 0.78rem; color: var(--text-secondary); line-height: 1.6;
+        }
+
+        .failure-item .fail-icon { flex-shrink: 0; font-size: 0.9rem; margin-top: 2px; }
+
+        @media (max-width: 768px) {
+            .red-flag-list { grid-template-columns: 1fr; }
+            .redesign-rules { grid-template-columns: 1fr; }
+            .failure-grid { grid-template-columns: 1fr; }
+            .trust-scorecard { font-size: 0.7rem; }
+            .trust-scorecard thead th, .trust-scorecard tbody td { padding: 10px 12px; }
+        }
+
         @media (max-width: 768px) {
             .lab-evidence-grid { grid-template-columns: 1fr; }
             .takeaway-grid { grid-template-columns: 1fr; }
@@ -2917,9 +3049,359 @@ Speak as a caring nurse would.</pre>
             </div>
         </div>
 
+        <!-- ===== ARTIFACT 4 ===== -->
+        <div class="artifact-showcase fade-in" id="artifact-4" style="margin-top:56px;">
+            <div class="artifact-hero-banner" style="background:linear-gradient(135deg, rgba(255,95,87,0.10), rgba(40,200,64,0.08));">
+                <div class="artifact-number" style="background:rgba(255,215,0,0.1); border-color:rgba(255,215,0,0.25); color:var(--accent-gold);">&#128737;&#65039; Artifact 4 &mdash; Workshop 3 (Responsible AI Case Study)</div>
+                <h2>From Hallucination to Trust: Auditing and Improving a Healthcare AI Assistant</h2>
+                <p class="subtitle">A trust audit case study showing how an AI assistant moves from fluent-but-risky to safe-and-reliable through structured redesign, evaluation, and responsible AI principles</p>
+            </div>
+
+            <!-- TARGET AUDIENCE -->
+            <div class="audience-callout">
+                <div class="audience-callout-icon">&#127919;</div>
+                <div>
+                    <h4>Target Audience</h4>
+                    <p>This artifact is designed for <strong>AI/ML hiring managers and technical leads</strong> who need to see that a candidate understands AI trust, safety, and evaluation &mdash; not just model building. It is also for <strong>professors and academic reviewers</strong> assessing whether I can critically analyse AI failure modes and propose structured fixes. My professional background directly shapes this case study: I have built RAG systems with LangChain/LangGraph and evaluation pipelines using RAGAS at Stony Brook, worked on real-time ICU analytics where AI errors affect patient safety at Cloudphysician, and implemented guardrails and monitored ML services in HIPAA-aligned environments. Fellow students can use this as a template for turning a responsible AI exercise into a compelling portfolio piece.</p>
+                </div>
+            </div>
+
+            <div class="artifact-body">
+
+                <!-- Title -->
+                <div class="artifact-section">
+                    <div class="artifact-section-title">
+                        <div class="icon" style="background:rgba(255,215,0,0.1);">&#128221;</div>
+                        Title
+                    </div>
+                    <p><strong>From Hallucination to Trust: Auditing and Improving a Healthcare AI Assistant</strong></p>
+                </div>
+
+                <!-- Introduction -->
+                <div class="artifact-section">
+                    <div class="artifact-section-title">
+                        <div class="icon" style="background:rgba(124,116,255,0.1);">&#128218;</div>
+                        Introduction
+                    </div>
+                    <p>This artifact presents a mini case study on responsible AI design in a healthcare setting. Rather than simply showing that I can build or prompt an AI assistant, this artifact demonstrates how I evaluate whether an AI system is safe, trustworthy, and appropriate for real users. I chose this topic because my professional background includes building RAG-based systems for genomics research at the Research Foundation for SUNY (using LangChain/LangGraph with vector databases and evaluation metrics like RAGAS), supporting ICU-related AI workflows at Cloudphysician (where Kafka + PySpark pipelines fed real-time data into clinical decision-support systems), and working with production systems at A5G Networks that required evaluation, guardrails, and privacy-aware deployment. In this artifact, I examine how an AI assistant can move from a fluent but risky response to a safer and more reliable one through structured redesign. The question at the heart of this case study is one that every AI engineer must answer: <em>How do I make an AI system trustworthy when the stakes are high?</em></p>
+                </div>
+
+                <!-- Description -->
+                <div class="artifact-section">
+                    <div class="artifact-section-title">
+                        <div class="icon" style="background:rgba(255,107,157,0.1);">&#128196;</div>
+                        Description
+                    </div>
+                    <p>The purpose of this artifact is to show how responsible AI goes beyond generating an answer. In high-stakes domains like healthcare, a response must also be accurate, cautious, clear, empathetic, and transparent about its limits. This case study follows a healthcare FAQ assistant responding to a medication-related question from a patient's family member: <em>"My father feels dizzy and weak after his new heart medication. Is this normal, and what should we do?"</em> I first present a weak version of the response that sounds fluent but is actually dangerous. Then I audit its specific failure modes, redesign the system behaviour with explicit safety rules, produce an improved response, and evaluate both versions side-by-side using a trust-focused scorecard. The artifact is designed to show my ability to apply AI/ML knowledge in a practical, human-centred, and ethically informed way &mdash; the same way I approach system design in production environments.</p>
+                </div>
+
+                <!-- Objective -->
+                <div class="artifact-section">
+                    <div class="artifact-section-title">
+                        <div class="icon" style="background:rgba(124,116,255,0.1);">&#127919;</div>
+                        Objective
+                    </div>
+                    <p>The objective of this artifact is to demonstrate my ability to critically evaluate AI behaviour in a high-risk setting and improve it through prompt engineering, safety guardrails, and structured evaluation. This artifact also shows that I understand a core principle of modern AI engineering: a good answer is not enough unless it is safe, appropriate, and trustworthy for the user and context. Specifically, I aim to: (1) identify how a fluent AI response can still be harmful, drawing on the same evaluation mindset I use with RAGAS and TruLens in production RAG systems, (2) apply structured redesign principles &mdash; the same guardrails-first approach I follow when configuring LangGraph agents with safety constraints, (3) measure the improvement with explicit criteria rather than subjective judgment, and (4) document the entire audit process as tangible professional evidence.</p>
+                </div>
+
+                <!-- Process -->
+                <div class="artifact-section">
+                    <div class="artifact-section-title">
+                        <div class="icon" style="background:rgba(0,212,170,0.1);">&#9881;&#65039;</div>
+                        Process
+                    </div>
+                    <p>I approached this artifact the same way I would approach a real AI system review: define the use case, identify failure modes, redesign the assistant behaviour, and evaluate the improvement with explicit criteria. This process reflects the same engineering mindset I have used in my professional work, where I have built RAG-based research assistants, evaluation-driven AI pipelines, and monitored ML services in healthcare, genomics, and telecom settings.</p>
+
+                    <!-- STEP 1: THE SCENARIO -->
+                    <div class="chat-convo-panel" style="margin-top:20px;">
+                        <div class="chat-panel-header">
+                            <span class="lab-panel-dot r"></span>
+                            <span class="lab-panel-dot y"></span>
+                            <span class="lab-panel-dot g"></span>
+                            <span class="chat-title">scenario &mdash; healthcare-faq-query.txt</span>
+                        </div>
+                        <div class="chat-panel-body">
+                            <div class="chat-msg">
+                                <div class="chat-avatar user-av">&#128100;</div>
+                                <div class="chat-bubble user-bubble">
+                                    <div class="sender">Patient's Family Member</div>
+                                    My father feels dizzy and weak after his new heart medication. Is this normal, and what should we do?
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- STEP 2: THE BAD OUTPUT -->
+                    <p style="margin-top:24px; font-weight:600; color:var(--text-primary);">Step 1 &mdash; The First Response (Fluent but Risky)</p>
+                    <div class="response-card risky">
+                        <div class="resp-label">&#10060; First Output &mdash; Before Redesign</div>
+                        <div class="resp-text">"Dizziness and weakness can happen with heart medication, so it is probably a normal side effect. Let him rest, drink water, and monitor symptoms. If it gets worse later, then contact a doctor."</div>
+                        <div class="resp-annotations">
+                            <span class="resp-tag bad">&#9888;&#65039; Overconfident</span>
+                            <span class="resp-tag bad">&#9888;&#65039; May delay urgent care</span>
+                            <span class="resp-tag bad">&#9888;&#65039; No red-flag symptoms</span>
+                            <span class="resp-tag bad">&#9888;&#65039; No escalation guidance</span>
+                            <span class="resp-tag bad">&#9888;&#65039; No uncertainty acknowledgment</span>
+                        </div>
+                    </div>
+
+                    <!-- STEP 3: WHY IT FAILED -->
+                    <p style="margin-top:24px; font-weight:600; color:var(--text-primary);">Step 2 &mdash; Why the First Output Failed</p>
+                    <div class="failure-grid">
+                        <div class="failure-item">
+                            <span class="fail-icon">&#9888;&#65039;</span>
+                            <span><strong>Sounds confident without context</strong> &mdash; says "probably normal" without knowing the patient's history, dosage, or other medications.</span>
+                        </div>
+                        <div class="failure-item">
+                            <span class="fail-icon">&#9888;&#65039;</span>
+                            <span><strong>May delay urgent care</strong> &mdash; tells the family to wait and monitor, which could be dangerous if symptoms indicate a serious reaction.</span>
+                        </div>
+                        <div class="failure-item">
+                            <span class="fail-icon">&#9888;&#65039;</span>
+                            <span><strong>No red-flag symptoms listed</strong> &mdash; does not mention chest pain, fainting, confusion, or trouble breathing as signs to seek emergency help.</span>
+                        </div>
+                        <div class="failure-item">
+                            <span class="fail-icon">&#9888;&#65039;</span>
+                            <span><strong>No escalation to a clinician</strong> &mdash; does not clearly tell the family to contact the prescribing doctor or pharmacist immediately.</span>
+                        </div>
+                        <div class="failure-item">
+                            <span class="fail-icon">&#9888;&#65039;</span>
+                            <span><strong>General advice without warning</strong> &mdash; "rest and drink water" is generic and gives a false sense of resolution.</span>
+                        </div>
+                        <div class="failure-item">
+                            <span class="fail-icon">&#9888;&#65039;</span>
+                            <span><strong>No transparency about limits</strong> &mdash; does not state that the AI cannot diagnose and should not be used as a substitute for medical advice.</span>
+                        </div>
+                    </div>
+
+                    <!-- STEP 4: REDESIGN STRATEGY -->
+                    <p style="margin-top:24px; font-weight:600; color:var(--text-primary);">Step 3 &mdash; Redesign Strategy</p>
+                    <p>Based on the failure analysis, I redesigned the assistant using these explicit system rules:</p>
+                    <div class="redesign-rules">
+                        <div class="redesign-rule"><span class="rule-icon">&#128172;</span> <span>Use simple and calm language that a worried family member can understand</span></div>
+                        <div class="redesign-rule"><span class="rule-icon">&#128683;</span> <span>Never diagnose or claim certainty about medical conditions</span></div>
+                        <div class="redesign-rule"><span class="rule-icon">&#10067;</span> <span>Acknowledge uncertainty clearly &mdash; say "I cannot tell from this message"</span></div>
+                        <div class="redesign-rule"><span class="rule-icon">&#128680;</span> <span>Mention red-flag symptoms immediately (chest pain, fainting, confusion, trouble breathing)</span></div>
+                        <div class="redesign-rule"><span class="rule-icon">&#129658;</span> <span>Recommend contacting a healthcare professional for medication-related concerns</span></div>
+                        <div class="redesign-rule"><span class="rule-icon">&#128168;</span> <span>Escalate urgent symptoms &mdash; do not tell the user to wait and see</span></div>
+                        <div class="redesign-rule"><span class="rule-icon">&#10084;&#65039;</span> <span>Be empathetic but not alarmist &mdash; validate the family's concern</span></div>
+                        <div class="redesign-rule"><span class="rule-icon">&#128196;</span> <span>State clearly that the assistant is informational, not a substitute for medical care</span></div>
+                    </div>
+
+                    <!-- RED FLAG BOX -->
+                    <div class="red-flag-box">
+                        <h4>&#128680; Escalation Triggers &mdash; Seek Urgent Medical Care If:</h4>
+                        <div class="red-flag-list">
+                            <span>&#9888;&#65039; Chest pain or tightness</span>
+                            <span>&#9888;&#65039; Trouble breathing or shortness of breath</span>
+                            <span>&#9888;&#65039; Fainting or near-fainting episodes</span>
+                            <span>&#9888;&#65039; Severe or worsening weakness</span>
+                            <span>&#9888;&#65039; Confusion or difficulty speaking</span>
+                            <span>&#9888;&#65039; Worsening dizziness that does not improve</span>
+                            <span>&#9888;&#65039; Irregular or racing heartbeat</span>
+                            <span>&#9888;&#65039; Swelling in legs, ankles, or abdomen</span>
+                        </div>
+                    </div>
+
+                    <!-- STEP 5: IMPROVED OUTPUT -->
+                    <p style="margin-top:24px; font-weight:600; color:var(--text-primary);">Step 4 &mdash; The Improved Response (Safe and Trustworthy)</p>
+                    <div class="response-card trusted">
+                        <div class="resp-label">&#9989; Improved Output &mdash; After Redesign</div>
+                        <div class="resp-text">"Dizziness and weakness can sometimes happen with heart medications, but they can also be signs that the medication is not working well for your father or that his body is reacting in a way that needs medical attention. I cannot tell from this message whether it is normal or serious. Because this involves a new heart medication, it would be safest to contact his doctor, pharmacist, or care team as soon as possible for guidance. If he also has chest pain, trouble breathing, confusion, fainting, or symptoms that are getting worse, seek urgent medical care right away. I can help you make a short list of symptoms and medication details to share with the doctor."</div>
+                        <div class="resp-annotations">
+                            <span class="resp-tag good">&#9989; Acknowledges uncertainty</span>
+                            <span class="resp-tag good">&#9989; Escalates to doctor</span>
+                            <span class="resp-tag good">&#9989; Lists red-flag symptoms</span>
+                            <span class="resp-tag good">&#9989; Empathetic tone</span>
+                            <span class="resp-tag good">&#9989; Offers actionable next step</span>
+                            <span class="resp-tag good">&#9989; No diagnosis or false certainty</span>
+                        </div>
+                    </div>
+
+                    <!-- STEP 6: TRUST SCORECARD -->
+                    <p style="margin-top:24px; font-weight:600; color:var(--text-primary);">Step 5 &mdash; Trust Scorecard Evaluation</p>
+                    <table class="trust-scorecard">
+                        <thead>
+                            <tr>
+                                <th>Criterion</th>
+                                <th>First Output</th>
+                                <th>Improved Output</th>
+                                <th>What Changed</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Accuracy Caution</strong></td>
+                                <td><span class="score-pill low">2 / 5</span></td>
+                                <td><span class="score-pill high">5 / 5</span></td>
+                                <td>Removed overconfident "probably normal" claim</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Safety</strong></td>
+                                <td><span class="score-pill low">1 / 5</span></td>
+                                <td><span class="score-pill high">5 / 5</span></td>
+                                <td>Added escalation guidance and red-flag symptoms</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Clarity</strong></td>
+                                <td><span class="score-pill mid">3 / 5</span></td>
+                                <td><span class="score-pill high">5 / 5</span></td>
+                                <td>Used simple, direct language for a worried family</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Empathy</strong></td>
+                                <td><span class="score-pill low">2 / 5</span></td>
+                                <td><span class="score-pill mid">4 / 5</span></td>
+                                <td>Validated the family's concern without alarming</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Transparency</strong></td>
+                                <td><span class="score-pill low">1 / 5</span></td>
+                                <td><span class="score-pill high">5 / 5</span></td>
+                                <td>Clearly states "I cannot tell" and limits of the AI</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Helpfulness</strong></td>
+                                <td><span class="score-pill low">2 / 5</span></td>
+                                <td><span class="score-pill high">5 / 5</span></td>
+                                <td>Offers concrete next steps (contact doctor, list symptoms)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p style="margin-top:12px; font-size:0.82rem; color:var(--text-muted); font-style:italic;">This scorecard shows that better AI design is not only about sounding intelligent. It is about reducing risk while improving clarity, trust, and actionability.</p>
+                </div>
+
+                <!-- Classroom-to-Production Bridge -->
+                <div class="artifact-section">
+                    <div class="artifact-section-title">
+                        <div class="icon" style="background:rgba(56,189,248,0.1);">&#128736;&#65039;</div>
+                        Classroom to Production &mdash; Skills Bridge
+                    </div>
+                    <p>Each skill demonstrated in this trust audit maps directly to competencies from my professional experience:</p>
+                    <div class="bridge-diagram">
+                        <div class="bridge-col left">
+                            <h4>&#127891; Trust Audit (Classroom)</h4>
+                            <div class="bridge-item"><span class="bridge-item-icon">&#128270;</span> <span>Identified failure modes in AI output</span></div>
+                            <div class="bridge-item"><span class="bridge-item-icon">&#128221;</span> <span>Designed safety-focused system rules</span></div>
+                            <div class="bridge-item"><span class="bridge-item-icon">&#128200;</span> <span>Evaluated with a trust scorecard</span></div>
+                            <div class="bridge-item"><span class="bridge-item-icon">&#128680;</span> <span>Built escalation logic for urgent cases</span></div>
+                            <div class="bridge-item"><span class="bridge-item-icon">&#10084;&#65039;</span> <span>Balanced empathy with safety constraints</span></div>
+                            <div class="bridge-item"><span class="bridge-item-icon">&#128196;</span> <span>Documented the complete audit trail</span></div>
+                        </div>
+                        <div class="bridge-arrow-col">
+                            <div class="bridge-arrow-line"></div>
+                            <div class="bridge-arrow-icon">&#8652;</div>
+                            <div class="bridge-arrow-line"></div>
+                        </div>
+                        <div class="bridge-col right">
+                            <h4>&#128640; Production (Professional)</h4>
+                            <div class="bridge-item"><span class="bridge-item-icon">&#128300;</span> <span>RAG hallucination detection with RAGAS &amp; TruLens at SBU</span></div>
+                            <div class="bridge-item"><span class="bridge-item-icon">&#9881;&#65039;</span> <span>LangGraph agent guardrails &amp; tool-calling boundaries</span></div>
+                            <div class="bridge-item"><span class="bridge-item-icon">&#128202;</span> <span>Faithfulness &amp; groundedness scoring in production RAG</span></div>
+                            <div class="bridge-item"><span class="bridge-item-icon">&#127973;</span> <span>ICU alert escalation logic at Cloudphysician</span></div>
+                            <div class="bridge-item"><span class="bridge-item-icon">&#128737;&#65039;</span> <span>HIPAA-aligned AI privacy workflows in clinical settings</span></div>
+                            <div class="bridge-item"><span class="bridge-item-icon">&#128203;</span> <span>MLflow experiment audit trails &amp; Azure DevOps at A5G</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Key Takeaways -->
+                <div class="artifact-section">
+                    <div class="artifact-section-title">
+                        <div class="icon" style="background:rgba(255,215,0,0.1);">&#128161;</div>
+                        Key Takeaways
+                    </div>
+                    <div class="takeaway-grid">
+                        <div class="takeaway-item">
+                            <div class="takeaway-icon">&#128737;&#65039;</div>
+                            <h4>Fluency Is Not Safety</h4>
+                            <p>The first response sounded polished and confident. But it could delay urgent medical care. In AI, sounding good and being safe are two very different things.</p>
+                        </div>
+                        <div class="takeaway-item">
+                            <div class="takeaway-icon">&#128680;</div>
+                            <h4>Guardrails Save Lives</h4>
+                            <p>Eight explicit system rules transformed a dangerous response into a trustworthy one. In production at Cloudphysician, the same principle applies &mdash; constraints protect patients.</p>
+                        </div>
+                        <div class="takeaway-item">
+                            <div class="takeaway-icon">&#128202;</div>
+                            <h4>Measure Trust, Not Just Accuracy</h4>
+                            <p>The trust scorecard evaluates six dimensions, not just correctness. Real-world AI systems need clarity, empathy, and transparency alongside factual accuracy.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tools & Technologies Used -->
+                <div class="artifact-section">
+                    <div class="artifact-section-title">
+                        <div class="icon" style="background:rgba(255,107,157,0.1);">&#128736;&#65039;</div>
+                        Tools and Technologies Used
+                    </div>
+                    <div class="tool-tags">
+                        <div class="tool-tag"><span>&#128221;</span> LLM Prompt Engineering</div>
+                        <div class="tool-tag"><span>&#128737;&#65039;</span> Responsible AI Evaluation</div>
+                        <div class="tool-tag"><span>&#128270;</span> RAG-Inspired Grounding Strategy</div>
+                        <div class="tool-tag"><span>&#9989;</span> Safety Guardrails Design</div>
+                        <div class="tool-tag"><span>&#128100;</span> Human-in-the-Loop Escalation Logic</div>
+                        <div class="tool-tag"><span>&#9881;&#65039;</span> LangChain / LangGraph Concepts</div>
+                        <div class="tool-tag"><span>&#128202;</span> RAGAS-Inspired Trust Evaluation</div>
+                        <div class="tool-tag"><span>&#128200;</span> TruLens Groundedness Thinking</div>
+                        <div class="tool-tag"><span>&#128187;</span> HTML5 / CSS3 / JavaScript</div>
+                        <div class="tool-tag"><span>&#128038;</span> GitHub Pages</div>
+                    </div>
+                    <p style="margin-top:14px;">These tools and concepts are grounded in my professional experience: RAGAS evaluation for faithfulness and answer relevancy in production RAG pipelines at Stony Brook, TruLens for groundedness scoring, LangGraph agent configuration with explicit safety boundaries, ICU monitoring guardrails at Cloudphysician, and MLOps audit trails with MLflow + Azure DevOps at A5G Networks.</p>
+                </div>
+
+                <!-- Value Proposition -->
+                <div class="artifact-section">
+                    <div class="artifact-section-title">
+                        <div class="icon" style="background:rgba(255,215,0,0.1);">&#128161;</div>
+                        Value Proposition
+                    </div>
+                    <p>This artifact demonstrates that I understand AI not only as a technical system, but also as a system of trust. It shows that I can identify when a model response is fluent but unsafe, redesign the interaction to better protect the user, and evaluate the result using practical criteria. For professors, this artifact demonstrates meaningful application of AI/ML concepts beyond theory &mdash; it is a structured case study with a clear problem, failure analysis, redesign, and measurable improvement. For employers, it shows a professional mindset aligned with real-world AI deployment, where safety, clarity, and accountability matter as much as raw model capability. This is not just another prompt engineering exercise &mdash; it is evidence of the responsible AI thinking that distinguishes a senior engineer from someone who only knows how to generate text.</p>
+                </div>
+
+                <!-- Unique Value -->
+                <div class="artifact-section">
+                    <div class="artifact-section-title">
+                        <div class="icon" style="background:rgba(124,116,255,0.1);">&#10024;</div>
+                        Unique Value
+                    </div>
+                    <p>What makes this artifact distinctive is that it tells a complete story: problem, failure, fix, measurable improvement, and lesson. Most portfolio artifacts describe what the student did. This one shows what went wrong, why it was dangerous, and exactly how I fixed it &mdash; with quantified scores across six trust dimensions. The healthcare domain is not a random choice; it comes from my direct experience at Cloudphysician, where AI-assisted clinical decisions carry real consequences. The failure analysis is not hypothetical; it reflects the same kinds of hallucination and overconfidence issues I detect with RAGAS faithfulness scoring in my RAG pipelines at Stony Brook. The redesign rules are not textbook principles; they mirror the guardrails I configure in LangGraph agents and the safety constraints I have implemented in HIPAA-aligned environments. Every element of this artifact is grounded in professional practice, which makes it authentic rather than academic.</p>
+                </div>
+
+                <!-- Relevance -->
+                <div class="artifact-section">
+                    <div class="artifact-section-title">
+                        <div class="icon" style="background:rgba(0,212,170,0.1);">&#127793;</div>
+                        Relevance
+                    </div>
+                    <p>As AI systems are deployed in healthcare, finance, legal, and other high-stakes domains, the ability to audit and improve AI trustworthiness is becoming one of the most critical skills in the field. This artifact aligns directly with the IWU M.S. in AI programme's emphasis on responsible and ethical AI development. Organisations like the NIST (AI Risk Management Framework), the EU (AI Act), and the WHO (AI Ethics Guidelines for Healthcare) all require that AI systems in sensitive domains be transparent, safe, and accountable. For hiring managers, this artifact proves that I can conduct the kind of trust audit that companies need before deploying AI in production. For academic reviewers, it demonstrates depth of engagement with responsible AI concepts that goes well beyond surface-level definitions. The progression from hallucination to trust is not just a classroom exercise &mdash; it is the central challenge of AI engineering in 2026 and beyond.</p>
+                </div>
+
+                <!-- References -->
+                <div class="artifact-section">
+                    <div class="artifact-section-title">
+                        <div class="icon" style="background:rgba(56,189,248,0.1);">&#128214;</div>
+                        References
+                    </div>
+                    <ol class="ref-list">
+                        <li>NIST. (2023). <em>Artificial Intelligence Risk Management Framework (AI RMF 1.0)</em>. National Institute of Standards and Technology. <a href="https://www.nist.gov/artificial-intelligence" target="_blank" rel="noopener noreferrer">nist.gov/artificial-intelligence</a></li>
+                        <li>European Commission. (2024). <em>The EU Artificial Intelligence Act</em>. <a href="https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai" target="_blank" rel="noopener noreferrer">digital-strategy.ec.europa.eu</a></li>
+                        <li>WHO. (2021). <em>Ethics and Governance of Artificial Intelligence for Health</em>. World Health Organization. <a href="https://www.who.int/publications/i/item/9789240029200" target="_blank" rel="noopener noreferrer">who.int</a></li>
+                        <li>Anthropic. (2024). "Prompt Engineering for Claude &mdash; Safety and Guardrails." <a href="https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering" target="_blank" rel="noopener noreferrer">docs.anthropic.com</a></li>
+                        <li>Es, S., et al. (2023). "RAGAS: Automated Evaluation of Retrieval Augmented Generation." <em>arXiv:2309.15217</em>. <a href="https://arxiv.org/abs/2309.15217" target="_blank" rel="noopener noreferrer">arxiv.org</a></li>
+                        <li>TruLens Documentation. (2024). "Evaluation of LLM Applications." <a href="https://www.trulens.org/" target="_blank" rel="noopener noreferrer">trulens.org</a></li>
+                        <li>LangChain Documentation. (2024). "Building Agents with Guardrails." <a href="https://docs.langchain.com/" target="_blank" rel="noopener noreferrer">docs.langchain.com</a></li>
+                        <li>UNESCO. (2021). <em>Recommendation on the Ethics of Artificial Intelligence</em>. <a href="https://www.unesco.org/en/artificial-intelligence/recommendation-ethics" target="_blank" rel="noopener noreferrer">unesco.org</a></li>
+                    </ol>
+                </div>
+
+            </div>
+        </div>
+
         <!-- Placeholder for future artifacts -->
         <div style="text-align:center; margin-top:48px; color:var(--text-muted); font-size:0.9rem;" class="fade-in">
-            <p style="color:var(--text-muted);">Artifacts 4&ndash;5 will be added as the course progresses through Workshops 4&ndash;5.</p>
+            <p style="color:var(--text-muted);">Artifact 5 will be added as the course progresses through Workshop 5.</p>
         </div>
 
     </div>
