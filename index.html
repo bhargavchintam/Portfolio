@@ -4464,6 +4464,183 @@ Speak as a caring nurse would.</pre>
             </div>
         </div>
 
+        <!-- ===== AIML-501 ARTIFACT 2 ===== -->
+        <div class="artifact-showcase fade-in" id="aiml501-artifact-2" style="margin-top:56px;">
+            <div class="artifact-hero-banner" style="background:linear-gradient(135deg, rgba(242,140,40,0.14), rgba(46,134,193,0.10));">
+                <div class="artifact-number" style="background:rgba(242,140,40,0.1); border-color:rgba(242,140,40,0.3); color:#f5a55a;">&#129504; AIML-501 Artifact 2 &middot; Workshop 2</div>
+                <h2>Inside a Neural Network: Six Components and One Learning Loop</h2>
+                <p class="subtitle">A 14-slide teaching deck built on 23 hands-on training runs in TensorFlow Playground</p>
+            </div>
+
+            <div class="audience-callout">
+                <div class="audience-callout-icon">&#127919;</div>
+                <div>
+                    <h4>Target Audience</h4>
+                    <p>Written for <strong>people who need to understand neural networks without building one</strong>: product managers, analysts, and new team members, along with <strong>hiring managers</strong> who want to see whether an ML engineer can teach. Each slide carries one idea, one picture, and one number from a real experiment, so a reader can follow it in a few minutes and check every claim.</p>
+                </div>
+            </div>
+
+            <div class="insights-strip">
+                <div class="insight-card">
+                    <div class="ic-head"><div class="ic-emoji">&#129513;</div><div class="ic-label">Challenges Faced</div></div>
+                    <h5>A result I did not expect</h5>
+                    <p>Fed squared coordinates, a model without any hidden layer ought to separate the circle easily, and with two seeds it did, in under 25 epochs. With my first seed it never moved off a loss near 1.0. Working out why (a saturated output with almost no slope to follow) became one of the deck's lessons instead of a run I hid.</p>
+                </div>
+                <div class="insight-card">
+                    <div class="ic-head"><div class="ic-emoji">&#128736;&#65039;</div><div class="ic-label">Tech Choices &amp; Why</div></div>
+                    <h5>Real runs, native charts</h5>
+                    <p>I scripted the Playground runs so every setting changed one at a time under a fixed seed, then built the deck in PowerPoint with native charts, so the numbers stay editable. The colors follow Playground's own orange and blue, so readers can move between the slides and the tool.</p>
+                </div>
+                <div class="insight-card">
+                    <div class="ic-head"><div class="ic-emoji">&#128200;</div><div class="ic-label">Measurable Outcomes</div></div>
+                    <h5>Every slide backed by data</h5>
+                    <p>Adding one hidden layer of four neurons cut circle test loss from 0.532 to 0.009. ReLU learned XOR to 0.002 while a linear activation stayed at 0.496. A learning rate of 3 never settled.</p>
+                    <span class="ic-metric">23 measured training runs</span>
+                </div>
+            </div>
+
+            <div class="artifact-body">
+
+                <div class="artifact-section">
+                    <div class="artifact-section-title"><div class="icon" style="background:rgba(124,116,255,0.1);">&#128221;</div>Title</div>
+                    <p><strong>Inside a Neural Network: Six Components and One Learning Loop</strong></p>
+                </div>
+
+                <div class="artifact-section">
+                    <div class="artifact-section-title"><div class="icon" style="background:rgba(0,212,170,0.1);">&#128218;</div>Introduction</div>
+                    <p>My first AIML-501 artifact compared many algorithms side by side. This one takes a single neural network apart and follows a piece of data through it. I built it in Workshop 2 because most explanations of neural networks either stay vague or jump straight into calculus, and I wanted something in between: plain words, one worked example, and proof from real training runs.</p>
+                </div>
+
+                <div class="artifact-section">
+                    <div class="artifact-section-title"><div class="icon" style="background:rgba(255,107,157,0.1);">&#128196;</div>Artifact Description</div>
+                    <p>The deck groups the six components by what they do. Layers and neurons give the network its <strong>structure</strong>. Weights, biases, and activation functions shape the <strong>signal</strong> as it passes through. The loss function and optimizer form the <strong>learning loop</strong>. A flowchart shows data moving forward and errors flowing back, one slide works a single neuron with real numbers, charts compare activation functions and learning rates, and the closing slides summarize what the experiments showed.</p>
+                </div>
+
+                <div class="artifact-section">
+                    <div class="artifact-section-title"><div class="icon" style="background:rgba(56,189,248,0.1);">&#128444;&#65039;</div>The Slide Deck</div>
+                    <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(260px, 1fr)); gap:16px;">
+                        <figure style="margin:0;">
+                            <a href="assets/aiml501/nn-deck/slide-01.jpg" target="_blank" rel="noopener noreferrer"><img src="assets/aiml501/nn-deck/slide-01.jpg" alt="Slide 1: Title" loading="lazy" style="width:100%; height:auto; border-radius:8px; border:1px solid var(--border-color);"></a>
+                            <figcaption style="font-size:0.82rem; color:var(--text-muted); margin-top:6px;">1. Title</figcaption>
+                        </figure>
+                        <figure style="margin:0;">
+                            <a href="assets/aiml501/nn-deck/slide-02.jpg" target="_blank" rel="noopener noreferrer"><img src="assets/aiml501/nn-deck/slide-02.jpg" alt="Slide 2: Six parts sorted into three jobs" loading="lazy" style="width:100%; height:auto; border-radius:8px; border:1px solid var(--border-color);"></a>
+                            <figcaption style="font-size:0.82rem; color:var(--text-muted); margin-top:6px;">2. Six parts sorted into three jobs</figcaption>
+                        </figure>
+                        <figure style="margin:0;">
+                            <a href="assets/aiml501/nn-deck/slide-03.jpg" target="_blank" rel="noopener noreferrer"><img src="assets/aiml501/nn-deck/slide-03.jpg" alt="Slide 3: Data flow and the learning loop" loading="lazy" style="width:100%; height:auto; border-radius:8px; border:1px solid var(--border-color);"></a>
+                            <figcaption style="font-size:0.82rem; color:var(--text-muted); margin-top:6px;">3. Data flow and the learning loop</figcaption>
+                        </figure>
+                        <figure style="margin:0;">
+                            <a href="assets/aiml501/nn-deck/slide-04.jpg" target="_blank" rel="noopener noreferrer"><img src="assets/aiml501/nn-deck/slide-04.jpg" alt="Slide 4: Layers, with a depth test" loading="lazy" style="width:100%; height:auto; border-radius:8px; border:1px solid var(--border-color);"></a>
+                            <figcaption style="font-size:0.82rem; color:var(--text-muted); margin-top:6px;">4. Layers, with a depth test</figcaption>
+                        </figure>
+                        <figure style="margin:0;">
+                            <a href="assets/aiml501/nn-deck/slide-05.jpg" target="_blank" rel="noopener noreferrer"><img src="assets/aiml501/nn-deck/slide-05.jpg" alt="Slide 5: One neuron worked by hand" loading="lazy" style="width:100%; height:auto; border-radius:8px; border:1px solid var(--border-color);"></a>
+                            <figcaption style="font-size:0.82rem; color:var(--text-muted); margin-top:6px;">5. One neuron worked by hand</figcaption>
+                        </figure>
+                        <figure style="margin:0;">
+                            <a href="assets/aiml501/nn-deck/slide-06.jpg" target="_blank" rel="noopener noreferrer"><img src="assets/aiml501/nn-deck/slide-06.jpg" alt="Slide 6: Weights, biases, and a parameter count" loading="lazy" style="width:100%; height:auto; border-radius:8px; border:1px solid var(--border-color);"></a>
+                            <figcaption style="font-size:0.82rem; color:var(--text-muted); margin-top:6px;">6. Weights, biases, and a parameter count</figcaption>
+                        </figure>
+                        <figure style="margin:0;">
+                            <a href="assets/aiml501/nn-deck/slide-07.jpg" target="_blank" rel="noopener noreferrer"><img src="assets/aiml501/nn-deck/slide-07.jpg" alt="Slide 7: Activation shapes and an XOR test" loading="lazy" style="width:100%; height:auto; border-radius:8px; border:1px solid var(--border-color);"></a>
+                            <figcaption style="font-size:0.82rem; color:var(--text-muted); margin-top:6px;">7. Activation shapes and an XOR test</figcaption>
+                        </figure>
+                        <figure style="margin:0;">
+                            <a href="assets/aiml501/nn-deck/slide-08.jpg" target="_blank" rel="noopener noreferrer"><img src="assets/aiml501/nn-deck/slide-08.jpg" alt="Slide 8: Two loss functions and the Playground loss" loading="lazy" style="width:100%; height:auto; border-radius:8px; border:1px solid var(--border-color);"></a>
+                            <figcaption style="font-size:0.82rem; color:var(--text-muted); margin-top:6px;">8. Two loss functions and the Playground loss</figcaption>
+                        </figure>
+                        <figure style="margin:0;">
+                            <a href="assets/aiml501/nn-deck/slide-09.jpg" target="_blank" rel="noopener noreferrer"><img src="assets/aiml501/nn-deck/slide-09.jpg" alt="Slide 9: Gradient descent and a learning-rate test" loading="lazy" style="width:100%; height:auto; border-radius:8px; border:1px solid var(--border-color);"></a>
+                            <figcaption style="font-size:0.82rem; color:var(--text-muted); margin-top:6px;">9. Gradient descent and a learning-rate test</figcaption>
+                        </figure>
+                        <figure style="margin:0;">
+                            <a href="assets/aiml501/nn-deck/slide-10.jpg" target="_blank" rel="noopener noreferrer"><img src="assets/aiml501/nn-deck/slide-10.jpg" alt="Slide 10: One training step in six moves" loading="lazy" style="width:100%; height:auto; border-radius:8px; border:1px solid var(--border-color);"></a>
+                            <figcaption style="font-size:0.82rem; color:var(--text-muted); margin-top:6px;">10. One training step in six moves</figcaption>
+                        </figure>
+                        <figure style="margin:0;">
+                            <a href="assets/aiml501/nn-deck/slide-11.jpg" target="_blank" rel="noopener noreferrer"><img src="assets/aiml501/nn-deck/slide-11.jpg" alt="Slide 11: Results from 23 runs" loading="lazy" style="width:100%; height:auto; border-radius:8px; border:1px solid var(--border-color);"></a>
+                            <figcaption style="font-size:0.82rem; color:var(--text-muted); margin-top:6px;">11. Results from 23 runs</figcaption>
+                        </figure>
+                        <figure style="margin:0;">
+                            <a href="assets/aiml501/nn-deck/slide-12.jpg" target="_blank" rel="noopener noreferrer"><img src="assets/aiml501/nn-deck/slide-12.jpg" alt="Slide 12: The spiral before and after" loading="lazy" style="width:100%; height:auto; border-radius:8px; border:1px solid var(--border-color);"></a>
+                            <figcaption style="font-size:0.82rem; color:var(--text-muted); margin-top:6px;">12. The spiral before and after</figcaption>
+                        </figure>
+                        <figure style="margin:0;">
+                            <a href="assets/aiml501/nn-deck/slide-13.jpg" target="_blank" rel="noopener noreferrer"><img src="assets/aiml501/nn-deck/slide-13.jpg" alt="Slide 13: Four takeaways" loading="lazy" style="width:100%; height:auto; border-radius:8px; border:1px solid var(--border-color);"></a>
+                            <figcaption style="font-size:0.82rem; color:var(--text-muted); margin-top:6px;">13. Four takeaways</figcaption>
+                        </figure>
+                        <figure style="margin:0;">
+                            <a href="assets/aiml501/nn-deck/slide-14.jpg" target="_blank" rel="noopener noreferrer"><img src="assets/aiml501/nn-deck/slide-14.jpg" alt="Slide 14: References" loading="lazy" style="width:100%; height:auto; border-radius:8px; border:1px solid var(--border-color);"></a>
+                            <figcaption style="font-size:0.82rem; color:var(--text-muted); margin-top:6px;">14. References</figcaption>
+                        </figure>
+                    </div>
+                    <div class="tool-tags" style="margin-top:16px;">
+                        <a class="tool-tag" href="assets/aiml501/neural-network-deck.pdf" target="_blank" rel="noopener noreferrer"><span>&#128196;</span> PDF version</a>
+                        <a class="tool-tag" href="assets/aiml501/neural-network-deck.pptx" download><span>&#128190;</span> PowerPoint file</a>
+                    </div>
+                </div>
+
+                <div class="artifact-section">
+                    <div class="artifact-section-title"><div class="icon" style="background:rgba(124,116,255,0.1);">&#127919;</div>Objective</div>
+                    <p>To explain all six building blocks clearly, show how they connect in one picture, and test each idea with experiments rather than just describe it.</p>
+                </div>
+
+                <div class="artifact-section">
+                    <div class="artifact-section-title"><div class="icon" style="background:rgba(0,212,170,0.1);">&#9881;&#65039;</div>Process</div>
+                    <ul>
+                        <li>Ran 23 trainings in TensorFlow Playground on four datasets, changing depth, input features, noise, activation, and learning rate one at a time.</li>
+                        <li>Checked Playground&apos;s code before writing the loss slides, so the deck states exactly how the tool scores its predictions.</li>
+                        <li>Sorted the six components into three jobs and gave each job a color used across the whole deck.</li>
+                        <li>Built 14 slides in PowerPoint with native charts and a hand-worked neuron example, then checked every slide for overflow and consistency.</li>
+                        <li>This was an individual project.</li>
+                    </ul>
+                </div>
+
+                <div class="artifact-section">
+                    <div class="artifact-section-title"><div class="icon" style="background:rgba(255,107,157,0.1);">&#128736;&#65039;</div>Tools and Technologies Used</div>
+                    <div class="tool-tags">
+                        <div class="tool-tag"><span>&#129504;</span> TensorFlow Playground</div>
+                        <div class="tool-tag"><span>&#127917;</span> Playwright (scripted runs)</div>
+                        <div class="tool-tag"><span>&#128202;</span> PowerPoint native charts</div>
+                        <div class="tool-tag"><span>&#128013;</span> Python (results analysis)</div>
+                        <div class="tool-tag"><span>&#129302;</span> AI assistant (drafting support)</div>
+                    </div>
+                </div>
+
+                <div class="artifact-section">
+                    <div class="artifact-section-title"><div class="icon" style="background:rgba(255,215,0,0.1);">&#128161;</div>Artifact-Specific Value Proposition</div>
+                    <p>This artifact shows a different strength from my first one: teaching. It turns the math of a neural network into something a non-specialist can follow, while staying exact enough that an engineer can check it. Teams need people who can explain why a model behaves the way it does, not only people who can train one.</p>
+                </div>
+
+                <div class="artifact-section">
+                    <div class="artifact-section-title"><div class="icon" style="background:rgba(124,116,255,0.1);">&#10024;</div>Unique Value</div>
+                    <p>Instead of borrowing textbook claims, every chart in the deck comes from a run I measured, including the ones that failed. The stuck-seed result and the learning-rate collapse are the kind of quiet failures that cost real projects time, and showing them openly is more useful than a clean demo.</p>
+                </div>
+
+                <div class="artifact-section">
+                    <div class="artifact-section-title"><div class="icon" style="background:rgba(0,212,170,0.1);">&#127793;</div>Relevance</div>
+                    <p>The same six components sit inside the embedding models, vision networks, and language models I work with. Being able to explain them simply helps when a stakeholder asks why a model needs more data, why training stalled, or why a setting change made results worse.</p>
+                </div>
+
+                <div class="artifact-section">
+                    <div class="artifact-section-title"><div class="icon" style="background:rgba(56,189,248,0.1);">&#128214;</div>References</div>
+                    <ol class="ref-list">
+                        <li><strong>3Blue1Brown (2017)</strong>: But what is a neural network? &middot; <em>YouTube</em> <a href="https://www.youtube.com/watch?v=aircAruvnKk" target="_blank" rel="noopener noreferrer">link</a></li>
+                        <li><strong>Goodfellow, Bengio &amp; Courville (2016)</strong>: Deep learning &middot; <em>MIT Press</em> <a href="https://www.deeplearningbook.org" target="_blank" rel="noopener noreferrer">link</a></li>
+                        <li><strong>Google (2025)</strong>: Neural networks module &middot; <em>ML Crash Course</em> <a href="https://developers.google.com/machine-learning/crash-course/neural-networks" target="_blank" rel="noopener noreferrer">link</a></li>
+                        <li><strong>IBM Technology (2022)</strong>: Neural networks in 5 minutes &middot; <em>YouTube</em> <a href="https://www.youtube.com/watch?v=jmmW0F0biz0" target="_blank" rel="noopener noreferrer">link</a></li>
+                        <li><strong>Kingma &amp; Ba (2014)</strong>: The Adam optimizer &middot; <em>arXiv</em> <a href="https://doi.org/10.48550/arXiv.1412.6980" target="_blank" rel="noopener noreferrer">link</a></li>
+                        <li><strong>Rumelhart, Hinton &amp; Williams (1986)</strong>: Backpropagation &middot; <em>Nature</em> <a href="https://doi.org/10.1038/323533a0" target="_blank" rel="noopener noreferrer">link</a></li>
+                        <li><strong>Smilkov &amp; Carter</strong>: TensorFlow Playground &middot; <em>web tool</em> <a href="https://playground.tensorflow.org" target="_blank" rel="noopener noreferrer">link</a></li>
+                    </ol>
+                    <p style="margin-top:12px; color:var(--text-muted); font-size:0.9rem;">Full APA 7 references are in the paper that accompanies this artifact.</p>
+                </div>
+
+            </div>
+        </div>
+
     </div>
 </section>
 
