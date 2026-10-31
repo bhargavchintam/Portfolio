@@ -4641,6 +4641,132 @@ Speak as a caring nurse would.</pre>
             </div>
         </div>
 
+        <!-- ===== AIML-501 ARTIFACT 3 ===== -->
+        <div class="artifact-showcase fade-in" id="aiml501-artifact-3" style="margin-top:56px;">
+            <div class="artifact-hero-banner" style="background:linear-gradient(135deg, rgba(122,79,179,0.14), rgba(201,142,10,0.10));">
+                <div class="artifact-number" style="background:rgba(122,79,179,0.1); border-color:rgba(122,79,179,0.3); color:#b39ddb;">&#9889; AIML-501 Artifact 3 &middot; Workshop 3</div>
+                <h2>What It Takes to Train a Large Language Model</h2>
+                <p class="subtitle">An interactive infographic on the LLM training pipeline and what it costs in data, compute, energy, time, and people</p>
+            </div>
+
+            <div class="audience-callout">
+                <div class="audience-callout-icon">&#127919;</div>
+                <div>
+                    <h4>Target Audience</h4>
+                    <p>Made for <strong>managers, investors, and policy readers</strong> who hear that a model "cost $100 million" and want to know what that money buys, and for <strong>hiring managers</strong> looking for an ML engineer who can turn scattered technical reports into a clear, honest picture. Every figure is tagged by where it came from, so a reader can tell a published number from an outside estimate.</p>
+                </div>
+            </div>
+
+            <div class="insights-strip">
+                <div class="insight-card">
+                    <div class="ic-head"><div class="ic-emoji">&#129513;</div><div class="ic-label">Challenges Faced</div></div>
+                    <h5>The biggest models publish the least</h5>
+                    <p>GPT-4, Gemini, and Claude have no public compute or energy figures, while open models such as Llama and BLOOM report almost everything. Instead of mixing the two, I gave every number a source tag: reported, estimated by researchers, my own calculation, or an executive's statement.</p>
+                </div>
+                <div class="insight-card">
+                    <div class="ic-head"><div class="ic-emoji">&#128736;&#65039;</div><div class="ic-label">Tech Choices &amp; Why</div></div>
+                    <h5>A data-driven web page, not a static image</h5>
+                    <p>My first two artifacts were a poster and a slide deck. This one is a responsive HTML page whose charts are drawn from a small data table in JavaScript, with a switch between compute, GPU-hours, carbon, and cost. The same file renders a print poster for offline use.</p>
+                </div>
+                <div class="insight-card">
+                    <div class="ic-head"><div class="ic-emoji">&#128200;</div><div class="ic-label">Measurable Outcomes</div></div>
+                    <h5>6 steps, 5 resources, 8 models</h5>
+                    <p>Llama 3.1 405B used about 121 times the training compute of GPT-3, yet energy is only 2&ndash;6% of a frontier model's cost; chips and staff make up the rest of most budgets.</p>
+                    <span class="ic-metric">21 sources cited and checked</span>
+                </div>
+            </div>
+
+            <div class="artifact-body">
+
+                <div class="artifact-section">
+                    <div class="artifact-section-title"><div class="icon" style="background:rgba(124,116,255,0.1);">&#128221;</div>Title</div>
+                    <p><strong>What It Takes to Train a Large Language Model</strong></p>
+                </div>
+
+                <div class="artifact-section">
+                    <div class="artifact-section-title"><div class="icon" style="background:rgba(0,212,170,0.1);">&#128218;</div>Introduction</div>
+                    <p>Headlines about AI often quote one big dollar figure. I wanted to show where that figure comes from. This third AIML-501 artifact follows a model from raw web text to a running chatbot and puts real numbers on each step, using technical reports from OpenAI, Meta, Google, Anthropic, BigScience, and DeepSeek, plus independent cost studies.</p>
+                </div>
+
+                <div class="artifact-section">
+                    <div class="artifact-section-title"><div class="icon" style="background:rgba(56,189,248,0.1);">&#128444;&#65039;</div>The Infographic</div>
+                    <a href="artifacts/aiml501-llm-training-costs.html" target="_blank" rel="noopener noreferrer"><img src="assets/aiml501/llm-training-costs-preview.jpg" alt="Infographic: six training steps with resource meters, a table of five resources, a comparison of eight models, and four takeaways" loading="lazy" style="width:100%; height:auto; border-radius:10px; border:1px solid var(--border-color);"></a>
+                    <div class="tool-tags" style="margin-top:16px;">
+                        <a class="tool-tag" href="artifacts/aiml501-llm-training-costs.html" target="_blank" rel="noopener noreferrer"><span>&#127760;</span> Interactive version</a>
+                        <a class="tool-tag" href="assets/aiml501/llm-training-costs-infographic.png" target="_blank" rel="noopener noreferrer"><span>&#128444;&#65039;</span> Full-size image</a>
+                        <a class="tool-tag" href="assets/aiml501/llm-training-costs-infographic.pdf" target="_blank" rel="noopener noreferrer"><span>&#128196;</span> PDF poster</a>
+                    </div>
+                </div>
+
+                <div class="artifact-section">
+                    <div class="artifact-section-title"><div class="icon" style="background:rgba(255,107,157,0.1);">&#128196;</div>Artifact Description</div>
+                    <p>The page has four parts. A six-step pipeline (collect data, clean and tokenize, pretrain, fine-tune and align, test and red-team, deploy and serve) shows, under each step, how heavily it uses each resource. A resource table explains what drives each cost and its share of a frontier budget. A model comparison lines up GPT-3, BLOOM, Llama 2, GPT-4, Gemini Ultra, Claude 3, Llama 3.1, and DeepSeek-V3 with log-scale charts. Four short takeaways close the page.</p>
+                </div>
+
+                <div class="artifact-section">
+                    <div class="artifact-section-title"><div class="icon" style="background:rgba(124,116,255,0.1);">&#127919;</div>Objective</div>
+                    <p>To make the training process and its resource costs easy to follow for a non-specialist, while keeping every figure traceable to its source and honest about what is unknown.</p>
+                </div>
+
+                <div class="artifact-section">
+                    <div class="artifact-section-title"><div class="icon" style="background:rgba(0,212,170,0.1);">&#9881;&#65039;</div>Process</div>
+                    <ul>
+                        <li>Read the course resources (IBM Technology, Eye on Tech, Wolfram) and the primary reports behind each model.</li>
+                        <li>Pulled figures straight from the source PDFs and model cards, and noted where each one came from.</li>
+                        <li>Filled a few gaps with transparent arithmetic, such as compute from 6 &times; parameters &times; tokens, and labeled those values as my own.</li>
+                        <li>Designed and coded the page, checked it on desktop and phone widths, and rendered a poster version.</li>
+                        <li>This was an individual project.</li>
+                    </ul>
+                </div>
+
+                <div class="artifact-section">
+                    <div class="artifact-section-title"><div class="icon" style="background:rgba(255,107,157,0.1);">&#128736;&#65039;</div>Tools and Technologies Used</div>
+                    <div class="tool-tags">
+                        <div class="tool-tag"><span>&#127760;</span> HTML, CSS, JavaScript</div>
+                        <div class="tool-tag"><span>&#128202;</span> Hand-built SVG charts</div>
+                        <div class="tool-tag"><span>&#127917;</span> Playwright (PNG and PDF export)</div>
+                        <div class="tool-tag"><span>&#128269;</span> Source PDF text extraction</div>
+                        <div class="tool-tag"><span>&#129302;</span> AI assistant (drafting support)</div>
+                    </div>
+                </div>
+
+                <div class="artifact-section">
+                    <div class="artifact-section-title"><div class="icon" style="background:rgba(255,215,0,0.1);">&#128161;</div>Artifact-Specific Value Proposition</div>
+                    <p>Artifact 1 showed I can sort algorithms and Artifact 2 showed I can teach how a network learns. This one shows research and data communication: reading dense reports, checking numbers against each other, and presenting uncertainty plainly. That skill matters whenever a team has to budget for training or defend a build-versus-buy decision.</p>
+                </div>
+
+                <div class="artifact-section">
+                    <div class="artifact-section-title"><div class="icon" style="background:rgba(124,116,255,0.1);">&#10024;</div>Unique Value</div>
+                    <p>Most graphics about AI cost show a single number per model. This one shows the evidence behind each number, places people next to chips and power as a real cost, and keeps blank cells blank instead of guessing.</p>
+                </div>
+
+                <div class="artifact-section">
+                    <div class="artifact-section-title"><div class="icon" style="background:rgba(0,212,170,0.1);">&#127793;</div>Relevance</div>
+                    <p>In my own work I decide whether to train, fine-tune, or call an existing model. Knowing that pretraining dominates compute while alignment and testing dominate human effort helps me plan those projects and explain their costs to decision makers.</p>
+                </div>
+
+                <div class="artifact-section">
+                    <div class="artifact-section-title"><div class="icon" style="background:rgba(56,189,248,0.1);">&#128214;</div>References</div>
+                    <ol class="ref-list">
+                        <li><strong>Brown et al. (2020)</strong>: GPT-3 paper &middot; <em>arXiv</em> <a href="https://doi.org/10.48550/arXiv.2005.14165" target="_blank" rel="noopener noreferrer">link</a></li>
+                        <li><strong>Cottier et al. (2025)</strong>: Rising costs of frontier AI training &middot; <em>arXiv</em> <a href="https://doi.org/10.48550/arXiv.2405.21015" target="_blank" rel="noopener noreferrer">link</a></li>
+                        <li><strong>DeepSeek-AI (2024)</strong>: DeepSeek-V3 technical report &middot; <em>arXiv</em> <a href="https://doi.org/10.48550/arXiv.2412.19437" target="_blank" rel="noopener noreferrer">link</a></li>
+                        <li><strong>IEA (2025)</strong>: Energy and AI &middot; <em>International Energy Agency</em> <a href="https://www.iea.org/reports/energy-and-ai" target="_blank" rel="noopener noreferrer">link</a></li>
+                        <li><strong>Kaplan et al. (2020)</strong>: Scaling laws for language models &middot; <em>arXiv</em> <a href="https://doi.org/10.48550/arXiv.2001.08361" target="_blank" rel="noopener noreferrer">link</a></li>
+                        <li><strong>Llama Team (2024)</strong>: The Llama 3 herd of models &middot; <em>arXiv</em> <a href="https://doi.org/10.48550/arXiv.2407.21783" target="_blank" rel="noopener noreferrer">link</a></li>
+                        <li><strong>Luccioni, Viguier &amp; Ligozat (2023)</strong>: Carbon footprint of BLOOM &middot; <em>JMLR</em> <a href="https://doi.org/10.48550/arXiv.2211.02001" target="_blank" rel="noopener noreferrer">link</a></li>
+                        <li><strong>Maslej et al. (2024)</strong>: AI Index Report 2024 &middot; <em>Stanford HAI</em> <a href="https://aiindex.stanford.edu/report/" target="_blank" rel="noopener noreferrer">link</a></li>
+                        <li><strong>OpenAI (2023)</strong>: GPT-4 technical report &middot; <em>arXiv</em> <a href="https://doi.org/10.48550/arXiv.2303.08774" target="_blank" rel="noopener noreferrer">link</a></li>
+                        <li><strong>Patterson et al. (2021)</strong>: Carbon emissions and large neural network training &middot; <em>arXiv</em> <a href="https://doi.org/10.48550/arXiv.2104.10350" target="_blank" rel="noopener noreferrer">link</a></li>
+                        <li><strong>Touvron et al. (2023)</strong>: Llama 2 &middot; <em>arXiv</em> <a href="https://doi.org/10.48550/arXiv.2307.09288" target="_blank" rel="noopener noreferrer">link</a></li>
+                        <li><strong>Anthropic (2024)</strong>: Claude 3 model card &middot; <em>Anthropic</em> <a href="https://www-cdn.anthropic.com/de8ba9b01c9ab7cbabf5c33b80b7bbc618857627/Model_Card_Claude_3.pdf" target="_blank" rel="noopener noreferrer">link</a></li>
+                    </ol>
+                    <p style="margin-top:12px; color:var(--text-muted); font-size:0.9rem;">Full APA 7 references are in the document that accompanies this artifact.</p>
+                </div>
+
+            </div>
+        </div>
+
     </div>
 </section>
 

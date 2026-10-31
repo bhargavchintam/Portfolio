@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Cost of Training an LLM</title>
+<meta name="description" content="An infographic of the six steps in training a large language model and the data, compute, energy, time, and people each step uses, with measured examples from GPT-3, GPT-4, Llama, Gemini, Claude, BLOOM, and DeepSeek-V3.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1d2a33; --ink2:#43525c; --muted:#6a7780; --rule:#cfd7d3; --paper:#eef1ec; --sheet:#fbfcfa;
+    --data:#2f6f9f; --compute:#7a4fb3; --energy:#c98e0a; --time:#3e8e68; --people:#b23a6f;
+    --rep:#1d2a33; --est:#6a7780;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{background:var(--paper)}
+  body{font-family:"IBM Plex Sans",system-ui,sans-serif;color:var(--ink);background:var(--paper);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  h1,h2,h3,.cond{font-family:"IBM Plex Sans Condensed","IBM Plex Sans",sans-serif}
+  a{color:var(--data)}
+  a:focus-visible,button:focus-visible{outline:3px solid var(--data);outline-offset:2px}
+  .page{max-width:1440px;margin:0 auto;padding:48px 40px 40px}
+
+  /* header */
+  header{display:grid;grid-template-columns:1fr auto;gap:32px;align-items:end;padding-bottom:26px;border-bottom:2px solid var(--ink)}
+  h1{font-size:clamp(34px,4.6vw,64px);line-height:1.02;font-weight:700;letter-spacing:-.01em;max-width:16ch}
+  .lede{font-size:18px;color:var(--ink2);max-width:62ch;margin-top:14px}
+  .byline{font-size:14px;color:var(--muted);text-align:right;line-height:1.6}
+  .byline strong{color:var(--ink);font-weight:600}
+
+  /* resource key: used everywhere */
+  .key{display:flex;flex-wrap:wrap;gap:8px 22px;margin:22px 0 0;font-size:14.5px;color:var(--ink2)}
+  .key span{display:inline-flex;align-items:center;gap:8px}
+  .sw{width:14px;height:14px;border-radius:3px;display:inline-block;flex:0 0 14px}
+  .c-data{background:var(--data)} .c-compute{background:var(--compute)} .c-energy{background:var(--energy)} .c-time{background:var(--time)} .c-people{background:var(--people)}
+
+  section{margin-top:44px}
+  .sh{display:grid;grid-template-columns:minmax(0,1fr);gap:4px;margin-bottom:18px}
+  h2{font-size:30px;line-height:1.1;font-weight:700}
+  .sh p{color:var(--ink2);max-width:72ch}
+
+  /* pipeline: the memorable element */
+  .pipe{position:relative;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:0;background:var(--sheet);border:1px solid var(--rule);border-radius:6px}
+  .stage{position:relative;padding:22px 20px 18px;border-right:1px solid var(--rule);display:flex;flex-direction:column}
+  .stage:last-child{border-right:0}
+  .stage:not(:last-child)::after{content:"";position:absolute;right:-11px;top:34px;width:20px;height:20px;background:var(--sheet);border-top:1px solid var(--rule);border-right:1px solid var(--rule);transform:rotate(45deg);z-index:2}
+  .stage.hot{background:#f4f0fa}
+  .stage.hot:not(:last-child)::after{background:#f4f0fa}
+  .snum{font-family:"IBM Plex Sans Condensed",sans-serif;font-weight:700;font-size:44px;line-height:1;color:var(--rule)}
+  .stage.hot .snum{color:#cbb8e6}
+  .stage h3{font-size:21px;line-height:1.15;margin-top:6px;font-weight:700}
+  .stage .what{font-size:14.5px;color:var(--ink2);margin-top:8px}
+  .stage .fact{font-size:14px;margin-top:12px;padding-top:10px;border-top:1px dashed var(--rule);color:var(--ink)}
+  .stage .fact cite{display:block;font-style:normal;color:var(--muted);font-size:12.5px;margin-top:4px}
+  .meters{margin-top:auto;padding-top:16px;display:grid;gap:6px}
+  .meter{display:grid;grid-template-columns:62px 1fr;align-items:center;gap:8px;font-size:12.5px;color:var(--muted)}
+  .bar{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;height:9px}
+  .bar i{border-radius:2px;background:#e1e6e3}
+  .pipe-note{font-size:13.5px;color:var(--muted);margin-top:10px;max-width:90ch}
+  .loop{display:flex;gap:14px;align-items:center;margin-top:12px;font-size:14px;color:var(--ink2)}
+  .loop svg{flex:0 0 auto}
+
+  /* resource spec sheet */
+  .spec{width:100%;border-collapse:collapse;background:var(--sheet);border:1px solid var(--rule);border-radius:6px;overflow:hidden;font-size:14.5px}
+  .spec th,.spec td{text-align:left;vertical-align:top;padding:14px 16px;border-bottom:1px solid var(--rule)}
+  .spec thead th{font-family:"IBM Plex Sans Condensed",sans-serif;font-size:15px;font-weight:600;color:var(--muted);background:#f3f6f2}
+  .spec tbody tr:last-child td,.spec tbody tr:last-child th{border-bottom:0}
+  .spec tbody th{width:150px;font-family:"IBM Plex Sans Condensed",sans-serif;font-size:19px;font-weight:700;border-left:6px solid}
+  .spec tbody th small{display:block;font-family:"IBM Plex Sans",sans-serif;font-size:12.5px;font-weight:400;color:var(--muted);margin-top:2px}
+  .share{font-family:"IBM Plex Sans Condensed",sans-serif;font-size:24px;font-weight:700;line-height:1.1;white-space:nowrap}
+  .share small{display:block;font-family:"IBM Plex Sans",sans-serif;font-size:12.5px;font-weight:400;color:var(--muted);white-space:normal}
+
+  /* models */
+  .models{display:grid;grid-template-columns:minmax(0,1fr);gap:24px;align-items:start}
+  .chartbox{max-width:860px}
+  body.poster .chartbox{max-width:none}
+  .mt{width:100%;border-collapse:collapse;font-size:14px;background:var(--sheet);border:1px solid var(--rule)}
+  .mt th,.mt td{padding:9px 10px;border-bottom:1px solid var(--rule);text-align:right;white-space:nowrap}
+  .mt th:first-child,.mt td:first-child{text-align:left;white-space:normal}
+  .mt thead th{font-family:"IBM Plex Sans Condensed",sans-serif;font-weight:600;color:var(--muted);background:#f3f6f2;vertical-align:bottom;font-size:13.5px}
+  .mt td:first-child b{font-weight:600}
+  .mt td:first-child span{display:block;font-size:12px;color:var(--muted)}
+  .v{display:inline-flex;align-items:baseline;gap:4px}
+  .ev{font-size:10.5px;font-weight:600;padding:1px 5px;border-radius:3px;border:1px solid;line-height:1.4}
+  .ev.R{color:var(--rep);border-color:var(--rep)} .ev.E{color:var(--est);border-color:var(--est);border-style:dashed}
+  .ev.C{color:var(--compute);border-color:var(--compute)} .ev.S{color:var(--people);border-color:var(--people);border-style:dashed}
+  .nd{color:#9aa6ad}
+  .evkey{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:13px;color:var(--ink2);margin-top:10px}
+  .chartbox{background:var(--sheet);border:1px solid var(--rule);padding:16px 18px 10px}
+  .tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+  .tabs button{font:inherit;font-size:13.5px;padding:6px 11px;border:1px solid var(--rule);background:#fff;border-radius:4px;color:var(--ink2);cursor:pointer}
+  .tabs button[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .ctitle{font-family:"IBM Plex Sans Condensed",sans-serif;font-weight:600;font-size:17px}
+  .csub{font-size:13px;color:var(--muted);margin-bottom:6px}
+  .chart svg{width:100%;height:auto;display:block}
+  .chart text{font-family:"IBM Plex Sans",sans-serif}
+  .grid4{display:none}
+
+  /* takeaways */
+  .take{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border-top:2px solid var(--ink)}
+  .take div{padding:18px 20px 6px 0;margin-right:20px;border-right:1px solid var(--rule)}
+  .take div:last-child{border-right:0;margin-right:0}
+  .take b{display:block;font-family:"IBM Plex Sans Condensed",sans-serif;font-size:34px;line-height:1;font-weight:700}
+  .take p{font-size:14.5px;color:var(--ink2);margin-top:8px}
+
+  footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--rule);display:grid;grid-template-columns:1fr auto;gap:24px;font-size:12.5px;color:var(--muted);line-height:1.6}
+
+  /* poster mode: fixed width, every chart shown */
+  body.poster .page{width:1600px;max-width:none;padding:56px 56px 40px}
+  body.poster .tabs,body.poster #chart-main{display:none}
+  body.poster .grid4{display:grid;grid-template-columns:1fr 1fr;gap:18px 48px}
+  body.poster .models{grid-template-columns:minmax(0,1fr)}
+  body.poster h1{max-width:20ch}
+
+  @media (max-width:1100px){
+    .pipe{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .stage:nth-child(3){border-right:0}
+    .stage:nth-child(3)::after{display:none}
+    .stage:nth-child(-n+3){border-bottom:1px solid var(--rule)}
+    .models{grid-template-columns:minmax(0,1fr)}
+    .take{grid-template-columns:1fr 1fr}
+    .take div:nth-child(2){border-right:0;margin-right:0}
+  }
+  @media (max-width:700px){
+    .page{padding:28px 16px}
+    header{grid-template-columns:1fr}.byline{text-align:left}
+    .pipe{grid-template-columns:1fr}
+    .stage{border-right:0;border-bottom:1px solid var(--rule)}
+    .stage::after{display:none}
+    .spec thead{display:none}.spec,.spec tbody,.spec tr,.spec th,.spec td{display:block;width:100%}
+    .spec tbody th{border-left-width:6px}
+    .mtwrap{overflow-x:auto}
+    .take{grid-template-columns:1fr}.take div{border-right:0;margin-right:0;border-bottom:1px solid var(--rule)}
+    footer{grid-template-columns:1fr}
+  }
+  @media (prefers-reduced-motion:no-preference){ .chart rect.b{transition:width .35s ease} }
+</style>
+</head>
+<body>
+<div class="page">
+
+<header>
+  <div>
+    <h1>What it takes to train a large language model</h1>
+    <p class="lede">Six steps turn raw text into a chatbot. Each one draws on five resources: data, compute, energy, time, and people. Pretraining burns most of the compute and power, but the bill is mostly chips and staff, and the biggest labs now share the least.</p>
+    <div class="key" aria-label="Resource colors">
+      <span><i class="sw c-data"></i>Data</span><span><i class="sw c-compute"></i>Compute</span><span><i class="sw c-energy"></i>Energy</span><span><i class="sw c-time"></i>Time</span><span><i class="sw c-people"></i>People</span>
+    </div>
+  </div>
+  <div class="byline"><strong>Bindu Bhargava Reddy Chintam</strong><br>AIML-501 Model Development<br>Indiana Wesleyan University<br>Figures checked October 2026</div>
+</header>
+
+<section aria-labelledby="h-pipe">
+  <div class="sh"><h2 id="h-pipe">The six steps, and what each one uses</h2>
+  <p>The bars under each step show how heavily it draws on each resource: one segment is light use, three is the main cost of that step. The shaded step is where most of the money and power goes.</p></div>
+  <div class="pipe" id="pipe"></div>
+  <div class="loop">
+    <svg width="46" height="24" viewBox="0 0 46 24" aria-hidden="true"><path d="M44 12a10 10 0 0 1-10 10H12A10 10 0 0 1 12 2h22" fill="none" stroke="#6a7780" stroke-width="2"/><path d="M30 -2 L36 2 L30 6" fill="none" stroke="#6a7780" stroke-width="2"/></svg>
+    <span>The steps loop. Problems found in testing or in use send teams back to the data or to fine-tuning, so a model is never really finished after step 6.</span>
+  </div>
+  <p class="pipe-note">Bar levels are my judgment, based on the examples shown and the sources in the footer.</p>
+</section>
+
+<section aria-labelledby="h-res">
+  <div class="sh"><h2 id="h-res">Five resources and how each one drives cost</h2>
+  <p>The assignment names data, compute, energy, and time. I added people because research staff are one of the two largest costs, even though they never appear in a GPU count.</p></div>
+  <table class="spec">
+    <thead><tr><th scope="col">Resource</th><th scope="col">What drives it</th><th scope="col">How it is measured, with an example</th><th scope="col">Share of a frontier model's cost</th></tr></thead>
+    <tbody id="spec"></tbody>
+  </table>
+</section>
+
+<section aria-labelledby="h-models">
+  <div class="sh"><h2 id="h-models">Eight models, side by side</h2>
+  <p>Every number carries a tag that says where it came from. Gaps are real: the companies behind GPT-4, Gemini, and Claude have not published these figures.</p></div>
+  <div class="models">
+    <div>
+      <div class="mtwrap"><table class="mt" id="mt"></table></div>
+      <div class="evkey">
+        <span><span class="ev R">R</span> Reported by the developer</span>
+        <span><span class="ev E">E</span> Estimated by researchers</span>
+        <span><span class="ev C">C</span> My calculation from reported numbers</span>
+        <span><span class="ev S">S</span> Executive's public statement</span>
+        <span><span class="nd">n/d</span> Not disclosed</span>
+      </div>
+    </div>
+    <div class="chartbox">
+      <div class="tabs" role="group" aria-label="Choose a measure" id="tabs"></div>
+      <div class="chart" id="chart-main"></div>
+      <div class="grid4" id="grid4"></div>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="h-take">
+  <div class="sh"><h2 id="h-take">What the numbers say</h2></div>
+  <div class="take">
+    <div><b>121&times;</b><p>more compute for Llama 3.1 405B than for GPT-3, four years apart. Compute is roughly 6 &times; parameters &times; training tokens, and both grew.</p></div>
+    <div><b>2&ndash;6%</b><p>of a frontier model's cost is energy. Chips and servers (47&ndash;64%) and staff (29&ndash;49%) dominate, yet Llama 3.1 still emitted about 16 times GPT-3's carbon.</p></div>
+    <div><b>0.2%</b><p>of DeepSeek-V3's GPU time went to post-training. Alignment is cheap in compute but heavy in human work: labelers, red-teamers, and months of testing.</p></div>
+    <div><b>$40M or $78M?</b><p>Two careful estimates of GPT-4's cost differ by about two times because they count different things. Without disclosure, every frontier number is a range.</p></div>
+  </div>
+</section>
+
+<footer>
+  <div><b style="color:var(--ink)">Sources.</b> Anthropic (2024) Claude 3 model card; Brown et al. (2020); Cottier et al. (2025); DeepSeek-AI (2024); Fitzmaurice (2024); Gemini Team (2023); Hoffmann et al. (2022); IEA (2025); Kaplan et al. (2020); Llama Team (2024) and Meta (2024) Llama 3.1 model card; Luccioni et al. (2023); Maslej et al. (2024) AI Index; OpenAI (2023); Ouyang et al. (2022); Patterson et al. (2021); Tong et al. (2024); Touvron et al. (2023). Full APA 7 references are in the accompanying document. Energy marked C is GPU-hours times peak chip power, so it is an upper bound. Llama 3.1 carbon is location-based; Meta reports zero market-based emissions.</div>
+  <div style="text-align:right;white-space:nowrap">AIML-501 Artifact 3<br>bhargavchintam.github.io/Portfolio</div>
+</footer>
+</div>
+
+<script>
+const LV = {data:'Data',compute:'Compute',energy:'Energy',time:'Time',people:'People'};
+const STAGES = [
+  {n:1,t:'Collect data',w:'Crawl the public web, buy or license text, add books, code, and human-written examples.',
+   f:'Llama 3 learned from 15.6 trillion tokens. Reddit reportedly licenses its posts to Google for about $60 million a year.',c:'Llama Team, 2024; Tong et al., 2024',
+   m:{data:3,compute:1,energy:1,time:2,people:2}},
+  {n:2,t:'Clean and tokenize',w:'Remove duplicates, spam, and harmful or private text, then split the rest into tokens.',
+   f:'GPT-3’s Common Crawl slice shrank from 45 TB to 570 GB after filtering.',c:'Brown et al., 2020',
+   m:{data:3,compute:1,energy:1,time:1,people:2}},
+  {n:3,t:'Pretrain',hot:1,w:'Thousands of GPUs or TPUs learn to predict the next token, for weeks or months without stopping.',
+   f:'Llama 3.1 405B used 3.8×10²⁵ operations on up to 16,384 GPUs and had 466 interruptions in one 54-day stretch.',c:'Llama Team, 2024',
+   m:{data:2,compute:3,energy:3,time:3,people:2}},
+  {n:4,t:'Fine-tune and align',w:'Train on human-written answers, then on human or AI rankings (RLHF, Constitutional AI).',
+   f:'InstructGPT relied on about 40 hired labelers. DeepSeek-V3 spent 5K GPU-hours here versus 2,664K on pretraining.',c:'Ouyang et al., 2022; DeepSeek-AI, 2024',
+   m:{data:2,compute:1,energy:1,time:2,people:3}},
+  {n:5,t:'Test and red-team',w:'Run benchmarks and safety tests, invite outside experts to break it, and fix what they find.',
+   f:'GPT-4 finished training in August 2022, then spent about six months in safety work before its March 2023 launch.',c:'OpenAI, 2023',
+   m:{data:1,compute:1,energy:1,time:2,people:3}},
+  {n:6,t:'Deploy and serve',w:'Run the model for millions of users, monitor it, and update it. This cost never stops.',
+   f:'Data centers used about 415 TWh in 2024, 1.5% of world electricity, and may reach 945 TWh by 2030.',c:'IEA, 2025',
+   m:{data:1,compute:3,energy:3,time:3,people:2}},
+];
+const SPEC = [
+  ['data','Tokens of text and code','Model size sets the appetite: Chinchilla research suggests about 20 tokens per parameter. Licensing, filtering, and labeling add cost.','GPT-3 learned from 300 billion tokens; Llama 3.1 405B from 15.6 trillion, 52 times more.','Varies','Licensing and labeling; not broken out in public studies'],
+  ['compute','Operations and GPU-hours','Compute ≈ 6 × parameters × tokens, so bigger models trained on more data grow it fast.','Llama 3.1 405B: 30.8 million H100 GPU-hours. GPT-4’s training hardware is estimated to have cost $800M to buy.','47–64%','Chips, servers, and networking, spread over their working life'],
+  ['energy','Megawatt-hours and carbon','GPU-hours × power per chip × data center overhead. The local grid decides the carbon.','GPT-3 used about 1,287 MWh. BLOOM used 433 MWh on France’s low-carbon grid and emitted about 25 t of CO₂ against GPT-3’s 552 t.','2–6%','Small in dollars, large in emissions'],
+  ['time','Days on the cluster, months overall','Cluster size, hardware failures, and safety testing. More chips shorten the run but raise the cost.','BLOOM trained for 118 days. DeepSeek-V3 pretrained in under two months on 2,048 GPUs.','Indirect','Time multiplies every other cost'],
+  ['people','Researchers, engineers, labelers','Bigger projects need larger teams: GPT-3 listed 25 contributors, GPT-4 listed 284, Gemini 941.','Human feedback, red-teaming, and safety reviews all depend on people.','29–49%','R&D staff including equity'],
+];
+// value cell: [display, tag] ; null = not disclosed
+const MODELS = [
+  {m:'GPT-3',d:'OpenAI, 2020',p:['175B','R'],k:['300B','R'],f:['3.1×10²³','R'],g:['3.6M','E'],e:['1,287','E'],co:['552','E'],$:null},
+  {m:'BLOOM',d:'BigScience, 2022',p:['176B','R'],k:null,f:null,g:['1.08M','R'],e:['433','R'],co:['25','R'],$:null},
+  {m:'Llama 2 70B',d:'Meta, 2023',p:['70B','R'],k:['2T','R'],f:['8.4×10²³','C'],g:['1.72M','R'],e:['688','C'],co:['291','R'],$:null},
+  {m:'GPT-4',d:'OpenAI, 2023',p:null,k:null,f:null,g:null,e:null,co:null,$:['40–78','E']},
+  {m:'Gemini Ultra',d:'Google, 2023',p:null,k:null,f:null,g:null,e:null,co:null,$:['30–191','E']},
+  {m:'Claude 3',d:'Anthropic, 2024',p:null,k:null,f:null,g:null,e:null,co:null,$:['~100†','S']},
+  {m:'Llama 3.1 405B',d:'Meta, 2024',p:['405B','R'],k:['15.6T','R'],f:['3.8×10²⁵','R'],g:['30.8M','R'],e:['21,600','C'],co:['8,930','R'],$:null},
+  {m:'DeepSeek-V3',d:'DeepSeek, 2024',p:['671B*','R'],k:['14.8T','R'],f:['3.3×10²⁴','C'],g:['2.79M','R'],e:null,co:null,$:['5.6','R']},
+];
+const CHARTS = {
+  compute:{t:'Training compute',s:'Total operations, log scale',u:'',rows:[['GPT-3',3.14e23,'R'],['Llama 2 70B',8.4e23,'C'],['DeepSeek-V3',3.3e24,'C'],['Llama 3.1 405B',3.8e25,'R']],fmt:v=>{const e=Math.floor(Math.log10(v));return (v/10**e).toFixed(1)+'×10'+String(e).replace(/./g,d=>'⁰¹²³⁴⁵⁶⁷⁸⁹'[d])},col:'var(--compute)'},
+  gpu:{t:'GPU-hours',s:'Accelerator hours for the final run, log scale',rows:[['BLOOM',1.08e6,'R'],['Llama 2 70B',1.72e6,'R'],['DeepSeek-V3',2.79e6,'R'],['GPT-3',3.55e6,'E'],['Llama 3.1 405B',30.84e6,'R']],fmt:v=>(v/1e6).toFixed(v<1e7?2:1)+'M',col:'var(--time)'},
+  energy:{t:'Carbon emitted in training',s:'Tonnes of CO₂ equivalent, log scale',rows:[['BLOOM',25,'R'],['Llama 2 70B',291,'R'],['GPT-3',552,'E'],['Llama 3.1 405B',8930,'R']],fmt:v=>v.toLocaleString('en-US')+' t',col:'var(--energy)'},
+  cost:{t:'Training cost',s:'Millions of US dollars, log scale',rows:[['DeepSeek-V3',5.6,'R'],['Gemini Ultra (low)',30,'E'],['GPT-4 (low)',40,'E'],['GPT-4 (high)',78,'E'],['Claude-class, 2024',100,'S'],['Gemini Ultra (high)',191,'E']],fmt:v=>'$'+v+'M',col:'var(--people)'},
+};
+const NOTES = {
+  compute:'R = reported; C = 6 × parameters × tokens (active parameters for DeepSeek-V3).',
+  gpu:'GPT-3 assumes 10,000 V100 GPUs for 14.8 days (Patterson et al., 2021).',
+  energy:'Llama 3.1 is location-based. BLOOM is the energy-only figure from Luccioni et al. (2023).',
+  cost:'Low = amortized hardware and energy (Cottier et al.); high = cloud-rental price (AI Index). DeepSeek’s figure excludes research runs.'
+};
+
+function bars(level,res){let s='';for(let i=1;i<=3;i++)s+=`<i style="${i<=level?'background:var(--'+res+')':''}"></i>`;return s}
+document.getElementById('pipe').innerHTML = STAGES.map(s=>`
+  <div class="stage${s.hot?' hot':''}">
+    <div class="snum" aria-hidden="true">${s.n}</div>
+    <h3>${s.t}</h3>
+    <p class="what">${s.w}</p>
+    <p class="fact">${s.f}<cite>${s.c}</cite></p>
+    <div class="meters">${Object.keys(LV).map(r=>`<div class="meter" title="${LV[r]}: ${['','light','medium','heavy'][s.m[r]]} use"><span>${LV[r]}</span><span class="bar" role="img" aria-label="${LV[r]} ${['','light','medium','heavy'][s.m[r]]}">${bars(s.m[r],r)}</span></div>`).join('')}</div>
+  </div>`).join('');
+document.getElementById('spec').innerHTML = SPEC.map(([r,unit,drive,ex,share,shnote])=>`
+  <tr><th scope="row" style="border-left-color:var(--${r})">${LV[r]}<small>${unit}</small></th><td>${drive}</td><td>${ex}</td><td><div class="share">${share}<small>${shnote}</small></div></td></tr>`).join('');
+const cell=c=>c?`<span class="v">${c[0]} <span class="ev ${c[1]}">${c[1]}</span></span>`:'<span class="nd">n/d</span>';
+document.getElementById('mt').innerHTML = `<thead><tr><th>Model</th><th>Parameters</th><th>Training tokens</th><th>Compute (operations)</th><th>GPU-hours</th><th>Energy (MWh)</th><th>CO₂e (t)</th><th>Cost ($M)</th></tr></thead><tbody>`+
+  MODELS.map(x=>`<tr><td><b>${x.m}</b><span>${x.d}</span></td><td>${cell(x.p)}</td><td>${cell(x.k)}</td><td>${cell(x.f)}</td><td>${cell(x.g)}</td><td>${cell(x.e)}</td><td>${cell(x.co)}</td><td>${cell(x.$)}</td></tr>`).join('')+
+  `</tbody><tfoot><tr><td colspan="8" style="text-align:left;font-size:12px;color:var(--muted);white-space:normal">*DeepSeek-V3 is a mixture-of-experts model: 671B parameters in total, 37B used per token. Energy marked C assumes every GPU ran at peak power, so it is an upper bound. †Anthropic’s CEO said in mid-2024 that models then in use cost about $100M to train; Claude 3’s own cost is not disclosed.</td></tr></tfoot>`;
+
+function drawChart(key){
+  const c=CHARTS[key], W=560, rowH=34, top=8, left=150, right=80, H=top+c.rows.length*rowH+30;
+  const vals=c.rows.map(r=>r[1]), lo=Math.floor(Math.log10(Math.min(...vals)))-0.15, hi=Math.ceil(Math.log10(Math.max(...vals)));
+  const x=v=>left+(Math.log10(v)-lo)/(hi-lo)*(W-left-right);
+  let g='';
+  for(let e=Math.ceil(lo);e<=hi;e++){const xx=x(10**e);g+=`<line x1="${xx}" x2="${xx}" y1="${top}" y2="${H-24}" stroke="#dde3df"/>`}
+  c.rows.forEach((r,i)=>{const y=top+i*rowH, w=x(r[1])-left, dash=r[2]!=='R';
+    g+=`<text x="${left-10}" y="${y+21}" text-anchor="end" font-size="13" fill="#1d2a33">${r[0]}</text>`+
+       `<rect class="b" x="${left}" y="${y+6}" height="22" width="${w}" fill="${dash?'#fff':c.col}" stroke="${c.col}" stroke-width="2" ${dash?'stroke-dasharray="5 3"':''} rx="2"><title>${r[0]}: ${c.fmt(r[1])} (${{R:'reported',E:'estimate',C:'my calculation',S:'public statement'}[r[2]]})</title></rect>`+
+       `<text x="${left+w+8}" y="${y+21}" font-size="13" font-weight="600" fill="#1d2a33">${c.fmt(r[1])}</text>`});
+  g+=`<text x="${left}" y="${H-6}" font-size="11.5" fill="#6a7780">Solid: reported by the developer. Outlined: estimate or calculation.</text>`;
+  return `<div class="ctitle">${c.t}</div><div class="csub">${c.s}</div><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${c.t} by model">${g}</svg><p class="csub" style="margin-top:2px">${NOTES[key]}</p>`;
+}
+const LABELS={compute:'Compute',gpu:'GPU-hours',energy:'Carbon',cost:'Cost'};
+const tabs=document.getElementById('tabs'), main=document.getElementById('chart-main');
+Object.keys(CHARTS).forEach((k,i)=>{const b=document.createElement('button');b.type='button';b.textContent=LABELS[k];b.setAttribute('aria-pressed',i===0?'true':'false');
+  b.onclick=()=>{tabs.querySelectorAll('button').forEach(z=>z.setAttribute('aria-pressed','false'));b.setAttribute('aria-pressed','true');main.innerHTML=drawChart(k)};tabs.appendChild(b)});
+main.innerHTML=drawChart('compute');
+document.getElementById('grid4').innerHTML=Object.keys(CHARTS).map(k=>`<div>${drawChart(k)}</div>`).join('');
+if(new URLSearchParams(location.search).has('poster')) document.body.classList.add('poster');
+</script>
+</body>
+</html>
