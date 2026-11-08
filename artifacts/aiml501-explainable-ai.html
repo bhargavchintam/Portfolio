@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Opening the AI Black Box</title>
+<meta name="description" content="A plain-language map of explainable AI for large language models: what it is, why it is hard, what OpenAI, Anthropic, Google, and Meta are doing about it, and how validation and metrics check the explanations.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Literata:opsz,wght@7..72,500;7..72,700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#14213d; --ink2:#3d4a63; --muted:#66728a; --rule:#cdd7e4; --bg:#eef3f8; --card:#ffffff; --soft:#f6f9fc;
+    --inside:#0f8b8d; --ask:#6c4ab6; --trace:#2f6db5; --doc:#b07800; --check:#14213d; --warn:#b4234a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--bg)}
+  body{font-family:"Atkinson Hyperlegible",system-ui,sans-serif;color:var(--ink);font-size:16.5px;line-height:1.55}
+  h1,h2,h3{font-family:"Literata",Georgia,serif;font-weight:700}
+  a{color:var(--trace)}
+  :focus-visible{outline:3px solid var(--trace);outline-offset:2px}
+  .page{max-width:1360px;margin:0 auto;padding:44px 36px 36px}
+
+  header{display:grid;grid-template-columns:minmax(0,1fr) 270px;gap:32px;align-items:end}
+  h1{font-size:clamp(34px,4.4vw,58px);line-height:1.04;letter-spacing:-.01em;max-width:18ch}
+  .lede{font-size:19px;color:var(--ink2);max-width:60ch;margin-top:14px}
+  .byline{font-size:14px;color:var(--muted);line-height:1.6;border-left:3px solid var(--rule);padding-left:14px}
+  .byline b{color:var(--ink)}
+
+  section{margin-top:40px}
+  h2{font-size:28px;line-height:1.15}
+  .sub{color:var(--ink2);max-width:74ch;margin-top:4px}
+
+  /* 1. definition */
+  .def{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:22px;margin-top:16px}
+  .box{background:var(--card);border:1px solid var(--rule);border-radius:10px;padding:20px 22px}
+  .quote{font-family:"Literata",serif;font-size:21px;line-height:1.4}
+  .why{display:grid;grid-template-columns:1fr 1fr;gap:12px 18px;margin-top:14px;font-size:15px}
+  .why b{display:block;font-size:15.5px}
+  .nist{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin-top:14px;border:1px solid var(--rule);border-radius:8px;overflow:hidden}
+  .nist div{padding:12px 12px;background:var(--soft);border-right:1px solid var(--rule);font-size:14px}
+  .nist div:last-child{border-right:0}
+  .nist b{display:block;font-size:15px;margin-bottom:2px}
+  .src{font-size:12.5px;color:var(--muted);margin-top:8px}
+
+  /* 2. challenges */
+  .chal{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-top:16px}
+  .ch{background:var(--card);border:1px solid var(--rule);border-top:4px solid var(--warn);border-radius:8px;padding:16px 16px 14px;display:flex;flex-direction:column}
+  .ch .k{font-family:"Literata",serif;font-weight:700;color:var(--warn);font-size:15px}
+  .ch h3{font-size:18.5px;line-height:1.2;margin-top:2px}
+  .ch p{font-size:14.5px;color:var(--ink2);margin-top:8px}
+  .ch .stat{margin-top:auto;padding-top:10px;font-size:13.5px;border-top:1px dashed var(--rule)}
+  .ch .stat b{font-family:"Literata",serif;font-size:24px;display:block;line-height:1.1;color:var(--ink)}
+
+  /* 3. map */
+  .mapwrap{margin-top:16px;background:var(--card);border:1px solid var(--rule);border-radius:12px;overflow:hidden}
+  .map{width:100%;border-collapse:separate;border-spacing:0}
+  .map th,.map td{border-bottom:1px solid var(--rule);vertical-align:top}
+  .map thead th{padding:16px 14px 14px;text-align:left;border-bottom:2px solid var(--ink)}
+  .map thead th.fam{border-top:6px solid;width:19%}
+  .fam h3{font-size:19px;line-height:1.15}
+  .fam .q{font-size:13.5px;color:var(--muted);font-style:italic;margin-top:2px}
+  .fam ul{list-style:none;margin-top:10px;display:grid;gap:7px;font-size:13.5px;font-weight:400;color:var(--ink2)}
+  .org{display:inline-block;font-size:11.5px;font-weight:700;padding:1px 6px;border-radius:3px;background:var(--soft);border:1px solid var(--rule);color:var(--ink);margin-right:4px;white-space:nowrap}
+  .rowh{padding:12px 14px;width:24%;text-align:left}
+  .rowh button{all:unset;cursor:pointer;display:block;width:100%}
+  .rowh button span{display:block;font-weight:700;font-size:15.5px}
+  .rowh button small{display:block;font-size:13px;color:var(--muted)}
+  .rowh button:focus-visible{outline:3px solid var(--trace);outline-offset:3px;border-radius:4px}
+  .cell{padding:12px 14px;font-size:13.5px;color:var(--ink2)}
+  .cell .dot{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:6px;vertical-align:-1px}
+  .cell.none{color:#a8b2c2}
+  .map tbody tr{transition:background .2s}
+  .map tbody tr.on{background:#f3f7fc}
+  .map tbody tr.dim .cell,.map tbody tr.dim .rowh{opacity:.35}
+  .maphint{font-size:13px;color:var(--muted);padding:10px 14px;background:var(--soft)}
+
+  /* 4. validation loop */
+  .loop{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin-top:16px;position:relative}
+  .step{background:var(--card);border:1px solid var(--rule);padding:18px 18px 16px;margin-right:22px;border-radius:10px;position:relative}
+  .step:last-child{margin-right:0}
+  .step:not(:last-child)::after{content:"";position:absolute;right:-17px;top:42px;border:8px solid transparent;border-left:10px solid var(--ink)}
+  .step .n{font-family:"Literata",serif;font-weight:700;font-size:15px;color:var(--muted)}
+  .step h3{font-size:19px;margin-top:2px}
+  .step p{font-size:14.5px;color:var(--ink2);margin-top:6px}
+  .step .m{margin-top:10px;font-size:13.5px;background:var(--soft);border-radius:6px;padding:8px 10px}
+  .step .m b{font-family:"Literata",serif;font-size:22px;display:block;line-height:1.1}
+  .back{display:flex;align-items:center;gap:10px;margin-top:10px;font-size:14px;color:var(--ink2)}
+
+  /* 5. takeaways */
+  .take{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:16px}
+  .take div{border-top:3px solid var(--ink);padding-top:10px}
+  .take b{font-family:"Literata",serif;font-size:19px;display:block;line-height:1.25}
+  .take p{font-size:15px;color:var(--ink2);margin-top:6px}
+
+  footer{margin-top:36px;padding-top:14px;border-top:1px solid var(--rule);font-size:12.5px;color:var(--muted);display:grid;grid-template-columns:1fr auto;gap:24px}
+
+  body.poster .page{width:1600px;max-width:none;padding:56px 56px 40px}
+  body.poster .maphint{display:none}
+
+  @media (max-width:1100px){
+    header{grid-template-columns:1fr}
+    .def{grid-template-columns:1fr}
+    .chal{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .loop{grid-template-columns:1fr 1fr;gap:16px}
+    .step{margin-right:0}.step::after{display:none}
+    .mapscroll{overflow-x:auto}
+    .map{min-width:980px}
+  }
+  @media (max-width:640px){
+    .page{padding:26px 16px}
+    .chal,.loop,.take,.why{grid-template-columns:1fr}
+    .nist{grid-template-columns:1fr 1fr}.nist div:nth-child(2){border-right:0}
+    footer{grid-template-columns:1fr}
+  }
+  @media (prefers-reduced-motion:reduce){.map tbody tr{transition:none}}
+</style>
+</head>
+<body>
+<div class="page">
+<header>
+  <div>
+    <h1>Opening the black box: how we explain and check large language models</h1>
+    <p class="lede">Chatbots like GPT, Claude, Gemini, and Llama make decisions no one can fully read. This map shows why that is hard, what the four biggest labs are doing about it, and how testing turns an explanation into something you can trust.</p>
+  </div>
+  <div class="byline"><b>Bindu Bhargava Reddy Chintam</b><br>AIML-501 Model Development<br>Indiana Wesleyan University<br>Sources checked November 2026</div>
+</header>
+
+<section aria-labelledby="h1s">
+  <h2 id="h1s">What explainable AI means, and why it matters</h2>
+  <div class="def">
+    <div class="box">
+      <p class="quote">Explainable AI is the work of showing people why a model gave an answer, in a way they can understand and check.</p>
+      <div class="why">
+        <div><b>Trust</b>Doctors, judges, and customers need reasons before they act on an answer.</div>
+        <div><b>Safety</b>Engineers can only fix a failure they can see.</div>
+        <div><b>Fairness</b>Explanations reveal when a model leans on race, gender, or dialect.</div>
+        <div><b>The law</b>The EU AI Act gives people affected by high-risk AI decisions a right to a clear explanation.</div>
+      </div>
+    </div>
+    <div class="box">
+      <h3 style="font-size:19px">Four promises a good explanation should keep</h3>
+      <div class="nist">
+        <div><b>Explanation</b>It gives reasons or evidence for the output.</div>
+        <div><b>Meaningful</b>Its intended reader can understand it.</div>
+        <div><b>Accurate</b>It matches how the model really decided.</div>
+        <div><b>Knows its limits</b>It flags when the model is out of its depth.</div>
+      </div>
+      <p class="src">Based on NIST's four principles of explainable AI (Phillips et al., 2021). Most of today's problems break the third promise.</p>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="h2s">
+  <h2 id="h2s">Five reasons large language models are hard to explain</h2>
+  <p class="sub">The first two come from inside the model, the third from its training data, and the last two from the people and rules around it.</p>
+  <div class="chal" id="chal"></div>
+</section>
+
+<section aria-labelledby="h3s">
+  <h2 id="h3s">Which tools answer which problem</h2>
+  <p class="sub">Each column is a family of techniques, with real examples from OpenAI, Anthropic, Google, and Meta. Each row is a challenge from above. A filled dot means the technique was built to address it.</p>
+  <div class="mapwrap"><div class="mapscroll"><table class="map" id="map"></table></div>
+  <div class="maphint">Select a challenge to highlight its row.</div></div>
+</section>
+
+<section aria-labelledby="h4s">
+  <h2 id="h4s">How validation and metrics turn an explanation into trust</h2>
+  <p class="sub">An explanation is only a claim until it is tested. These four checks, run in order and repeated, are how labs and users decide whether a model, and its explanation, can be relied on.</p>
+  <div class="loop" id="loop"></div>
+  <div class="back"><svg width="40" height="20" viewBox="0 0 40 20" aria-hidden="true"><path d="M38 10a8 8 0 0 1-8 8H10A8 8 0 0 1 10 2h18" fill="none" stroke="#66728a" stroke-width="2"/><path d="M24 -2 L30 2 L24 6" fill="none" stroke="#66728a" stroke-width="2"/></svg>A failed check sends the team back to the data, the model, or the explanation, so the loop never really ends.</div>
+</section>
+
+<section aria-labelledby="h5s">
+  <h2 id="h5s">What this means for anyone using AI</h2>
+  <div class="take">
+    <div><b>A model's own explanation is a clue, not proof.</b><p>When tested, reasoning models admitted using a planted hint only 25% to 39% of the time.</p></div>
+    <div><b>Looking inside is real but early.</b><p>Labs can now find millions of concepts inside models, yet the best tools give clear answers for only about a quarter of the prompts tried.</p></div>
+    <div><b>Trust comes from testing, not from words.</b><p>Ask for the metrics: recall and precision on your own data, bias tests, red-team results, and how the explanation itself was checked.</p></div>
+  </div>
+</section>
+
+<footer>
+  <div><b style="color:var(--ink)">Sources.</b> Baker et al. (2025); Bills et al. (2023); Chen et al. (2025); Gao et al. (2024); Hofmann et al. (2024); Jain &amp; Wallace (2019); Kokhlikyan et al. (2020); Korbak et al. (2025); Lieberum et al. (2024); Lindsey et al. (2025); Lundberg &amp; Lee (2017); Mitchell et al. (2019); Phillips et al. (2021); Regulation (EU) 2024/1689, Art. 86; Röttger et al. (2024); Templeton et al. (2024); Turpin et al. (2023). Full APA 7 references are in the accompanying document.</div>
+  <div style="text-align:right;white-space:nowrap">AIML-501 Artifact 4<br>bhargavchintam.github.io/Portfolio</div>
+</footer>
+</div>
+
+<script>
+const CH = [
+  {id:'scale', k:'Inside the model', t:'Too big and tangled', p:'Knowledge is spread across billions of numbers, and one neuron can stand for several unrelated ideas at once.', s:'34 million', sl:'concepts Anthropic found in one mid-size Claude model, and still not all of them'},
+  {id:'faith', k:'Inside the model', t:'Explanations that are not the real reason', p:'When a model explains itself, the words can be a story told after the fact.', s:'up to 36%', sl:'accuracy drop from a hidden bias that the model never mentioned in its reasoning'},
+  {id:'data', k:'Training data', t:'Hidden data, inherited bias', p:'Models learn from data the public cannot inspect, including its stereotypes.', s:'Covert bias', sl:'GPT-4 judged dialect speakers more harshly, even though its direct answers about race sounded positive'},
+  {id:'aud', k:'People', t:'One answer, many audiences', p:'A patient, a doctor, an engineer, and a regulator each need a different kind of explanation.', s:'Meaningful', sl:'is one of NIST’s four principles: the reader must understand it'},
+  {id:'rules', k:'Rules and business', t:'Secrecy and new laws', p:'Closed models protect trade secrets, while laws now demand explanations for high-risk decisions.', s:'Article 86', sl:'of the EU AI Act: a right to a clear explanation of high-risk AI decisions'},
+];
+const FAM = [
+  {id:'inside', c:'var(--inside)', t:'Look inside the model', q:'What is happening in the network?', ex:[['Anthropic','Finds millions of concepts in Claude and traces how they connect into step-by-step "circuits"'],['OpenAI','Maps 16 million concepts in GPT-4; uses GPT-4 to describe GPT-2’s neurons'],['Google','Gemma Scope: free concept maps for every layer of its smaller open Gemma 2 models']]},
+  {id:'ask', c:'var(--ask)', t:'Ask the model to show its work', q:'What does the model say it did?', ex:[['OpenAI','Lets a second model read reasoning steps to catch cheating'],['Anthropic','Tests whether Claude’s reasoning admits the hints it used'],['All four','Joint 2025 paper urges labs to keep reasoning readable']]},
+  {id:'trace', c:'var(--trace)', t:'Trace answers back to inputs', q:'Which words or features drove this answer?', ex:[['Meta','Captum toolkit scores how much each input mattered'],['Research','SHAP values and attention maps; attention alone can mislead']]},
+  {id:'doc', c:'var(--doc)', t:'Document and open up', q:'What can outsiders check?', ex:[['Google','Model cards: a standard fact sheet for each model'],['OpenAI, Anthropic','System cards with safety test results'],['Meta, Google','Open model weights that any researcher can study']]},
+];
+// which families address which challenge: 2 = main tool, 1 = partial help
+const LINK = {
+  scale:{inside:[2,'Finds the concepts and circuits directly'],ask:[1,'Readable steps give a window, not the full picture'],trace:[1,'Shows which inputs mattered, not why'],doc:[0,'']},
+  faith:{inside:[2,'Checks the stated reason against what really fired inside'],ask:[2,'Monitors and tests the stated reasoning'],trace:[1,'Compares the claimed reason with input importance'],doc:[0,'']},
+  data:{inside:[1,'Can surface concepts tied to bias'],ask:[0,''],trace:[2,'Reveals reliance on names, dialect, or gender words'],doc:[2,'Data and bias tests reported in cards']},
+  aud:{inside:[0,''],ask:[2,'Plain-language reasons for everyday users'],trace:[1,'Highlighted words help experts review a case'],doc:[2,'Cards written for decision makers']},
+  rules:{inside:[1,'Gives evidence regulators may later expect'],ask:[1,'Reasoning logs support audits'],trace:[1,'Per-decision reasons for affected people'],doc:[2,'Disclosure and outside access meet transparency duties']},
+};
+const STEPS = [
+  {n:'Check 1', t:'Score it on new data', p:'Measure precision, recall, and calibration on data the model never saw, broken out by group.', mb:'3 of 42', ml:'cancers missed by a 96%-accurate model in my Workshop 4 test, which accuracy alone hid'},
+  {n:'Check 2', t:'Attack it', p:'Red-teamers and test suites look for unsafe answers, bias, and wrong refusals.', mb:'~6%', ml:'of 250 safe prompts that GPT-4 still refused in one test suite'},
+  {n:'Check 3', t:'Test the explanation itself', p:'Plant a hint or change an internal concept and see if the explanation and the answer change together.', mb:'25% / 39%', ml:'how often Claude 3.7 Sonnet and DeepSeek R1 admitted using a planted hint'},
+  {n:'Check 4', t:'Watch it after launch', p:'Monitor outputs and reasoning in real use, and publish results in model and system cards.', mb:'1 in 4', ml:'prompts where Anthropic’s best tracing tool gave a clear answer, so monitoring still matters'},
+];
+document.getElementById('chal').innerHTML = CH.map((c,i)=>`<div class="ch"><span class="k">${i+1}. ${c.k}</span><h3>${c.t}</h3><p>${c.p}</p><div class="stat"><b>${c.s}</b>${c.sl}</div></div>`).join('');
+const head = `<thead><tr><th scope="col" style="width:24%"><span style="font-family:Literata,serif;font-size:17px">Challenge</span><div class="q" style="font-size:13px;color:var(--muted);font-weight:400;margin-top:4px">Filled dot: main tool. Half dot: partial help.</div></th>` +
+  FAM.map(f=>`<th scope="col" class="fam" style="border-top-color:${f.c}"><h3 style="color:${f.c}">${f.t}</h3><div class="q">${f.q}</div><ul>${f.ex.map(([o,e])=>`<li><span class="org">${o}</span>${e}</li>`).join('')}</ul></th>`).join('') + `</tr></thead>`;
+const dot=(lv,c)=>lv===2?`<span class="dot" style="background:${c}" aria-label="main tool"></span>`:lv===1?`<span class="dot" style="background:linear-gradient(90deg,${c} 50%,#fff 50%);border:1.5px solid ${c}" aria-label="partial help"></span>`:'';
+const rows = CH.map((c,i)=>`<tr data-id="${c.id}"><th scope="row" class="rowh"><button type="button" aria-pressed="false"><span>${i+1}. ${c.t}</span><small>${c.k}</small></button></th>` +
+  FAM.map(f=>{const [lv,txt]=LINK[c.id][f.id];return `<td class="cell${lv?'':' none'}">${lv?dot(lv,f.c)+txt:'Not its job'}</td>`}).join('')+`</tr>`).join('');
+const map=document.getElementById('map'); map.innerHTML = head + `<tbody>${rows}</tbody>`;
+map.querySelectorAll('tbody tr').forEach(tr=>{tr.querySelector('button').addEventListener('click',()=>{
+  const on=!tr.classList.contains('on');
+  map.querySelectorAll('tbody tr').forEach(r=>{r.classList.remove('on','dim');r.querySelector('button').setAttribute('aria-pressed','false')});
+  if(on){map.querySelectorAll('tbody tr').forEach(r=>r.classList.add(r===tr?'on':'dim'));tr.querySelector('button').setAttribute('aria-pressed','true')}
+})});
+document.getElementById('loop').innerHTML = STEPS.map(s=>`<div class="step"><div class="n">${s.n}</div><h3>${s.t}</h3><p>${s.p}</p><div class="m"><b>${s.mb}</b>${s.ml}</div></div>`).join('');
+if(new URLSearchParams(location.search).has('poster')) document.body.classList.add('poster');
+</script>
+</body>
+</html>
