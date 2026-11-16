@@ -4891,6 +4891,133 @@ Speak as a caring nurse would.</pre>
             </div>
         </div>
 
+        <!-- ===== AIML-501 ARTIFACT 5 ===== -->
+        <div class="artifact-showcase fade-in" id="aiml501-artifact-5" style="margin-top:56px;">
+            <div class="artifact-hero-banner" style="background:linear-gradient(135deg, rgba(67,56,202,0.14), rgba(180,83,9,0.10));">
+                <div class="artifact-number" style="background:rgba(67,56,202,0.1); border-color:rgba(67,56,202,0.3); color:#8f88f2;">&#9878;&#65039; AIML-501 Artifact 5 &middot; Workshop 5</div>
+                <h2>Right-Sizing AI: A Pre-trained Model Decision Matrix</h2>
+                <p class="subtitle">Ten models tested on one laptop and scored on size, accuracy, speed, and explainability, with sliders that re-rank them for your project</p>
+            </div>
+
+            <div class="audience-callout">
+                <div class="audience-callout-icon">&#127919;</div>
+                <div>
+                    <h4>Target Audience</h4>
+                    <p>Built for <strong>product owners and engineering leads</strong> who must pick a model under a budget, a device limit, or a rule that decisions be explained. It also shows <strong>hiring managers</strong> that I back recommendations with my own measurements, not just quotes from papers.</p>
+                </div>
+            </div>
+
+            <div class="insights-strip">
+                <div class="insight-card">
+                    <div class="ic-head"><div class="ic-emoji">&#129513;</div><div class="ic-label">Challenges Faced</div></div>
+                    <h5>Some models would not cooperate</h5>
+                    <p>The 1.5B chat model pushed my 16 GB laptop into heavy swapping, so I tested its 0.5B sibling. TabPFN now needs an account and license to download, so its row is marked as published data. Both became part of the story about size and access.</p>
+                </div>
+                <div class="insight-card">
+                    <div class="ic-head"><div class="ic-emoji">&#128736;&#65039;</div><div class="ic-label">Tech Choices &amp; Why</div></div>
+                    <h5>A benchmark first, a graphic second</h5>
+                    <p>I wrote one Python script that times every model the same way: CPU only, one input at a time, median of 30 runs. The page then turns those numbers into colored ratings with dot icons, so it still reads in grayscale or for color-blind viewers.</p>
+                </div>
+                <div class="insight-card">
+                    <div class="ic-head"><div class="ic-emoji">&#128200;</div><div class="ic-label">Measurable Outcomes</div></div>
+                    <h5>3 domains, 10 models, 4 lenses</h5>
+                    <p>DistilBERT kept 91.1% accuracy while running 2.3 times faster than BERT. LightGBM tied for best on the income data and answered in 0.22 ms.</p>
+                    <span class="ic-metric">872 sentences and 5,000 rows tested</span>
+                </div>
+            </div>
+
+            <div class="artifact-body">
+
+                <div class="artifact-section">
+                    <div class="artifact-section-title"><div class="icon" style="background:rgba(124,116,255,0.1);">&#128221;</div>Title</div>
+                    <p><strong>Right-Sizing AI: Which Pre-trained Model Fits the Job?</strong></p>
+                </div>
+
+                <div class="artifact-section">
+                    <div class="artifact-section-title"><div class="icon" style="background:rgba(0,212,170,0.1);">&#128218;</div>Introduction</div>
+                    <p>Teams often reach for the biggest, newest model by default. That choice costs memory, money, and energy, and it can make decisions harder to explain. My fifth AIML-501 artifact lays out the trade-off honestly, so a team can pick the smallest model that still does the job well.</p>
+                </div>
+
+                <div class="artifact-section">
+                    <div class="artifact-section-title"><div class="icon" style="background:rgba(56,189,248,0.1);">&#128444;&#65039;</div>The Decision Matrix</div>
+                    <a href="artifacts/aiml501-model-decision-matrix.html" target="_blank" rel="noopener noreferrer"><img src="assets/aiml501/model-decision-matrix-preview.jpg" alt="Decision matrix comparing ten pre-trained models in language, vision, and tabular groups on size, accuracy, speed, and explainability, using green, amber, and red cells with dot ratings" loading="lazy" style="width:100%; height:auto; border-radius:10px; border:1px solid var(--border-color);"></a>
+                    <div class="tool-tags" style="margin-top:16px;">
+                        <a class="tool-tag" href="artifacts/aiml501-model-decision-matrix.html" target="_blank" rel="noopener noreferrer"><span>&#127760;</span> Interactive version</a>
+                        <a class="tool-tag" href="assets/aiml501/model-decision-matrix.png" target="_blank" rel="noopener noreferrer"><span>&#128444;&#65039;</span> Full-size image</a>
+                        <a class="tool-tag" href="assets/aiml501/model-decision-matrix.pdf" target="_blank" rel="noopener noreferrer"><span>&#128196;</span> PDF poster</a>
+                    </div>
+                </div>
+
+                <div class="artifact-section">
+                    <div class="artifact-section-title"><div class="icon" style="background:rgba(255,107,157,0.1);">&#128196;</div>Artifact Description</div>
+                    <p>The page starts with four questions to ask about any model. The main table groups models into language, vision, and tabular bands, rates each one strong, middle, or weak within its band, and adds notes on licenses, energy, and tooling. Four sliders and four presets, such as Phone app and Hospital or bank, re-rank the models live. Bubble charts show size against accuracy, a short decision path points to a starting model, and four lessons from the tests close the page.</p>
+                </div>
+
+                <div class="artifact-section">
+                    <div class="artifact-section-title"><div class="icon" style="background:rgba(124,116,255,0.1);">&#127919;</div>Objective</div>
+                    <p>To give a team a quick, fair way to match a pre-trained model to its device, accuracy target, and explanation needs.</p>
+                </div>
+
+                <div class="artifact-section">
+                    <div class="artifact-section-title"><div class="icon" style="background:rgba(0,212,170,0.1);">&#9881;&#65039;</div>Process</div>
+                    <ul>
+                        <li>Picked small, medium, and large options in each of the three domains.</li>
+                        <li>Ran every model on my MacBook Air (M4) with the same timing rules, using SST-2 for text and UCI Adult for tables.</li>
+                        <li>Took ImageNet accuracy and TabPFN results from official sources and labeled them as published.</li>
+                        <li>Rated each lens relative to the domain and scored explainability by the method each model allows.</li>
+                        <li>Coded the page, checked it on desktop and phone, and exported a poster. This was an individual project.</li>
+                    </ul>
+                </div>
+
+                <div class="artifact-section">
+                    <div class="artifact-section-title"><div class="icon" style="background:rgba(255,107,157,0.1);">&#128736;&#65039;</div>Tools and Technologies Used</div>
+                    <div class="tool-tags">
+                        <div class="tool-tag"><span>&#128013;</span> Python, PyTorch, Hugging Face</div>
+                        <div class="tool-tag"><span>&#127795;</span> scikit-learn, LightGBM, XGBoost</div>
+                        <div class="tool-tag"><span>&#127760;</span> HTML, CSS, JavaScript, SVG charts</div>
+                        <div class="tool-tag"><span>&#9855;</span> Color plus icon ratings, keyboard support</div>
+                        <div class="tool-tag"><span>&#127917;</span> Playwright (PNG and PDF export)</div>
+                        <div class="tool-tag"><span>&#129302;</span> AI assistant (coding support)</div>
+                    </div>
+                </div>
+
+                <div class="artifact-section">
+                    <div class="artifact-section-title"><div class="icon" style="background:rgba(255,215,0,0.1);">&#128161;</div>Artifact-Specific Value Proposition</div>
+                    <p>My earlier artifacts were built from reading and research. This one adds a different skill: hands-on benchmarking. Every speed number and most accuracy numbers on the page came from code I ran myself.</p>
+                </div>
+
+                <div class="artifact-section">
+                    <div class="artifact-section-title"><div class="icon" style="background:rgba(124,116,255,0.1);">&#10024;</div>Unique Value</div>
+                    <p>Most comparisons copy numbers from papers that used different machines. Here every model was timed on the same laptop, and the reader can change the weights to fit their own project instead of accepting one fixed ranking.</p>
+                </div>
+
+                <div class="artifact-section">
+                    <div class="artifact-section-title"><div class="icon" style="background:rgba(0,212,170,0.1);">&#127793;</div>Relevance</div>
+                    <p>In health care, a model must often run on modest hardware and explain itself to clinicians. The matrix is how I would start any model choice for a clinical tool: device first, then accuracy, then who needs an explanation.</p>
+                </div>
+
+                <div class="artifact-section">
+                    <div class="artifact-section-title"><div class="icon" style="background:rgba(56,189,248,0.1);">&#128214;</div>References</div>
+                    <ol class="ref-list">
+                        <li><strong>Devlin et al. (2019)</strong>: BERT &middot; <em>NAACL</em> <a href="https://doi.org/10.18653/v1/N19-1423" target="_blank" rel="noopener noreferrer">link</a></li>
+                        <li><strong>Sanh et al. (2019)</strong>: DistilBERT &middot; <em>arXiv</em> <a href="https://doi.org/10.48550/arXiv.1910.01108" target="_blank" rel="noopener noreferrer">link</a></li>
+                        <li><strong>Qwen Team (2024)</strong>: Qwen2.5 technical report &middot; <em>arXiv</em> <a href="https://doi.org/10.48550/arXiv.2412.15115" target="_blank" rel="noopener noreferrer">link</a></li>
+                        <li><strong>Sandler et al. (2018)</strong>: MobileNetV2 &middot; <em>CVPR</em> <a href="https://doi.org/10.1109/CVPR.2018.00474" target="_blank" rel="noopener noreferrer">link</a></li>
+                        <li><strong>Tan &amp; Le (2019)</strong>: EfficientNet &middot; <em>ICML</em> <a href="https://proceedings.mlr.press/v97/tan19a.html" target="_blank" rel="noopener noreferrer">link</a></li>
+                        <li><strong>He et al. (2016)</strong>: ResNet &middot; <em>CVPR</em> <a href="https://doi.org/10.1109/CVPR.2016.90" target="_blank" rel="noopener noreferrer">link</a></li>
+                        <li><strong>Ke et al. (2017)</strong>: LightGBM &middot; <em>NeurIPS</em> <a href="https://papers.nips.cc/paper/6907-lightgbm-a-highly-efficient-gradient-boosting-decision-tree" target="_blank" rel="noopener noreferrer">link</a></li>
+                        <li><strong>Chen &amp; Guestrin (2016)</strong>: XGBoost &middot; <em>ACM KDD</em> <a href="https://doi.org/10.1145/2939672.2939785" target="_blank" rel="noopener noreferrer">link</a></li>
+                        <li><strong>Hollmann et al. (2025)</strong>: TabPFN, a tabular foundation model &middot; <em>Nature</em> <a href="https://doi.org/10.1038/s41586-024-08328-6" target="_blank" rel="noopener noreferrer">link</a></li>
+                        <li><strong>Grinsztajn et al. (2022)</strong>: Why trees still beat deep learning on tables &middot; <em>NeurIPS</em> <a href="https://arxiv.org/abs/2207.08815" target="_blank" rel="noopener noreferrer">link</a></li>
+                        <li><strong>Lundberg et al. (2020)</strong>: TreeSHAP explanations &middot; <em>Nature Machine Intelligence</em> <a href="https://doi.org/10.1038/s42256-019-0138-9" target="_blank" rel="noopener noreferrer">link</a></li>
+                        <li><strong>Selvaraju et al. (2017)</strong>: Grad-CAM heat maps &middot; <em>ICCV</em> <a href="https://doi.org/10.1109/ICCV.2017.74" target="_blank" rel="noopener noreferrer">link</a></li>
+                    </ol>
+                    <p style="margin-top:12px; color:var(--text-muted); font-size:0.9rem;">Full APA 7 references are in the document that accompanies this artifact.</p>
+                </div>
+
+            </div>
+        </div>
+
     </div>
 </section>
 

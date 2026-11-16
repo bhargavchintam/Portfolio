@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Right-Sizing AI: Pre-trained Model Decision Matrix</title>
+<meta name="description" content="A decision matrix comparing ten pre-trained and ready-to-use models across language, vision, and tabular data on size, accuracy, speed, and explainability, with speed measured on one MacBook Air (M4).">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Sans+Condensed:wght@600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#16181d; --ink2:#3a3f4b; --muted:#6b7280; --rule:#d8dce3; --bg:#f4f2ee; --card:#ffffff; --soft:#faf9f6;
+    --lang:#4338ca; --lang-bg:#eef0ff; --vis:#0f766e; --vis-bg:#e7f5f2; --tab:#b45309; --tab-bg:#fdf1e3;
+    --good:#15803d; --good-bg:#e3f4e8; --mid:#a16207; --mid-bg:#fbf1d6; --weak:#b91c1c; --weak-bg:#fbe5e3;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--bg)}
+  body{font-family:"IBM Plex Sans",system-ui,sans-serif;color:var(--ink);font-size:16px;line-height:1.5}
+  h1,h2,h3{font-family:"IBM Plex Sans Condensed","IBM Plex Sans",sans-serif;font-weight:700;letter-spacing:-.005em}
+  .num{font-family:"IBM Plex Mono",ui-monospace,monospace;font-weight:500}
+  :focus-visible{outline:3px solid var(--lang);outline-offset:2px}
+  .page{max-width:1380px;margin:0 auto;padding:40px 32px 32px}
+
+  header{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:28px;align-items:end;border-bottom:3px solid var(--ink);padding-bottom:22px}
+  .kicker{font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  h1{font-size:clamp(34px,4.6vw,60px);line-height:1.02;margin-top:6px}
+  .lede{font-size:18.5px;color:var(--ink2);max-width:68ch;margin-top:12px}
+  .byline{font-size:13.5px;color:var(--muted);border-left:3px solid var(--rule);padding-left:14px;line-height:1.6}
+  .byline b{color:var(--ink)}
+
+  section{margin-top:34px}
+  h2{font-size:27px;line-height:1.15}
+  .sub{color:var(--ink2);max-width:80ch;margin-top:4px}
+
+  /* lenses */
+  .lenses{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:14px}
+  .lens{background:var(--card);border:1px solid var(--rule);border-radius:10px;padding:14px 16px}
+  .lens h3{font-size:19px;display:flex;align-items:center;gap:8px}
+  .lens p{font-size:14.5px;color:var(--ink2);margin-top:4px}
+  .lens .how{font-size:13px;color:var(--muted);margin-top:6px}
+  .icon{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:7px;background:var(--soft);border:1px solid var(--rule);font-size:15px}
+
+  .legend{display:flex;flex-wrap:wrap;gap:10px 18px;margin-top:14px;font-size:14px;color:var(--ink2);align-items:center}
+  .chip{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:999px;font-weight:600;font-size:13px}
+  .c-good{background:var(--good-bg);color:var(--good)} .c-mid{background:var(--mid-bg);color:var(--mid)} .c-weak{background:var(--weak-bg);color:var(--weak)}
+  .dots{letter-spacing:1px}
+
+  /* controls */
+  .controls{display:grid;grid-template-columns:auto minmax(0,1fr);gap:16px 24px;align-items:center;background:var(--card);border:1px solid var(--rule);border-radius:10px;padding:14px 18px;margin-top:16px}
+  .tabs{display:flex;gap:6px;flex-wrap:wrap}
+  .tabs button{font:600 14px "IBM Plex Sans",sans-serif;border:1px solid var(--rule);background:var(--soft);color:var(--ink2);padding:7px 14px;border-radius:999px;cursor:pointer}
+  .tabs button[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .sliders{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px 18px}
+  .sliders label{font-size:13.5px;font-weight:600;color:var(--ink2);display:flex;justify-content:space-between}
+  .sliders input{width:100%;accent-color:var(--ink)}
+  .presets{display:flex;gap:6px;flex-wrap:wrap;grid-column:1/-1;font-size:13.5px;color:var(--muted);align-items:center}
+  .presets button{font:500 13px "IBM Plex Sans",sans-serif;border:1px dashed var(--muted);background:transparent;color:var(--ink2);padding:4px 10px;border-radius:6px;cursor:pointer}
+
+  /* matrix */
+  .matrix-wrap{overflow-x:auto;margin-top:14px;border-radius:12px;border:1px solid var(--rule);background:var(--card)}
+  table{border-collapse:collapse;width:100%;min-width:1180px;font-size:14.5px}
+  th{font:600 12.5px "IBM Plex Sans",sans-serif;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:2px solid var(--ink);background:var(--soft);position:sticky;top:0}
+  td{padding:10px 12px;border-bottom:1px solid var(--rule);vertical-align:top}
+  tr.group td{background:var(--soft);font-family:"IBM Plex Sans Condensed",sans-serif;font-weight:700;font-size:17px;padding:9px 12px;border-bottom:1px solid var(--rule)}
+  tr.group .tag{font:500 13px "IBM Plex Sans",sans-serif;color:var(--muted);margin-left:8px}
+  .dom-lang{border-left:6px solid var(--lang)} .dom-vis{border-left:6px solid var(--vis)} .dom-tab{border-left:6px solid var(--tab)}
+  .mname{font-weight:700;font-size:15.5px}
+  .mmeta{font-size:12.5px;color:var(--muted)}
+  .cell{border-radius:8px;padding:6px 9px;display:block}
+  .cell .big{font-family:"IBM Plex Mono",monospace;font-size:15px;font-weight:500;display:block}
+  .cell .small{font-size:12.5px;display:block;opacity:.92}
+  .g{background:var(--good-bg);color:#0f5a2a} .m{background:var(--mid-bg);color:#6b4306} .w{background:var(--weak-bg);color:#861515}
+  .pub{font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);border:1px solid var(--rule);border-radius:4px;padding:0 4px;margin-left:4px;vertical-align:1px}
+  .other{font-size:13.5px;color:var(--ink2);max-width:30ch}
+  .fit{font-size:13.5px;max-width:26ch}
+  .fit b{display:block;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+  .score{min-width:120px}
+  .bar{height:10px;border-radius:999px;background:var(--rule);overflow:hidden;margin-top:4px}
+  .bar i{display:block;height:100%;background:var(--ink);border-radius:999px;transition:width .35s}
+  .rank{font:600 12px "IBM Plex Sans",sans-serif;color:var(--muted)}
+  tr.top .rank{color:var(--good)}
+  tr.model.hidden,tr.group.hidden{display:none}
+
+  /* charts */
+  .charts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:14px}
+  .chart{background:var(--card);border:1px solid var(--rule);border-radius:10px;padding:12px 14px}
+  .chart h3{font-size:18px}
+  .chart p{font-size:13px;color:var(--muted)}
+  svg text{font-family:"IBM Plex Sans",sans-serif}
+
+  /* flow */
+  .flow{display:grid;grid-template-columns:200px repeat(3,minmax(0,1fr));gap:14px;margin-top:14px;align-items:stretch}
+  .start{background:var(--ink);color:#fff;border-radius:10px;padding:16px;display:flex;flex-direction:column;justify-content:center}
+  .start h3{font-size:20px}
+  .start p{font-size:14px;opacity:.85;margin-top:6px}
+  .lane{border-radius:10px;padding:14px;border:1px solid var(--rule);background:var(--card)}
+  .lane h3{font-size:18px;padding-bottom:6px;border-bottom:2px solid currentColor;margin-bottom:8px}
+  .lane.lang h3{color:var(--lang)} .lane.vis h3{color:var(--vis)} .lane.tab h3{color:var(--tab)}
+  .q{font-size:14px;margin-top:8px}
+  .q b{display:block}
+  .q span{display:inline-block;margin-top:3px;font-size:13.5px;padding:2px 8px;border-radius:6px;background:var(--soft);border:1px solid var(--rule)}
+
+  /* insights */
+  .insights{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:14px}
+  .ins{background:var(--card);border:1px solid var(--rule);border-top:5px solid var(--ink);border-radius:10px;padding:14px 16px}
+  .ins .stat{font-family:"IBM Plex Mono",monospace;font-size:26px;line-height:1.1}
+  .ins h3{font-size:17px;margin-top:6px}
+  .ins p{font-size:14px;color:var(--ink2);margin-top:4px}
+
+  footer{margin-top:30px;border-top:1px solid var(--rule);padding-top:14px;display:grid;grid-template-columns:1.3fr 1fr;gap:24px;font-size:13px;color:var(--muted)}
+  footer b{color:var(--ink2)}
+  footer ol{padding-left:18px}
+
+  @media (max-width:900px){
+    header,.flow,footer{grid-template-columns:1fr}
+    .lenses,.insights{grid-template-columns:1fr 1fr}
+    .charts{grid-template-columns:1fr}
+    .sliders{grid-template-columns:1fr 1fr}
+    .controls{grid-template-columns:1fr}
+  }
+  @media (max-width:560px){ .lenses,.insights{grid-template-columns:1fr} .page{padding:24px 16px} }
+  body.poster .controls{display:none}
+</style>
+</head>
+<body>
+<div class="page">
+
+<header>
+  <div>
+    <div class="kicker">AIML-501 Portfolio Artifact 5 &middot; Pre-trained model decision matrix</div>
+    <h1>Right-Sizing AI: Which Pre-trained Model Fits the Job?</h1>
+    <p class="lede">Ten models across language, vision, and tabular data, compared on size, accuracy, speed, and how easy they are to explain. Every speed number was measured on the same laptop, so the comparison is fair.</p>
+  </div>
+  <div class="byline"><b>Bindu Bhargava Reddy Chintam</b><br>Indiana Wesleyan University &middot; AIML-501<br>November 2026<br>Test machine: MacBook Air, Apple M4, 16 GB, CPU only, batch size 1</div>
+</header>
+
+<section aria-labelledby="lenses">
+  <h2 id="lenses">Four questions to ask about any model</h2>
+  <div class="lenses">
+    <div class="lens"><h3><span class="icon" aria-hidden="true">&#9878;</span>Size</h3><p>How much memory and storage does it need?</p><div class="how">Parameters and file size in MB. Smaller fits phones and cheap servers.</div></div>
+    <div class="lens"><h3><span class="icon" aria-hidden="true">&#127919;</span>Accuracy</h3><p>How often is it right on a standard test?</p><div class="how">Measured on SST-2 and UCI Adult; published ImageNet top-1 for vision.</div></div>
+    <div class="lens"><h3><span class="icon" aria-hidden="true">&#9201;</span>Speed</h3><p>How long does one prediction take?</p><div class="how">Median CPU latency for one input, after warm-up, on the test laptop.</div></div>
+    <div class="lens"><h3><span class="icon" aria-hidden="true">&#128269;</span>Explainability</h3><p>Can we show why it made a choice?</p><div class="how">Tree models give exact feature credit; deep nets need add-on tools; chat models are hardest.</div></div>
+  </div>
+  <div class="legend" aria-label="Rating legend">
+    <span><b>Ratings are within each domain:</b></span>
+    <span class="chip c-good"><span class="dots">&#9679;&#9679;&#9679;</span> Strong</span>
+    <span class="chip c-mid"><span class="dots">&#9679;&#9679;&#9675;</span> Middle</span>
+    <span class="chip c-weak"><span class="dots">&#9679;&#9675;&#9675;</span> Weak</span>
+    <span><span class="pub">Published</span> = taken from the paper or model card, not measured here</span>
+  </div>
+</section>
+
+<section aria-labelledby="matrix">
+  <h2 id="matrix">The decision matrix</h2>
+  <p class="sub">Set what matters most for your project. The fit score multiplies each rating by your weight, then ranks models inside each domain. Models from different domains solve different problems, so they are never ranked against each other.</p>
+  <div class="controls">
+    <div class="tabs" role="group" aria-label="Show domain">
+      <button type="button" data-dom="all" aria-pressed="true">All domains</button>
+      <button type="button" data-dom="lang" aria-pressed="false">Language &amp; GenAI</button>
+      <button type="button" data-dom="vis" aria-pressed="false">Vision</button>
+      <button type="button" data-dom="tab" aria-pressed="false">Tabular</button>
+    </div>
+    <div class="sliders">
+      <div><label for="w-size">Size <output id="o-size">2</output></label><input id="w-size" type="range" min="0" max="3" value="2"></div>
+      <div><label for="w-acc">Accuracy <output id="o-acc">3</output></label><input id="w-acc" type="range" min="0" max="3" value="3"></div>
+      <div><label for="w-speed">Speed <output id="o-speed">2</output></label><input id="w-speed" type="range" min="0" max="3" value="2"></div>
+      <div><label for="w-exp">Explainability <output id="o-exp">2</output></label><input id="w-exp" type="range" min="0" max="3" value="2"></div>
+    </div>
+    <div class="presets">Try a scenario:
+      <button type="button" data-preset="2,3,2,2">Balanced</button>
+      <button type="button" data-preset="3,1,3,0">Phone app</button>
+      <button type="button" data-preset="0,3,1,3">Hospital or bank (must explain)</button>
+      <button type="button" data-preset="1,3,0,1">Accuracy first</button>
+    </div>
+  </div>
+  <div class="matrix-wrap">
+    <table id="tbl">
+      <thead><tr><th>Model</th><th>Size</th><th>Accuracy</th><th>Speed (CPU, 1 input)</th><th>Explainability</th><th>Other considerations</th><th>Best fit</th><th class="score">Fit score</th></tr></thead>
+      <tbody id="tbody"></tbody>
+    </table>
+  </div>
+</section>
+
+<section aria-labelledby="charts">
+  <h2 id="charts">Trade-offs at a glance</h2>
+  <p class="sub">Size on a log scale across the bottom, accuracy up the side. Bigger circles mean slower predictions. The best spot is the top-left: small and accurate.</p>
+  <div class="charts" id="charts-wrap"></div>
+</section>
+
+<section aria-labelledby="flow">
+  <h2 id="flow">How to choose: a quick path</h2>
+  <div class="flow">
+    <div class="start"><h3>Start with your data</h3><p>The type of data picks the family. Your limits on device, accuracy, and explanation pick the model.</p></div>
+    <div class="lane lang"><h3>Text</h3>
+      <div class="q"><b>Many tasks, no labeled data?</b><span>Small chat model (Qwen2.5-0.5B) or a cloud chat model</span></div>
+      <div class="q"><b>One task with labels, need speed?</b><span>DistilBERT</span></div>
+      <div class="q"><b>One task, best accuracy on a server?</b><span>BERT-base</span></div>
+    </div>
+    <div class="lane vis"><h3>Images</h3>
+      <div class="q"><b>Phone or edge device?</b><span>MobileNetV2</span></div>
+      <div class="q"><b>Best accuracy per MB, with a GPU?</b><span>EfficientNet-B0</span></div>
+      <div class="q"><b>Server CPU, mature tools?</b><span>ResNet-50</span></div>
+    </div>
+    <div class="lane tab"><h3>Tables</h3>
+      <div class="q"><b>Default choice, must explain?</b><span>LightGBM or XGBoost + SHAP</span></div>
+      <div class="q"><b>Very small dataset, no time to tune?</b><span>TabPFN (pretrained)</span></div>
+      <div class="q"><b>Quick, robust baseline?</b><span>Random Forest</span></div>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="ins">
+  <h2 id="ins">What the measurements taught me</h2>
+  <div class="insights" id="insights"></div>
+</section>
+
+<footer>
+  <div><b>Method.</b> Speed: median of 30 runs after 5 warm-up runs, one input at a time, CPU only, 4 threads, on a MacBook Air (M4, 16 GB). Language accuracy: all 872 SST-2 validation sentences. Tabular accuracy: UCI Adult, 5,000 training and 5,000 test rows, default settings, seed 42. Vision accuracy: published ImageNet top-1 for the official PyTorch weights. TabPFN could not be run locally because its weights now require an account and license step, so its row uses published results. Code and raw results are in the accompanying document.</div>
+  <div><b>Key sources.</b>
+    <ol>
+      <li>Devlin et al. (2019); Sanh et al. (2019); Qwen Team (2024)</li>
+      <li>Sandler et al. (2018); Tan &amp; Le (2019); He et al. (2016); TorchVision model docs</li>
+      <li>Ke et al. (2017); Chen &amp; Guestrin (2016); Breiman (2001); Hollmann et al. (2025)</li>
+      <li>Lundberg &amp; Lee (2017); Selvaraju et al. (2017); Grinsztajn et al. (2022)</li>
+    </ol>
+  </div>
+</footer>
+</div>
+
+<script>
+// ------------------------------------------------------------------ data (measured unless marked published)
+const M = [
+ {dom:"lang", name:"BERT-base", meta:"Encoder, fine-tuned for sentiment (SST-2) · 2019",
+  size:{v:"110M params", s:"438 MB", r:2}, acc:{v:"92.4%", s:"SST-2, measured", r:3},
+  speed:{v:"14.4 ms", s:"144 sentences/s in batches", r:2}, exp:{v:"Moderate", s:"Token attributions with add-on tools", r:2},
+  other:"Mature tooling; one small output layer per task. Needs labeled data for each new task.", fit:"Highest accuracy for one text task on a server"},
+ {dom:"lang", name:"DistilBERT", meta:"Smaller copy of BERT trained to imitate it · 2019",
+  size:{v:"67M params", s:"268 MB", r:3}, acc:{v:"91.1%", s:"SST-2, measured", r:3},
+  speed:{v:"6.3 ms", s:"282 sentences/s in batches", r:3}, exp:{v:"Moderate", s:"Same tools as BERT", r:2},
+  other:"Lower energy and cost per prediction. Loses about one accuracy point.", fit:"Production text classification on CPUs or phones"},
+ {dom:"lang", name:"Qwen2.5-0.5B-Instruct", meta:"Small generative chat model, used with no extra training · 2024",
+  size:{v:"494M params", s:"2.0 GB (1.0 GB in 16-bit)", r:1}, acc:{v:"90.6%", s:"SST-2 with no training, measured; MMLU 47.5 published", r:3},
+  speed:{v:"101.7 ms", s:"Writes about 29 tokens/s", r:1}, exp:{v:"Low", s:"Can explain in words, but the words may not match its real reasoning", r:1},
+  other:"One model handles many tasks with only a prompt. Open license (Apache 2.0). The 1.5B version pushed this 16 GB laptop into heavy memory swapping.", fit:"Many tasks or no labeled data; prototypes"},
+ {dom:"vis", name:"MobileNetV2", meta:"Lightweight CNN for phones · 2018",
+  size:{v:"3.5M params", s:"14 MB", r:3}, acc:{v:"71.9%", s:"ImageNet top-1", pub:1, r:1},
+  speed:{v:"16.0 ms", s:"36 images/s in batches", r:3}, exp:{v:"Moderate", s:"Heat maps (Grad-CAM)", r:2},
+  other:"Runs well on phones and microcontrollers; the base model inside Teachable Machine.", fit:"Phone, camera, or edge apps"},
+ {dom:"vis", name:"EfficientNet-B0", meta:"CNN scaled for accuracy per parameter · 2019",
+  size:{v:"5.3M params", s:"21 MB", r:3}, acc:{v:"77.7%", s:"ImageNet top-1", pub:1, r:3},
+  speed:{v:"83.1 ms", s:"16 images/s in batches", r:1}, exp:{v:"Moderate", s:"Heat maps (Grad-CAM)", r:2},
+  other:"Fewest FLOPs for its accuracy, but its layer types run slowly on this CPU. Faster on GPUs and TPUs.", fit:"Best accuracy per MB when you have a GPU"},
+ {dom:"vis", name:"ResNet-50", meta:"Classic deep residual CNN · 2016",
+  size:{v:"25.6M params", s:"102 MB", r:1}, acc:{v:"76.1%", s:"ImageNet top-1 (80.9% with newer weights)", pub:1, r:2},
+  speed:{v:"14.2 ms", s:"14 images/s in batches", r:3}, exp:{v:"Moderate", s:"Heat maps (Grad-CAM); most studied", r:2},
+  other:"Huge ecosystem and many fine-tuned versions. Biggest file of the three.", fit:"Server apps and transfer learning baselines"},
+ {dom:"tab", name:"LightGBM", meta:"Gradient-boosted trees, trained on your data · 2017",
+  size:{v:"300 trees", s:"1.0 MB", r:3}, acc:{v:"84.2% · AUC 0.899", s:"UCI Adult, measured", r:3},
+  speed:{v:"0.22 ms", s:"Trained in 0.4 s", r:3}, exp:{v:"High", s:"Exact feature credit (TreeSHAP)", r:3},
+  other:"Fast, low energy, and easy to deploy. Not pretrained: you train it, which takes seconds.", fit:"Default for business and clinical tables"},
+ {dom:"tab", name:"XGBoost", meta:"Gradient-boosted trees, trained on your data · 2016",
+  size:{v:"300 trees", s:"0.7 MB", r:3}, acc:{v:"83.6% · AUC 0.889", s:"UCI Adult, measured", r:2},
+  speed:{v:"0.35 ms", s:"Trained in 0.2 s", r:3}, exp:{v:"High", s:"Exact feature credit (TreeSHAP)", r:3},
+  other:"Most widely used tree library; strong community and cloud support.", fit:"Tables where mature tooling matters"},
+ {dom:"tab", name:"Random Forest", meta:"Many independent decision trees · 2001",
+  size:{v:"300 trees", s:"35 MB", r:1}, acc:{v:"84.2% · AUC 0.891", s:"UCI Adult, measured", r:2},
+  speed:{v:"13.3 ms", s:"Trained in 0.3 s", r:2}, exp:{v:"High", s:"Feature importance; TreeSHAP", r:3},
+  other:"Works well with almost no tuning, but deep trees make the file large.", fit:"Quick, robust first baseline"},
+ {dom:"tab", name:"TabPFN", meta:"Transformer pretrained on 100 million synthetic tables · 2025",
+  size:{v:"Neural network", s:"Weights need an account to download", r:2}, acc:{v:"Beats tuned trees", s:"On datasets up to 10,000 rows", pub:1, r:3},
+  speed:{v:"2.8 s to fit", s:"vs. 4 h of tuning for baselines; slower per row on CPU", pub:1, r:2}, exp:{v:"Low", s:"Neural network; needs add-on tools", r:1},
+  other:"No tuning needed, but best with a GPU and limited to small tables. Not measured here because of the license step.", fit:"Small datasets when time to tune is short"}
+];
+const DOM = {lang:["Language & Generative AI","dom-lang","Text: understanding and generating language"], vis:["Computer Vision","dom-vis","Images: ImageNet classification"], tab:["Tabular Data","dom-tab","Rows and columns: income prediction"]};
+const INS = [
+ ["16\u00d7","Bigger is not always better","A small chat model scored 90.6% with no training at all, half a point behind DistilBERT, but it was 16 times slower and 7 times larger. Its larger 1.5B sibling would not even run smoothly on a 16 GB laptop.","var(--lang)"],
+ ["4.4×","FLOPs do not equal speed","EfficientNet-B0 needs the fewest operations for its accuracy, yet it was 4.4 times slower than MobileNetV2 on this CPU, and ResNet-50 was fastest of all. Always time a model on the hardware you will use.","var(--vis)"],
+ ["0.22 ms","Trees still rule tables","LightGBM matched the best accuracy, trained in under half a second, and explains every prediction exactly. This agrees with large studies showing trees beat deep learning on typical tables.","var(--tab)"],
+ ["2.3×","Distilled models are a free lunch","DistilBERT is 39% smaller and 2.3 times faster than BERT and gave up only 1.4 accuracy points. For most production text tasks it is the smarter pick.","var(--ink)"]
+];
+
+// ------------------------------------------------------------------ render
+const cls = r => r === 3 ? "g" : r === 2 ? "m" : "w";
+const dots = r => "●".repeat(r) + "○".repeat(3 - r);
+const cell = c => `<span class="cell ${cls(c.r)}"><span class="big">${c.v}${c.pub ? '<span class="pub">Published</span>' : ""}</span><span class="small">${dots(c.r)} ${c.s}</span></span>`;
+function render(){
+  const tb = document.getElementById("tbody"); let h = "";
+  for (const d of ["lang","vis","tab"]){
+    h += `<tr class="group" data-dom="${d}"><td colspan="8" class="${DOM[d][1]}">${DOM[d][0]}<span class="tag">${DOM[d][2]}</span></td></tr>`;
+    M.filter(m => m.dom === d).forEach((m, i) => {
+      h += `<tr class="model" data-dom="${d}" data-i="${M.indexOf(m)}"><td class="${DOM[d][1]}"><div class="mname">${m.name}</div><div class="mmeta">${m.meta}</div></td>
+      <td>${cell(m.size)}</td><td>${cell(m.acc)}</td><td>${cell(m.speed)}</td><td>${cell(m.exp)}</td>
+      <td class="other">${m.other}</td><td class="fit"><b>Best fit</b>${m.fit}</td>
+      <td class="score"><span class="rank"></span><div class="bar"><i></i></div><span class="num sc"></span></td></tr>`;
+    });
+  }
+  tb.innerHTML = h;
+  document.getElementById("insights").innerHTML = INS.map(([s,t,p,c]) => `<div class="ins" style="border-top-color:${c}"><div class="stat" style="color:${c}">${s}</div><h3>${t}</h3><p>${p}</p></div>`).join("");
+  score(); charts();
+}
+function weights(){ return ["size","acc","speed","exp"].map(k => +document.getElementById("w-"+k).value); }
+function score(){
+  const w = weights(), tot = w.reduce((a,b)=>a+b,0) || 1;
+  ["size","acc","speed","exp"].forEach((k,i)=>document.getElementById("o-"+k).textContent = w[i]);
+  for (const d of ["lang","vis","tab"]){
+    const rows = [...document.querySelectorAll(`tr.model[data-dom="${d}"]`)];
+    const sc = rows.map(r => { const m = M[+r.dataset.i]; return ([m.size.r,m.acc.r,m.speed.r,m.exp.r].reduce((a,v,i)=>a+v*w[i],0)) / (3*tot) * 100; });
+    const order = [...sc].map((s,i)=>[s,i]).sort((a,b)=>b[0]-a[0]);
+    rows.forEach((r,i) => {
+      const pos = order.findIndex(o => o[1] === i) + 1;
+      r.querySelector(".bar i").style.width = sc[i].toFixed(0) + "%";
+      r.querySelector(".sc").textContent = sc[i].toFixed(0) + " / 100";
+      r.querySelector(".rank").textContent = pos === 1 ? "Best match in domain" : "#" + pos + " in domain";
+      r.classList.toggle("top", pos === 1);
+    });
+  }
+}
+function charts(){
+  const W = 400, H = 250, P = {l:46,r:26,t:14,b:40};
+  const sets = {
+    lang:{title:"Language", unit:"SST-2 accuracy (%)", y:[88,94], pts:[["BERT-base",438,92.4,14.4,-1],["DistilBERT",268,91.1,6.3,1],["Qwen2.5-0.5B",1976,90.6,101.7]]},
+    vis:{title:"Vision", unit:"ImageNet top-1 (%)", y:[68,80], pts:[["MobileNetV2",14,71.9,16.0],["EfficientNet-B0",21.2,77.7,83.1],["ResNet-50",102,76.1,14.2]]},
+    tab:{title:"Tabular", unit:"UCI Adult AUC", y:[0.885,0.902], pts:[["LightGBM",1.03,0.8985,0.22],["XGBoost",0.69,0.8894,0.35],["Random Forest",35.5,0.8911,13.3]]}
+  };
+  const col = {lang:"#4338ca",vis:"#0f766e",tab:"#b45309"};
+  let out = "";
+  for (const [d,s] of Object.entries(sets)){
+    const xs = s.pts.map(p=>p[1]); const lx0 = Math.floor(Math.log10(Math.min(...xs))), lx1 = Math.ceil(Math.log10(Math.max(...xs)));
+    const X = v => P.l + (Math.log10(v)-lx0)/(lx1-lx0)*(W-P.l-P.r);
+    const Y = v => H-P.b - (v-s.y[0])/(s.y[1]-s.y[0])*(H-P.t-P.b);
+    const R = ms => 6 + Math.min(22, Math.sqrt(ms)*2.2);
+    let g = `<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="${s.title}: model size versus accuracy, circle size shows prediction time">`;
+    g += `<rect x="${P.l}" y="${P.t}" width="${W-P.l-P.r}" height="${H-P.t-P.b}" fill="#faf9f6" stroke="#d8dce3"/>`;
+    for (let e=lx0;e<=lx1;e++){ const x=X(10**e); g+=`<line x1="${x}" x2="${x}" y1="${P.t}" y2="${H-P.b}" stroke="#e7e9ee"/><text x="${x}" y="${H-P.b+15}" font-size="11" text-anchor="middle" fill="#6b7280">${10**e>=1000?(10**e/1000)+" GB":10**e>=1?10**e+" MB":(10**e*1000)+" KB"}</text>`; }
+    for (let k=0;k<=4;k++){ const v=s.y[0]+(s.y[1]-s.y[0])*k/4, y=Y(v); g+=`<text x="${P.l-6}" y="${y+4}" font-size="11" text-anchor="end" fill="#6b7280">${s.y[1]<2?v.toFixed(3):(Number.isInteger(v)?v.toFixed(0):v.toFixed(1))}</text><line x1="${P.l}" x2="${W-P.r}" y1="${y}" y2="${y}" stroke="#eef0f3"/>`; }
+    g += `<text x="${(W+P.l)/2}" y="${H-6}" font-size="11.5" text-anchor="middle" fill="#3a3f4b">Model size (log scale)</text>`;
+    s.pts.forEach(([n,x,y,ms,v],i)=>{ const cx=X(x), cy=Y(y), r=R(ms); let anchor = cx>W*0.7?"end":"start", dx = anchor==="end"?-(r+4):(r+4), ty = cy+4;
+      if (v){ anchor="middle"; dx=0; ty = v<0 ? cy-r-20 : cy+r+14; }
+      g+=`<circle cx="${cx}" cy="${cy}" r="${r}" fill="${col[d]}" fill-opacity=".18" stroke="${col[d]}" stroke-width="2"/><text x="${cx+dx}" y="${ty}" font-size="12.5" font-weight="600" text-anchor="${anchor}" fill="#16181d">${n}</text><text x="${cx+dx}" y="${ty+14}" font-size="11" text-anchor="${anchor}" fill="#6b7280">${ms} ms</text>`; });
+    g += `</svg>`;
+    out += `<div class="chart"><h3 style="color:${col[d]}">${s.title}</h3><p>${s.unit} vs. size &middot; circle = prediction time</p>${g}</div>`;
+  }
+  document.getElementById("charts-wrap").innerHTML = out;
+}
+document.querySelectorAll(".tabs button").forEach(b => b.addEventListener("click", () => {
+  document.querySelectorAll(".tabs button").forEach(x => x.setAttribute("aria-pressed", x === b));
+  const d = b.dataset.dom;
+  document.querySelectorAll("tr.model,tr.group").forEach(r => r.classList.toggle("hidden", d !== "all" && r.dataset.dom !== d));
+}));
+["size","acc","speed","exp"].forEach(k => document.getElementById("w-"+k).addEventListener("input", score));
+document.querySelectorAll(".presets button").forEach(b => b.addEventListener("click", () => {
+  b.dataset.preset.split(",").forEach((v,i) => document.getElementById("w-"+["size","acc","speed","exp"][i]).value = v); score();
+}));
+if (new URLSearchParams(location.search).has("poster")) document.body.classList.add("poster");
+render();
+</script>
+</body>
+</html>
