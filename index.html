@@ -2205,8 +2205,8 @@
                 </article>
                 <article class="oss-card">
                     <a class="oss-repo" href="https://github.com/llm-d/llm-d-inference-sim/pulls?q=is%3Apr+author%3Abhargavchintam" target="_blank" rel="noopener noreferrer">llm-d/llm-d-inference-sim</a>
-                    <p>Three fixes from a parity check of the simulator against real vLLM: the time-per-output-token metric no longer skips single-token outputs, <code>request_params_max_tokens</code> no longer skips requests without max_tokens and records the value each request ran with, and a 400 from the render service now reaches the client as a 400, not a 500.</p>
-                    <div class="oss-prs"><span class="oss-state merged">Merged</span><a href="https://github.com/llm-d/llm-d-inference-sim/pull/891" target="_blank" rel="noopener noreferrer">#891</a><a href="https://github.com/llm-d/llm-d-inference-sim/pull/894" target="_blank" rel="noopener noreferrer">#894</a><a href="https://github.com/llm-d/llm-d-inference-sim/pull/898" target="_blank" rel="noopener noreferrer">#898</a></div>
+                    <p>Three fixes from a parity check of the simulator against real vLLM: the time-per-output-token metric no longer skips single-token outputs, <code>request_params_max_tokens</code> no longer skips requests without max_tokens and records the value each request ran with, and a 400 from the render service now reaches the client as a 400, not a 500. A fourth fix stops the vLLM metrics adapter's unit tests from starting the adapter twice, which made them race on its request counters.</p>
+                    <div class="oss-prs"><span class="oss-state merged">Merged</span><a href="https://github.com/llm-d/llm-d-inference-sim/pull/891" target="_blank" rel="noopener noreferrer">#891</a><a href="https://github.com/llm-d/llm-d-inference-sim/pull/894" target="_blank" rel="noopener noreferrer">#894</a><a href="https://github.com/llm-d/llm-d-inference-sim/pull/898" target="_blank" rel="noopener noreferrer">#898</a><a href="https://github.com/llm-d/llm-d-inference-sim/pull/934" target="_blank" rel="noopener noreferrer">#934</a></div>
                 </article>
                 <article class="oss-card">
                     <a class="oss-repo" href="https://github.com/llm-d/llm-d-benchmark/pull/2149" target="_blank" rel="noopener noreferrer">llm-d/llm-d-benchmark</a>
@@ -2217,6 +2217,11 @@
                     <a class="oss-repo" href="https://github.com/nf-core/modules/pull/13483" target="_blank" rel="noopener noreferrer">nf-core/modules</a>
                     <p><code>utils_nfcore_pipeline</code> keeps trailing zeros in software versions, so <code>samtools: 1.20</code> no longer turns into <code>1.2</code>.</p>
                     <div class="oss-prs"><span class="oss-state merged">Merged</span><a href="https://github.com/nf-core/modules/pull/13483" target="_blank" rel="noopener noreferrer">#13483</a></div>
+                </article>
+                <article class="oss-card">
+                    <a class="oss-repo" href="https://github.com/Nimbleway/webrouter/pulls?q=is%3Apr+author%3Abhargavchintam" target="_blank" rel="noopener noreferrer">Nimbleway/webrouter</a>
+                    <p>Two bugs I found in WebRouter, which connects AI agents to the web, each fixed with regression tests: search through exa-mcp and you-mcp no longer fails when a result contains U+2028, since event streams now split lines only at CR and LF, and <code>auto</code> extract keeps pages in the order asked for after it retries a failed URL.</p>
+                    <div class="oss-prs"><span class="oss-state merged">Merged</span><a href="https://github.com/Nimbleway/webrouter/pull/353" target="_blank" rel="noopener noreferrer">#353</a><a href="https://github.com/Nimbleway/webrouter/pull/354" target="_blank" rel="noopener noreferrer">#354</a></div>
                 </article>
                 <article class="oss-card">
                     <a class="oss-repo" href="https://github.com/spack/spack-packages/pull/7083" target="_blank" rel="noopener noreferrer">spack/spack-packages</a>
@@ -2273,7 +2278,7 @@
                 </article>
             </div>
         </div>
-        <p class="oss-note fade-in">Statuses as of November 18, 2026.</p>
+        <p class="oss-note fade-in">Statuses as of November 19, 2026.</p>
     </div>
 </section>
 
