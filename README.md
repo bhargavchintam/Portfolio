@@ -1,6 +1,6 @@
 # Bhargav Chintam — AI/ML Professional Portfolio
 
-This repository holds the e-portfolio website of Bindu Bhargava Reddy Chintam (Bhargav Chintam), an AI/ML professional. It is a single page with his bio, experience, skills, education, publications and contact details. The main section, **Portfolio Artifacts**, shows coursework from his M.S. in Artificial Intelligence at Indiana Wesleyan University (IWU), for example an interactive timeline of AI history, an audit of a healthcare AI assistant, a multi-agent research copilot design and a slide deck on how a neural network learns.
+This repository holds the e-portfolio website of Bindu Bhargava Reddy Chintam (Bhargav Chintam), an AI/ML professional. It is a single page with his bio, experience, open-source contributions, skills, education, publications and contact details. The main section, **Portfolio Artifacts**, shows coursework from his M.S. in Artificial Intelligence at Indiana Wesleyan University (IWU), for example an interactive timeline of AI history, an audit of a healthcare AI assistant, a multi-agent research copilot design and a slide deck on how a neural network learns.
 
 **Live site:** https://bhargavchintam.github.io/Portfolio/
 

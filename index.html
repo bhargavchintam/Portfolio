@@ -691,6 +691,76 @@
         .pub-info h4 { font-size: 0.9rem; font-weight: 600; margin-bottom: 3px; line-height: 1.5; }
         .pub-info p { font-size: 0.78rem; color: var(--text-muted); }
 
+        /* ===== OPEN SOURCE ===== */
+        .oss-group { max-width: 1000px; margin: 0 auto; }
+        .oss-group + .oss-group { margin-top: 44px; }
+
+        .oss-group-title {
+            display: flex; align-items: center; gap: 12px;
+            font-size: 0.78rem; font-weight: 700; color: var(--text-muted);
+            text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px;
+        }
+
+        .oss-group-title::after { content: ''; flex: 1; height: 1px; background: var(--border-color); }
+
+        .oss-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+
+        .oss-card {
+            background: var(--bg-card); border: 1px solid var(--border-color);
+            border-radius: var(--radius); padding: 22px 24px;
+            display: flex; flex-direction: column; gap: 12px;
+            transition: var(--transition);
+        }
+
+        .oss-card:hover { border-color: var(--border-glow); box-shadow: var(--shadow-glow); }
+
+        .oss-repo {
+            font-family: 'JetBrains Mono', monospace; font-size: 0.86rem; font-weight: 600;
+            color: var(--text-primary); text-decoration: none; overflow-wrap: anywhere;
+        }
+
+        .oss-repo:hover { color: var(--accent-primary); }
+
+        .oss-card p {
+            font-size: 0.86rem; color: var(--text-secondary); line-height: 1.7;
+            overflow-wrap: anywhere; flex: 1;
+        }
+
+        .oss-card code {
+            font-family: 'JetBrains Mono', monospace; font-size: 0.8em;
+            background: rgba(124, 116, 255, 0.1); color: var(--text-primary);
+            padding: 1px 5px; border-radius: 4px;
+        }
+
+        .oss-prs { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+
+        .oss-state {
+            padding: 3px 8px; border-radius: 6px;
+            font-size: 0.66rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap;
+        }
+
+        .oss-state.merged { background: rgba(0, 212, 170, 0.1); color: var(--accent-secondary); }
+        .oss-state.review { background: rgba(255, 215, 0, 0.1); color: var(--accent-gold); }
+        .oss-state.issue { background: rgba(56, 189, 248, 0.1); color: var(--accent-blue); }
+
+        .oss-prs a {
+            font-family: 'JetBrains Mono', monospace; font-size: 0.74rem;
+            color: var(--text-secondary); text-decoration: none;
+            padding: 3px 8px; border-radius: 6px;
+            background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: var(--transition);
+        }
+
+        .oss-prs a:hover { color: var(--text-primary); border-color: var(--border-glow); }
+
+        .oss-note { max-width: 1000px; margin: 28px auto 0; font-size: 0.78rem; color: var(--text-muted); text-align: center; }
+
+        @media (max-width: 768px) {
+            .oss-grid { grid-template-columns: 1fr; }
+            .oss-card { padding: 20px; }
+        }
+
         /* ===== CONTACT ===== */
         .contact-grid {
             display: grid; grid-template-columns: repeat(4, 1fr);
@@ -746,6 +816,20 @@
             .value-grid { grid-template-columns: 1fr 1fr; }
             .edu-cards { grid-template-columns: 1fr; }
             .contact-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        /* With ten nav links the bar needs about 1010px, so the menu button takes over at 1100px and below */
+        @media (max-width: 1100px) {
+            .nav-links { display: none; }
+            .nav-toggle { display: block; }
+            .nav-links.active {
+                display: flex; flex-direction: column;
+                position: absolute; top: 100%; left: 0; right: 0;
+                background: rgba(10, 10, 15, 0.95);
+                backdrop-filter: blur(20px);
+                padding: 16px 24px;
+                border-bottom: 1px solid var(--border-color);
+            }
         }
 
         @media (max-width: 768px) {
@@ -1838,6 +1922,7 @@
             <a href="#about" role="menuitem">Bio</a>
             <a href="#value" role="menuitem">Value</a>
             <a href="#experience" role="menuitem">Experience</a>
+            <a href="#opensource" role="menuitem">Open Source</a>
             <a href="#artifacts" role="menuitem">Artifacts</a>
             <a href="#skills" role="menuitem">Skills</a>
             <a href="#education" role="menuitem">Education</a>
@@ -2074,6 +2159,121 @@
                 <div style="width:calc(50% - 36px)"></div>
             </div>
         </div>
+    </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ===== OPEN SOURCE ===== -->
+<section class="section" id="opensource">
+    <div class="section-inner">
+        <div class="section-header fade-in">
+            <div class="section-label">Open Source</div>
+            <h2 class="section-title">Open Source Contributions</h2>
+            <p class="section-desc">Fixes I have sent to other teams&apos; projects, mostly ML infrastructure. Every pull request is linked, with its status.</p>
+        </div>
+        <div class="oss-group fade-in">
+            <h3 class="oss-group-title">Merged upstream</h3>
+            <div class="oss-grid">
+                <article class="oss-card">
+                    <a class="oss-repo" href="https://github.com/Dao-AILab/flash-attention/pulls?q=is%3Apr+author%3Abhargavchintam" target="_blank" rel="noopener noreferrer">Dao-AILab/flash-attention</a>
+                    <p><code>mha_fwd_kvcache</code> now checks the length of <code>cache_batch_idx</code>, so a short index raises an error instead of reading past its end (fixes #3097). #3153 adds the same check to FA3.</p>
+                    <div class="oss-prs"><span class="oss-state merged">Merged</span><a href="https://github.com/Dao-AILab/flash-attention/pull/3102" target="_blank" rel="noopener noreferrer">#3102</a><a href="https://github.com/Dao-AILab/flash-attention/pull/3153" target="_blank" rel="noopener noreferrer">#3153</a></div>
+                </article>
+                <article class="oss-card">
+                    <a class="oss-repo" href="https://github.com/smg-project/smg/pulls?q=is%3Apr+author%3Abhargavchintam" target="_blank" rel="noopener noreferrer">smg-project/smg</a>
+                    <p>Harmony chat prompts now put a leading system message in the developer message and leave out an empty one, as vLLM does (#2830). #5354 makes <code>least_load</code> count its own picks on workers that send no load report (fixes #4602).</p>
+                    <div class="oss-prs"><span class="oss-state merged">Merged</span><a href="https://github.com/smg-project/smg/pull/5353" target="_blank" rel="noopener noreferrer">#5353</a></div>
+                    <div class="oss-prs"><span class="oss-state review">In review</span><a href="https://github.com/smg-project/smg/pull/5354" target="_blank" rel="noopener noreferrer">#5354</a></div>
+                </article>
+                <article class="oss-card">
+                    <a class="oss-repo" href="https://github.com/Slicer/Slicer/pulls?q=is%3Apr+author%3Abhargavchintam" target="_blank" rel="noopener noreferrer">Slicer/Slicer</a>
+                    <p>Removes redundant variables in the GrowCut and Terminologies logic (fixes #9462 and #9463). #9515 adds a test for the slice view N-layer API (#8294).</p>
+                    <div class="oss-prs"><span class="oss-state merged">Merged</span><a href="https://github.com/Slicer/Slicer/pull/9513" target="_blank" rel="noopener noreferrer">#9513</a></div>
+                    <div class="oss-prs"><span class="oss-state review">In review</span><a href="https://github.com/Slicer/Slicer/pull/9515" target="_blank" rel="noopener noreferrer">#9515</a></div>
+                </article>
+                <article class="oss-card">
+                    <a class="oss-repo" href="https://github.com/LegalQuants/lq-ai/pull/783" target="_blank" rel="noopener noreferrer">LegalQuants/lq-ai</a>
+                    <p>Constrains the Teams install-only <code>id_token</code> flow (D-03).</p>
+                    <div class="oss-prs"><span class="oss-state merged">Merged</span><a href="https://github.com/LegalQuants/lq-ai/pull/783" target="_blank" rel="noopener noreferrer">#783</a></div>
+                </article>
+                <article class="oss-card">
+                    <a class="oss-repo" href="https://github.com/linkedin/Liger-Kernel/pulls?q=is%3Apr+author%3Abhargavchintam" target="_blank" rel="noopener noreferrer">linkedin/Liger-Kernel</a>
+                    <p>Kernel fixes checked against PyTorch references. Merged: the DyT forward launch above 65535 rows and the column stride in the fused KL and JSD gradients, both from a B200 sweep. In review: GroupNorm backward kept in fp32 so fp16 gradients stop turning into NaN, and label smoothing in vocab-parallel cross entropy, which returned inf when a logit was far below the row max.</p>
+                    <div class="oss-prs"><span class="oss-state merged">Merged</span><a href="https://github.com/linkedin/Liger-Kernel/pull/1607" target="_blank" rel="noopener noreferrer">#1607</a><a href="https://github.com/linkedin/Liger-Kernel/pull/1613" target="_blank" rel="noopener noreferrer">#1613</a></div>
+                    <div class="oss-prs"><span class="oss-state review">In review</span><a href="https://github.com/linkedin/Liger-Kernel/pull/1608" target="_blank" rel="noopener noreferrer">#1608</a><a href="https://github.com/linkedin/Liger-Kernel/pull/1619" target="_blank" rel="noopener noreferrer">#1619</a></div>
+                </article>
+                <article class="oss-card">
+                    <a class="oss-repo" href="https://github.com/llm-d/llm-d-inference-sim/pulls?q=is%3Apr+author%3Abhargavchintam" target="_blank" rel="noopener noreferrer">llm-d/llm-d-inference-sim</a>
+                    <p>Three fixes from a parity check of the simulator against real vLLM: the time-per-output-token metric no longer skips single-token outputs, <code>request_params_max_tokens</code> no longer skips requests without max_tokens and records the value each request ran with, and a 400 from the render service now reaches the client as a 400, not a 500.</p>
+                    <div class="oss-prs"><span class="oss-state merged">Merged</span><a href="https://github.com/llm-d/llm-d-inference-sim/pull/891" target="_blank" rel="noopener noreferrer">#891</a><a href="https://github.com/llm-d/llm-d-inference-sim/pull/894" target="_blank" rel="noopener noreferrer">#894</a><a href="https://github.com/llm-d/llm-d-inference-sim/pull/898" target="_blank" rel="noopener noreferrer">#898</a></div>
+                </article>
+                <article class="oss-card">
+                    <a class="oss-repo" href="https://github.com/llm-d/llm-d-benchmark/pull/2149" target="_blank" rel="noopener noreferrer">llm-d/llm-d-benchmark</a>
+                    <p>Adds demand p95 and an optional demand series to the sizing report (#2134).</p>
+                    <div class="oss-prs"><span class="oss-state merged">Merged</span><a href="https://github.com/llm-d/llm-d-benchmark/pull/2149" target="_blank" rel="noopener noreferrer">#2149</a></div>
+                </article>
+                <article class="oss-card">
+                    <a class="oss-repo" href="https://github.com/nf-core/modules/pull/13483" target="_blank" rel="noopener noreferrer">nf-core/modules</a>
+                    <p><code>utils_nfcore_pipeline</code> keeps trailing zeros in software versions, so <code>samtools: 1.20</code> no longer turns into <code>1.2</code>.</p>
+                    <div class="oss-prs"><span class="oss-state merged">Merged</span><a href="https://github.com/nf-core/modules/pull/13483" target="_blank" rel="noopener noreferrer">#13483</a></div>
+                </article>
+                <article class="oss-card">
+                    <a class="oss-repo" href="https://github.com/spack/spack-packages/pull/7083" target="_blank" rel="noopener noreferrer">spack/spack-packages</a>
+                    <p>Makes charliecloud 0.44 and later require squashfuse 0.4.0 or newer (fixes #5400).</p>
+                    <div class="oss-prs"><span class="oss-state merged">Merged</span><a href="https://github.com/spack/spack-packages/pull/7083" target="_blank" rel="noopener noreferrer">#7083</a></div>
+                </article>
+                <article class="oss-card">
+                    <a class="oss-repo" href="https://github.com/COMPAS-Lab/cloud-manager/pulls?q=is%3Apr+author%3Abhargavchintam" target="_blank" rel="noopener noreferrer">COMPAS-Lab/cloud-manager</a>
+                    <p>15 merged pull requests to a research lab's cloud console, a fork of Linode Cloud Manager (TypeScript, React).</p>
+                    <div class="oss-prs"><span class="oss-state merged">Merged</span><a href="https://github.com/COMPAS-Lab/cloud-manager/pulls?q=is%3Apr+author%3Abhargavchintam+is%3Amerged" target="_blank" rel="noopener noreferrer">15 PRs</a></div>
+                </article>
+            </div>
+        </div>
+        <div class="oss-group fade-in">
+            <h3 class="oss-group-title">In review</h3>
+            <div class="oss-grid">
+                <article class="oss-card">
+                    <a class="oss-repo" href="https://github.com/ai-dynamo/dynamo/pulls?q=is%3Apr+author%3Abhargavchintam" target="_blank" rel="noopener noreferrer">ai-dynamo/dynamo</a>
+                    <p>Five bugs I found in Dynamo's KV routing, runtime and request handling, each fixed in its own PR with a test that fails on main: binary extra keys in KV events, repeated block events in the standalone indexer, the QUIC response plane during a graceful drain, a 503 instead of a 500 when no worker is eligible, and stopping the worker once every choice has finished.</p>
+                    <div class="oss-prs"><span class="oss-state review">In review</span><a href="https://github.com/ai-dynamo/dynamo/pull/18473" target="_blank" rel="noopener noreferrer">#18473</a><a href="https://github.com/ai-dynamo/dynamo/pull/18476" target="_blank" rel="noopener noreferrer">#18476</a><a href="https://github.com/ai-dynamo/dynamo/pull/18477" target="_blank" rel="noopener noreferrer">#18477</a><a href="https://github.com/ai-dynamo/dynamo/pull/18479" target="_blank" rel="noopener noreferrer">#18479</a><a href="https://github.com/ai-dynamo/dynamo/pull/18481" target="_blank" rel="noopener noreferrer">#18481</a></div>
+                </article>
+                <article class="oss-card">
+                    <a class="oss-repo" href="https://github.com/triton-lang/triton/pulls?q=is%3Apr+author%3Abhargavchintam" target="_blank" rel="noopener noreferrer">triton-lang/triton</a>
+                    <p>Bugs on Blackwell from my B200 test sweeps. Fixes in review: wrong <code>tl.dot</code> results for a transposed operand above 256, and 8-bit dots with 8-element rows that fail to compile. Two more bugs are reported, and two earlier sweep bugs were fixed upstream.</p>
+                    <div class="oss-prs"><span class="oss-state review">In review</span><a href="https://github.com/triton-lang/triton/pull/12672" target="_blank" rel="noopener noreferrer">#12672</a><a href="https://github.com/triton-lang/triton/pull/12674" target="_blank" rel="noopener noreferrer">#12674</a></div>
+                    <div class="oss-prs"><span class="oss-state issue">Reported</span><a href="https://github.com/triton-lang/triton/issues/12675" target="_blank" rel="noopener noreferrer">#12675</a><a href="https://github.com/triton-lang/triton/issues/12678" target="_blank" rel="noopener noreferrer">#12678</a></div>
+                    <div class="oss-prs"><span class="oss-state issue">Fixed upstream</span><a href="https://github.com/triton-lang/triton/issues/12606" target="_blank" rel="noopener noreferrer">#12606</a><a href="https://github.com/triton-lang/triton/issues/12607" target="_blank" rel="noopener noreferrer">#12607</a></div>
+                </article>
+                <article class="oss-card">
+                    <a class="oss-repo" href="https://github.com/NVIDIA/TransformerEngine/pull/3790" target="_blank" rel="noopener noreferrer">NVIDIA/TransformerEngine</a>
+                    <p>Adds <code>export_components()</code> to MXFP8 tensors, returning the FP8 values and their compact scales (#3644).</p>
+                    <div class="oss-prs"><span class="oss-state review">In review</span><a href="https://github.com/NVIDIA/TransformerEngine/pull/3790" target="_blank" rel="noopener noreferrer">#3790</a></div>
+                </article>
+                <article class="oss-card">
+                    <a class="oss-repo" href="https://github.com/BristolSTA/uobtheatre-api/pull/1044" target="_blank" rel="noopener noreferrer">BristolSTA/uobtheatre-api</a>
+                    <p>Stores emails in lower case and matches them ignoring case (fixes #834).</p>
+                    <div class="oss-prs"><span class="oss-state review">In review</span><a href="https://github.com/BristolSTA/uobtheatre-api/pull/1044" target="_blank" rel="noopener noreferrer">#1044</a></div>
+                </article>
+            </div>
+        </div>
+        <div class="oss-group fade-in">
+            <h3 class="oss-group-title">Issue reports</h3>
+            <div class="oss-grid">
+                <article class="oss-card">
+                    <a class="oss-repo" href="https://github.com/NVIDIA-NeMo/Curator/issues/2285" target="_blank" rel="noopener noreferrer">NVIDIA-NeMo/Curator</a>
+                    <p>Showed that the fuzzy-dedup tuning guidance for <code>num_bands</code> and <code>minhashes_per_band</code> was inverted under MinHash-LSH banding. The maintainers fixed the docs.</p>
+                    <div class="oss-prs"><span class="oss-state issue">Reported</span><a href="https://github.com/NVIDIA-NeMo/Curator/issues/2285" target="_blank" rel="noopener noreferrer">#2285</a></div>
+                    <div class="oss-prs"><span class="oss-state issue">Fixed upstream</span><a href="https://github.com/NVIDIA-NeMo/Curator/pull/2287" target="_blank" rel="noopener noreferrer">#2287</a></div>
+                </article>
+                <article class="oss-card">
+                    <a class="oss-repo" href="https://github.com/promptdriven/pdd/issues/2341" target="_blank" rel="noopener noreferrer">promptdriven/pdd</a>
+                    <p>Context limits are handled as a hard cutoff, and provider prompt caching is never used. A second issue is an RFC on serving assumptions.</p>
+                    <div class="oss-prs"><span class="oss-state issue">Reported</span><a href="https://github.com/promptdriven/pdd/issues/2341" target="_blank" rel="noopener noreferrer">#2341</a><a href="https://github.com/promptdriven/pdd/issues/2342" target="_blank" rel="noopener noreferrer">#2342</a></div>
+                </article>
+            </div>
+        </div>
+        <p class="oss-note fade-in">Statuses as of November 18, 2026.</p>
     </div>
 </section>
 
