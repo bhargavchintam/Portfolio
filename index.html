@@ -2224,6 +2224,12 @@
                     <div class="oss-prs"><span class="oss-state merged">Merged</span><a href="https://github.com/Nimbleway/webrouter/pull/353" target="_blank" rel="noopener noreferrer">#353</a><a href="https://github.com/Nimbleway/webrouter/pull/354" target="_blank" rel="noopener noreferrer">#354</a></div>
                 </article>
                 <article class="oss-card">
+                    <a class="oss-repo" href="https://github.com/ai-dynamo/dynamo/pulls?q=is%3Apr+author%3Abhargavchintam" target="_blank" rel="noopener noreferrer">ai-dynamo/dynamo</a>
+                    <p>Five bugs I found in Dynamo's KV routing, runtime and request handling, each fixed in its own PR with a test that fails without the fix. #18476 makes the standalone indexer reference-count repeated vLLM block events, so it no longer drops a block when one of two cached copies is evicted. In review: binary extra keys in KV events, the QUIC response plane during a graceful drain, a 503 instead of a 500 when no worker is eligible, and stopping the worker once every choice has finished.</p>
+                    <div class="oss-prs"><span class="oss-state merged">Merged</span><a href="https://github.com/ai-dynamo/dynamo/pull/18476" target="_blank" rel="noopener noreferrer">#18476</a></div>
+                    <div class="oss-prs"><span class="oss-state review">In review</span><a href="https://github.com/ai-dynamo/dynamo/pull/18473" target="_blank" rel="noopener noreferrer">#18473</a><a href="https://github.com/ai-dynamo/dynamo/pull/18477" target="_blank" rel="noopener noreferrer">#18477</a><a href="https://github.com/ai-dynamo/dynamo/pull/18479" target="_blank" rel="noopener noreferrer">#18479</a><a href="https://github.com/ai-dynamo/dynamo/pull/18481" target="_blank" rel="noopener noreferrer">#18481</a></div>
+                </article>
+                <article class="oss-card">
                     <a class="oss-repo" href="https://github.com/spack/spack-packages/pull/7083" target="_blank" rel="noopener noreferrer">spack/spack-packages</a>
                     <p>Makes charliecloud 0.44 and later require squashfuse 0.4.0 or newer (fixes #5400).</p>
                     <div class="oss-prs"><span class="oss-state merged">Merged</span><a href="https://github.com/spack/spack-packages/pull/7083" target="_blank" rel="noopener noreferrer">#7083</a></div>
@@ -2239,16 +2245,11 @@
             <h3 class="oss-group-title">In review</h3>
             <div class="oss-grid">
                 <article class="oss-card">
-                    <a class="oss-repo" href="https://github.com/ai-dynamo/dynamo/pulls?q=is%3Apr+author%3Abhargavchintam" target="_blank" rel="noopener noreferrer">ai-dynamo/dynamo</a>
-                    <p>Five bugs I found in Dynamo's KV routing, runtime and request handling, each fixed in its own PR with a test that fails on main: binary extra keys in KV events, repeated block events in the standalone indexer, the QUIC response plane during a graceful drain, a 503 instead of a 500 when no worker is eligible, and stopping the worker once every choice has finished.</p>
-                    <div class="oss-prs"><span class="oss-state review">In review</span><a href="https://github.com/ai-dynamo/dynamo/pull/18473" target="_blank" rel="noopener noreferrer">#18473</a><a href="https://github.com/ai-dynamo/dynamo/pull/18476" target="_blank" rel="noopener noreferrer">#18476</a><a href="https://github.com/ai-dynamo/dynamo/pull/18477" target="_blank" rel="noopener noreferrer">#18477</a><a href="https://github.com/ai-dynamo/dynamo/pull/18479" target="_blank" rel="noopener noreferrer">#18479</a><a href="https://github.com/ai-dynamo/dynamo/pull/18481" target="_blank" rel="noopener noreferrer">#18481</a></div>
-                </article>
-                <article class="oss-card">
                     <a class="oss-repo" href="https://github.com/triton-lang/triton/pulls?q=is%3Apr+author%3Abhargavchintam" target="_blank" rel="noopener noreferrer">triton-lang/triton</a>
-                    <p>Bugs on Blackwell from my B200 test sweeps. Fixes in review: wrong <code>tl.dot</code> results for a transposed operand above 256, and 8-bit dots with 8-element rows that fail to compile. Two more bugs are reported, and two earlier sweep bugs were fixed upstream.</p>
-                    <div class="oss-prs"><span class="oss-state review">In review</span><a href="https://github.com/triton-lang/triton/pull/12672" target="_blank" rel="noopener noreferrer">#12672</a><a href="https://github.com/triton-lang/triton/pull/12674" target="_blank" rel="noopener noreferrer">#12674</a></div>
+                    <p>Bugs on Blackwell from my B200 test sweeps. In review: 8-bit dots with 8-element rows that fail to compile. Wrong <code>tl.dot</code> results for a transposed operand above 256, which I reported with a reproducer and diagnosis, were fixed upstream in #12864, a maintainer's fix that thanks me for both. Two earlier sweep bugs were also fixed upstream, and two more are reported.</p>
+                    <div class="oss-prs"><span class="oss-state review">In review</span><a href="https://github.com/triton-lang/triton/pull/12674" target="_blank" rel="noopener noreferrer">#12674</a></div>
                     <div class="oss-prs"><span class="oss-state issue">Reported</span><a href="https://github.com/triton-lang/triton/issues/12675" target="_blank" rel="noopener noreferrer">#12675</a><a href="https://github.com/triton-lang/triton/issues/12678" target="_blank" rel="noopener noreferrer">#12678</a></div>
-                    <div class="oss-prs"><span class="oss-state issue">Fixed upstream</span><a href="https://github.com/triton-lang/triton/issues/12606" target="_blank" rel="noopener noreferrer">#12606</a><a href="https://github.com/triton-lang/triton/issues/12607" target="_blank" rel="noopener noreferrer">#12607</a></div>
+                    <div class="oss-prs"><span class="oss-state issue">Fixed upstream</span><a href="https://github.com/triton-lang/triton/issues/12671" target="_blank" rel="noopener noreferrer">#12671</a><a href="https://github.com/triton-lang/triton/issues/12606" target="_blank" rel="noopener noreferrer">#12606</a><a href="https://github.com/triton-lang/triton/issues/12607" target="_blank" rel="noopener noreferrer">#12607</a></div>
                 </article>
                 <article class="oss-card">
                     <a class="oss-repo" href="https://github.com/NVIDIA/TransformerEngine/pull/3790" target="_blank" rel="noopener noreferrer">NVIDIA/TransformerEngine</a>
@@ -2278,7 +2279,7 @@
                 </article>
             </div>
         </div>
-        <p class="oss-note fade-in">Statuses as of November 19, 2026.</p>
+        <p class="oss-note fade-in">Statuses as of November 20, 2026.</p>
     </div>
 </section>
 
