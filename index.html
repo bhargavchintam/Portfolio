@@ -2257,6 +2257,16 @@
                     <div class="oss-prs"><span class="oss-state review">In review</span><a href="https://github.com/NVIDIA/TransformerEngine/pull/3790" target="_blank" rel="noopener noreferrer">#3790</a><a href="https://github.com/NVIDIA/TransformerEngine/pull/3915" target="_blank" rel="noopener noreferrer">#3915</a></div>
                 </article>
                 <article class="oss-card">
+                    <a class="oss-repo" href="https://github.com/flashinfer-ai/flashinfer/pulls?q=is%3Apr+author%3Abhargavchintam" target="_blank" rel="noopener noreferrer">flashinfer-ai/flashinfer</a>
+                    <p>Two bugs I found, both fixes tested on a B200 and an H200. #9839: CUDA RMSNorm now uses 64-bit row offsets, so tensors past <code>2**32</code> elements no longer get wrong rows (fixes #9838). #9841: <code>LogitsPipe</code> accepts the int64 per-row <code>top_k</code> tensors that the sampling API already takes (fixes #9840).</p>
+                    <div class="oss-prs"><span class="oss-state review">In review</span><a href="https://github.com/flashinfer-ai/flashinfer/pull/9839" target="_blank" rel="noopener noreferrer">#9839</a><a href="https://github.com/flashinfer-ai/flashinfer/pull/9841" target="_blank" rel="noopener noreferrer">#9841</a></div>
+                </article>
+                <article class="oss-card">
+                    <a class="oss-repo" href="https://github.com/NVIDIA/cutlass/pull/3919" target="_blank" rel="noopener noreferrer">NVIDIA/cutlass</a>
+                    <p>The CuTe DSL MoE <code>grouped_mm</code> examples for Blackwell now generate expert offsets on 16-byte boundaries where tokens are the stride-1 mode, so TMA no longer reads or writes an expert shifted or faults on its copy. A bug I found (fixes #3918).</p>
+                    <div class="oss-prs"><span class="oss-state review">In review</span><a href="https://github.com/NVIDIA/cutlass/pull/3919" target="_blank" rel="noopener noreferrer">#3919</a></div>
+                </article>
+                <article class="oss-card">
                     <a class="oss-repo" href="https://github.com/kubernetes-sigs/inference-perf/pull/1109" target="_blank" rel="noopener noreferrer">kubernetes-sigs/inference-perf</a>
                     <p>Adds the first part of OpenAI Batch API support (#1069). A writer turns benchmark records into a batch input file, and a client uploads the file, creates the batch, polls it until it ends and downloads the results.</p>
                     <div class="oss-prs"><span class="oss-state review">In review</span><a href="https://github.com/kubernetes-sigs/inference-perf/pull/1109" target="_blank" rel="noopener noreferrer">#1109</a></div>
