@@ -2292,16 +2292,17 @@
                     <p>Two bugs I found in the 0.32.0 release. #3043: <code>import supervision</code> no longer prints six FutureWarnings with pyDeprecate 0.12 or newer, or fails when warnings are errors (fixes #3042). #3045: the declared Pillow floor moves from 9.4 to 10.4, the oldest release where its Pillow-scene annotation works (fixes #3044).</p>
                     <div class="oss-prs"><span class="oss-state review">In review</span><a href="https://github.com/roboflow/supervision/pull/3043" target="_blank" rel="noopener noreferrer">#3043</a><a href="https://github.com/roboflow/supervision/pull/3045" target="_blank" rel="noopener noreferrer">#3045</a></div>
                 </article>
+                <article class="oss-card">
+                    <a class="oss-repo" href="https://github.com/pytorch/pytorch/pulls?q=is%3Apr+author%3Abhargavchintam" target="_blank" rel="noopener noreferrer">pytorch/pytorch</a>
+                    <p>Three bugs I found and reported. #206330: <code>torch.fft.ihfftn</code> and <code>ihfft2</code> now write <code>out</code> when one axis is transformed (fixes #206218). #206327: <code>torch.matmul(vector, matrix, out=o)</code> no longer resizes a correctly shaped <code>o</code> or writes outside a strided one (fixes #206219). #206326: <code>reflection_pad1d</code> and <code>reflection_pad3d</code> now have a deterministic CUDA backward, so <code>torch.stft</code> backward runs under <code>use_deterministic_algorithms</code> (fixes #206255); its gather kernels were faster than the old atomic ones in all 17 shapes measured. All three were tested on an H200.</p>
+                    <div class="oss-prs"><span class="oss-state review">In review</span><a href="https://github.com/pytorch/pytorch/pull/206330" target="_blank" rel="noopener noreferrer">#206330</a><a href="https://github.com/pytorch/pytorch/pull/206327" target="_blank" rel="noopener noreferrer">#206327</a><a href="https://github.com/pytorch/pytorch/pull/206326" target="_blank" rel="noopener noreferrer">#206326</a></div>
+                    <div class="oss-prs"><span class="oss-state issue">Reported</span><a href="https://github.com/pytorch/pytorch/issues/206218" target="_blank" rel="noopener noreferrer">#206218</a><a href="https://github.com/pytorch/pytorch/issues/206219" target="_blank" rel="noopener noreferrer">#206219</a><a href="https://github.com/pytorch/pytorch/issues/206255" target="_blank" rel="noopener noreferrer">#206255</a></div>
+                </article>
             </div>
         </div>
         <div class="oss-group fade-in">
             <h3 class="oss-group-title">Issue reports</h3>
             <div class="oss-grid">
-                <article class="oss-card">
-                    <a class="oss-repo" href="https://github.com/pytorch/pytorch/issues?q=is%3Aissue+author%3Abhargavchintam" target="_blank" rel="noopener noreferrer">pytorch/pytorch</a>
-                    <p>Three problems I found and reported. <code>torch.fft.ihfftn</code> and <code>ihfft2</code> do not write <code>out</code> when one axis is transformed; <code>torch.matmul(vector, matrix, out=o)</code> resizes a correctly shaped <code>o</code> and writes outside a strided one; and <code>reflection_pad1d</code> and <code>reflection_pad3d</code> have no deterministic CUDA backward, so <code>torch.stft</code> backward raises under <code>use_deterministic_algorithms</code>.</p>
-                    <div class="oss-prs"><span class="oss-state issue">Reported</span><a href="https://github.com/pytorch/pytorch/issues/206218" target="_blank" rel="noopener noreferrer">#206218</a><a href="https://github.com/pytorch/pytorch/issues/206219" target="_blank" rel="noopener noreferrer">#206219</a><a href="https://github.com/pytorch/pytorch/issues/206255" target="_blank" rel="noopener noreferrer">#206255</a></div>
-                </article>
                 <article class="oss-card">
                     <a class="oss-repo" href="https://github.com/NVIDIA-NeMo/Curator/issues/2285" target="_blank" rel="noopener noreferrer">NVIDIA-NeMo/Curator</a>
                     <p>Showed that the fuzzy-dedup tuning guidance for <code>num_bands</code> and <code>minhashes_per_band</code> was inverted under MinHash-LSH banding. The maintainers fixed the docs.</p>
