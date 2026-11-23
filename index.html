@@ -2268,9 +2268,9 @@
                     <div class="oss-prs"><span class="oss-state review">In review</span><a href="https://github.com/flashinfer-ai/flashinfer/pull/9839" target="_blank" rel="noopener noreferrer">#9839</a><a href="https://github.com/flashinfer-ai/flashinfer/pull/9841" target="_blank" rel="noopener noreferrer">#9841</a><a href="https://github.com/flashinfer-ai/flashinfer/pull/9867" target="_blank" rel="noopener noreferrer">#9867</a></div>
                 </article>
                 <article class="oss-card">
-                    <a class="oss-repo" href="https://github.com/NVIDIA/cutlass/pull/3919" target="_blank" rel="noopener noreferrer">NVIDIA/cutlass</a>
-                    <p>The CuTe DSL MoE <code>grouped_mm</code> examples for Blackwell now generate expert offsets on 16-byte boundaries where tokens are the stride-1 mode, so TMA no longer reads or writes an expert shifted or faults on its copy. A bug I found (fixes #3918).</p>
-                    <div class="oss-prs"><span class="oss-state review">In review</span><a href="https://github.com/NVIDIA/cutlass/pull/3919" target="_blank" rel="noopener noreferrer">#3919</a></div>
+                    <a class="oss-repo" href="https://github.com/NVIDIA/cutlass/pulls?q=is%3Apr+author%3Abhargavchintam" target="_blank" rel="noopener noreferrer">NVIDIA/cutlass</a>
+                    <p>Two bugs I found in the CuTe DSL examples. The MoE <code>grouped_mm</code> examples for Blackwell now generate expert offsets on 16-byte boundaries where tokens are the stride-1 mode, so TMA no longer reads or writes an expert shifted or faults on its copy (fixes #3918). The RMSNorm example now uses 64-bit tile offsets, so tensors past <code>2**31</code> elements no longer hit an illegal memory access or leave rows unwritten (fixes #3925). Both were tested on a B200.</p>
+                    <div class="oss-prs"><span class="oss-state review">In review</span><a href="https://github.com/NVIDIA/cutlass/pull/3919" target="_blank" rel="noopener noreferrer">#3919</a><a href="https://github.com/NVIDIA/cutlass/pull/3926" target="_blank" rel="noopener noreferrer">#3926</a></div>
                 </article>
                 <article class="oss-card">
                     <a class="oss-repo" href="https://github.com/kubernetes-sigs/inference-perf/pull/1109" target="_blank" rel="noopener noreferrer">kubernetes-sigs/inference-perf</a>
@@ -2297,6 +2297,11 @@
         <div class="oss-group fade-in">
             <h3 class="oss-group-title">Issue reports</h3>
             <div class="oss-grid">
+                <article class="oss-card">
+                    <a class="oss-repo" href="https://github.com/pytorch/pytorch/issues?q=is%3Aissue+author%3Abhargavchintam" target="_blank" rel="noopener noreferrer">pytorch/pytorch</a>
+                    <p>Three problems I found and reported. <code>torch.fft.ihfftn</code> and <code>ihfft2</code> do not write <code>out</code> when one axis is transformed; <code>torch.matmul(vector, matrix, out=o)</code> resizes a correctly shaped <code>o</code> and writes outside a strided one; and <code>reflection_pad1d</code> and <code>reflection_pad3d</code> have no deterministic CUDA backward, so <code>torch.stft</code> backward raises under <code>use_deterministic_algorithms</code>.</p>
+                    <div class="oss-prs"><span class="oss-state issue">Reported</span><a href="https://github.com/pytorch/pytorch/issues/206218" target="_blank" rel="noopener noreferrer">#206218</a><a href="https://github.com/pytorch/pytorch/issues/206219" target="_blank" rel="noopener noreferrer">#206219</a><a href="https://github.com/pytorch/pytorch/issues/206255" target="_blank" rel="noopener noreferrer">#206255</a></div>
+                </article>
                 <article class="oss-card">
                     <a class="oss-repo" href="https://github.com/NVIDIA-NeMo/Curator/issues/2285" target="_blank" rel="noopener noreferrer">NVIDIA-NeMo/Curator</a>
                     <p>Showed that the fuzzy-dedup tuning guidance for <code>num_bands</code> and <code>minhashes_per_band</code> was inverted under MinHash-LSH banding. The maintainers fixed the docs.</p>
